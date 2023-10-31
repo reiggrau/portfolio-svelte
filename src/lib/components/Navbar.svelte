@@ -2,8 +2,10 @@
 
 </script>
 
-<h1>Navbar</h1>
+<div id='Navbar'></div>
 
 <style lang='postcss'>
-    
+    #Navbar {
+        @apply 'w-full';
+    }
 </style>
