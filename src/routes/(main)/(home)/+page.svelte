@@ -2,13 +2,13 @@
 
 </script>
 
-<div id="imageDiv" class="bg-blue-200 w-auto h-[750px]"/>
+<div id="imageDiv" class="bg-blue-200 w-auto h-[770px]"/>
 
 <style>
     #imageDiv {
         background-image: url($lib/images/home_background_wide.png);
         background-size: cover;
         background-position: center top;
-        box-shadow: 0 -30px 30px -30px black inset, 0 -30px 30px -30px black inset, 0 -30px 30px -30px black inset;
+        box-shadow: 0 -100px 100px -100px black inset, 0 -100px 100px -100px black inset;
     }
 </style>
