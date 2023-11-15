@@ -9,6 +9,6 @@
         background-image: url($lib/images/home_background_wide.png);
         background-size: cover;
         background-position: center top;
-        box-shadow: 0 -100px 100px -100px black inset, 0 -100px 100px -100px black inset;
+        box-shadow: 0 -100px 100px -100px black inset, -100px -100px 100px -100px black inset;
     }
 </style>
