@@ -1,9 +1,15 @@
 <script lang='ts'>
     import "../app.css";
+    
+	import NavBar from "$lib/components/NavBar.svelte";
 </script>
 
-<svelte:head>
-	<title>Guillem RG - Full-Stack Developer</title>
-</svelte:head>
+<NavBar/>
 
 <slot/>
+
+<style lang="postcss">
+    :global(html) {
+        /* background-color: theme(colors.gray.950); */
+    }
+</style>

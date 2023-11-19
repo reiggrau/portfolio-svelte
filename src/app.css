@@ -2,27 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-	@font-face {
-		font-family: 'Sofia Sans Condensed';
-		src: local('sofia-sans-condensed'),
-			url('/fonts/sofia-sans-condensed/SofiaSansCondensed[wght].ttf');
-		font-weight: normal;
-		font-display: swap;
-	}
-	@font-face {
-		font-family: 'Monument Valley';
-		src: local('monument-valley'), url('/fonts/monument-valley/MonumentValley12-X55o.otf');
-		font-weight: normal;
-		font-display: swap;
-	}
-}
-
 * {
 	@apply transition-all;
 }
 
 body {
-	/* background-color: #020207; */
-	background: linear-gradient(#020206, #020207);
+	@apply bg-gray-50 dark:bg-gray-950;
 }
