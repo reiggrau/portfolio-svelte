@@ -29,10 +29,10 @@
     }
 </script>
 
-<button on:click={toggleDarkMode} class='text-white p-2 ml-8'>
+<button id='DarkMode' on:click={toggleDarkMode} class='text-gray p-2 ml-8'>
     {#if $darkmode}
-        <SunSolid/>
-    {:else}
         <MoonSolid/>
+    {:else}
+        <SunSolid/>
     {/if}
 </button>

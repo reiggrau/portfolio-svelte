@@ -1,10 +1,24 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin')
+
 export default {
 	content: [
 		'./src/**/*.{html,js,svelte,ts}',
 		'./node_modules/flowbite-svelte/**/*.{html,js,svelte,ts}'
 	],
-	plugins: [require('flowbite/plugin')],
+	plugins: [
+		require('flowbite/plugin'),
+		plugin(function ({ matchUtilities, theme }) {
+			matchUtilities(
+			  {
+				'text-shadow': (value) => ({
+				  textShadow: value,
+				}),
+			  },
+			  { values: theme('textShadow') }
+			)
+		})
+	],
 	darkMode: 'class',
 	theme: {
 		extend: {
@@ -22,7 +36,12 @@ export default {
 					800: '#CC4522',
 					900: '#A5371B'
 				}
-			}
+			},
+			textShadow: {
+				sm: '1px 0 5px var(--tw-shadow-color)',
+				DEFAULT: '1px 0 10px var(--tw-shadow-color)',
+				lg: '1px 0 15px var(--tw-shadow-color)',
+			  },
 		}
 	}
 };
