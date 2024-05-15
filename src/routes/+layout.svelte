@@ -7,9 +7,3 @@
 <NavBar/>
 
 <slot/>
-
-<style lang="postcss">
-    :global(html) {
-        /* background-color: theme(colors.gray.950); */
-    }
-</style>

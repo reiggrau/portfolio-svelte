@@ -5,5 +5,5 @@
 
 <main id='page-main'>
     <Welcome/>
-    <About/>
+    <!-- <About/> -->
 </main>

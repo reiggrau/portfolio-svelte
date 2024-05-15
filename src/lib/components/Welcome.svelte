@@ -5,13 +5,13 @@
 </script>
 
 <!-- <div id='Welcome' class='w-full h-screen bg-white dark:bg-black' style='background-image: url({src})'> -->
-<div id='Welcome' class='w-full h-screen bg-white dark:bg-black'>
+<div id='Welcome' class='w-full h-screen'>
 
 </div>
 
 <style lang="postcss">
-    #Welcome {
+    /* #Welcome {
         background-size: cover;
         background-position: center;
-    }
+    } */
 </style>
