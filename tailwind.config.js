@@ -41,7 +41,16 @@ export default {
 				sm: '1px 0 5px var(--tw-shadow-color)',
 				DEFAULT: '1px 0 10px var(--tw-shadow-color)',
 				lg: '1px 0 15px var(--tw-shadow-color)',
-			  },
+			},
+			animation: {
+				'appear': 'appear 0.1s linear forwards',
+			},
+			keyframes: {
+				appear: {
+					'0%': { opacity: 0 },
+					'100%': { opacity: 100 },
+				}
+			}
 		}
 	}
 };

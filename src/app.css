@@ -9,5 +9,5 @@ body {
 }
 
 * {
-	@apply transition;
+	@apply transition-all;
 }

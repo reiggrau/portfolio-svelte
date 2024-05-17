@@ -31,8 +31,8 @@
 
 <button id='DarkMode' on:click={toggleDarkMode} class='text-gray p-2 ml-8'>
     {#if $darkmode}
-        <MoonSolid/>
+        <MoonSolid class='h-7 w-8 md:h-4 md:w-5'/>
     {:else}
-        <SunSolid/>
+        <SunSolid class='h-8 w-8 md:h-5 md:w-5'/>
     {/if}
 </button>
