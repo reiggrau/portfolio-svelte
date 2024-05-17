@@ -1,9 +1,9 @@
 <script>
-	import Welcome from "$lib/components/Welcome.svelte";
+	import Home from "$lib/components/Home.svelte";
     import About from "$lib/components/About.svelte";
 </script>
 
 <main id='page-main'>
-    <Welcome/>
+    <Home/>
     <!-- <About/> -->
 </main>

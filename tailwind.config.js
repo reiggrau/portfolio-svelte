@@ -43,12 +43,22 @@ export default {
 				lg: '1px 0 15px var(--tw-shadow-color)',
 			},
 			animation: {
-				'appear': 'appear 0.1s linear forwards',
+				wiggle: 'wiggle 1s ease-in-out forwards',
+				appear: 'appear 0.15s linear forwards',
+				disappear: 'disappear 0.15s linear forwards',
 			},
 			keyframes: {
+				wiggle: {
+					'0%, 100%': { transform: 'rotate(0deg)' },
+					'50%': { transform: 'rotate(45deg)' },
+				},
 				appear: {
 					'0%': { opacity: 0 },
 					'100%': { opacity: 100 },
+				},
+				disappear: {
+					'0%': { opacity: 100 },
+					'100%': { opacity: 0 },
 				}
 			}
 		}

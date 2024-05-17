@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 body {
-	@apply font-[Outfit] bg-gray-100 dark:bg-gray-900 text-black dark:text-white;
+	@apply font-[Outfit] bg-white dark:bg-gray-900 text-black dark:text-white duration-300;
 }
 
 * {
