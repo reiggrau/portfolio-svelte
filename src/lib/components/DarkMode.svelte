@@ -31,7 +31,7 @@
 
 <button id='DarkMode' on:click={toggleDarkMode} class='text-gray p-2 ml-8'>
     {#if $darkmode}
-        <MoonSolid class='h-7 w-8 md:h-4 md:w-5 animate-[spin_1s_ease-out_forwards]'/>
+        <MoonSolid class='h-7 w-8 md:h-4 md:w-5 animate-[spin_1s_ease-out_forwards] hover:box-shadow shadow-white'/>
     {:else}
         <SunSolid class='h-8 w-8 md:h-5 md:w-5 animate-[spin_1s_ease-out_forwards]'/>
     {/if}
