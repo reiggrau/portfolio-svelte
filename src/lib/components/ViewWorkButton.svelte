@@ -1,13 +1,10 @@
 <!-- Thanks to Shawn @shawnrossouw: https://codepen.io/shawnrossouw -->
 <!-- Source: https://codepen.io/shawnrossouw/pen/qeBxxb -->
 
-<script>
-    import { ArrowRightSolid } from 'flowbite-svelte-icons';
-</script>
 
-<button class="btn mt-4">
-    <span class="line"></span>
-    <span class='btn-content'>View my work <ArrowRightSolid size='sm'/></span>
+<button class='btn mt-4 border border-neutral-400 dark:border-[#00d6fc4d] text-neutral-500 dark:text-[#00d6fc80] hover:text-neutral-800 dark:hover:text-[#00d6fc] hover:shadow dark:hover:shadow-[1px_1px_8px_#00d6fc4d] hover:text-shadow before:bg-neutral-700 dark:before:bg-[#00d6fc] after:bg-neutral-700 dark:after:bg-[#00d6fc]'>
+    <span class='line before:bg-neutral-700 dark:before:bg-[#00d6fc] after:bg-neutral-700 dark:after:bg-[#00d6fc]'></span>
+    View my work
 </button>
 
 <style lang='postcss'>
@@ -15,9 +12,9 @@
 
     .btn {
         position: relative;
-        border: solid 1px rgba(0, 214, 252, 0.3);
+        /* border: solid 1px #00d6fc4d; */
         background: none;
-        color: rgba(0, 214, 252, 0.5);
+        /* color: #00d6fc80; */
         font-family: "Roboto", sans-serif;
         font-weight: normal;
         letter-spacing: 1.8px;
@@ -27,16 +24,9 @@
         outline: none;
     }
     .btn:hover {
-        box-shadow: 1px 1px 8px rgba(0, 214, 252, 0.3);
-        color: rgba(0, 214, 252, 1);
-        text-shadow: 0 0 8px rgba(0, 214, 252, 0.4);
-    }
-    .btn-content {
-        padding-left: 1.75rem;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        transition: all 0.25s ease;
+        /* box-shadow: 1px 1px 8px #00d6fc4d; */
+        /* color: #00d6fc; */
+        /* text-shadow: 0 0 8px #00d6fc66; */
     }
     .btn:before {
         content: "";
@@ -46,7 +36,7 @@
         width: 60px;
         height: 1px;
         transform: translateY(-1px);
-        background: rgba(0, 214, 252, 1);
+        /* background: #00d6fc; */
         transition: all 0.25s ease;
     }
     .btn:hover::before {
@@ -61,7 +51,7 @@
         width: 60px;
         height: 1px;
         transform: translateY(1px);
-        background: rgba(0, 214, 252, 1);
+        /* background: rgba(0, 214, 252, 1); */
         transition: all 0.25s ease;
     }
     .btn:hover::after {
@@ -76,7 +66,7 @@
         width: 1px;
         height: 20px;
         transform: translateX(1px);
-        background: rgba(0, 214, 252, 1);
+        /* background: rgba(0, 214, 252, 1); */
         transition: all 0.25s ease;
     }
     .btn:hover .line:before {
@@ -90,7 +80,7 @@
         width: 1px;
         height: 20px;
         transform: translateX(-1px);
-        background: rgba(0, 214, 252, 1);
+        /* background: rgba(0, 214, 252, 1); */
         transition: all 0.25s ease;
     }
     .btn:hover .line:after {
