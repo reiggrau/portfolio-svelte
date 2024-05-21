@@ -1,5 +1,26 @@
+<script lang="ts">
+	import { browser } from '$app/environment';
+	import { darkmode } from '$lib/store';
+	import { SunSolid, MoonSolid } from 'flowbite-svelte-icons';
+
+	let systemDarkmode;
+	let htmlClassList: any;
+
+	if (browser) {
+		systemDarkmode = window.matchMedia('(prefers-color-scheme: dark)');
+		htmlClassList = window.document.documentElement.classList;
+
+		systemDarkmode.matches ? darkmode.set(true) : darkmode.set(false);
+	}
+
+	function toggleDarkMode() {
+		darkmode.set(!$darkmode);
+		htmlClassList.toggle('dark');
+	}
+</script>
+
 <svelte:head>
-    <script>
+	<script>
 		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
 			document.documentElement.classList.add('dark');
 		} else {
@@ -8,31 +29,12 @@
 	</script>
 </svelte:head>
 
-<script lang='ts'>
-    import { browser } from '$app/environment';
-    import { darkmode } from '$lib/store';
-    import { SunSolid, MoonSolid } from 'flowbite-svelte-icons';
-
-    let systemDarkmode;
-    let htmlClassList: any;
-
-    if (browser) {
-        systemDarkmode = window.matchMedia('(prefers-color-scheme: dark)');
-        htmlClassList = window.document.documentElement.classList;
-
-        systemDarkmode.matches ? darkmode.set(true) : darkmode.set(false);
-    }
-
-    function toggleDarkMode() {
-        darkmode.set(!$darkmode);
-        htmlClassList.toggle('dark');
-    }
-</script>
-
-<button id='DarkMode' on:click={toggleDarkMode} class='text-gray p-2 ml-8'>
-    {#if $darkmode}
-        <MoonSolid class='h-7 w-8 md:h-4 md:w-5 animate-[spin_1s_ease-out_forwards] hover:box-shadow shadow-white'/>
-    {:else}
-        <SunSolid class='h-8 w-8 md:h-5 md:w-5 animate-[spin_1s_ease-out_forwards]'/>
-    {/if}
+<button id="DarkMode" on:click={toggleDarkMode} class="text-gray p-2 ml-8">
+	{#if $darkmode}
+		<MoonSolid
+			class="h-7 w-8 md:h-4 md:w-5 animate-[spin_1s_ease-out_forwards] hover:box-shadow shadow-white"
+		/>
+	{:else}
+		<SunSolid class="h-8 w-8 md:h-5 md:w-5 animate-[spin_1s_ease-out_forwards]" />
+	{/if}
 </button>
