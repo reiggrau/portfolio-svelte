@@ -5,8 +5,11 @@
 	import Background from '$lib/components/Background.svelte';
 </script>
 
-<NavBar />
-<SocialsIcons />
-<Background />
+<div class='h-screen w-screen'>
+	<NavBar />
+	<SocialsIcons />
+	<Background />
 
-<slot />
+	<slot />
+</div>
+

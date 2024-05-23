@@ -4,6 +4,6 @@
 </script>
 
 <main id="page-main">
-	<Home />
+	<!-- <Home /> -->
 	<!-- <About/> -->
 </main>
