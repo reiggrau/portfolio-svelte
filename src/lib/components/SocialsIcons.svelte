@@ -10,7 +10,7 @@
 <!-- Icons -->
 <div
 	id="SocialsIcons"
-	class="hidden sm:block fixed top-[35%] left-0 flex flex-col text-2xl text-white"
+	class="hidden sm:block fixed top-[35%] left-0 flex flex-col text-2xl text-white z-10"
 >
 	<!-- LinkedIn -->
 	<a

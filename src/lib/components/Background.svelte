@@ -4,7 +4,9 @@
 </script>
 
 <div id="Background" class="fixed w-screen h-screen">
-	<Canvas>
-		<Scene />
+	<Canvas rendererParameters={{
+		antialias: true
+	}}>
+		<Scene/>
 	</Canvas>
 </div>
