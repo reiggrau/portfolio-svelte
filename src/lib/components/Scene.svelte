@@ -1,8 +1,8 @@
 <!-- https://threlte.xyz/docs/learn/getting-started/your-first-scene -->
 
 <script lang='ts'>
-	import * as THREE from 'three'
-	import { TextureLoader } from 'three'
+	import * as THREE from 'three';
+	import { TextureLoader } from 'three';
 	import { T, useTask, useLoader } from '@threlte/core';
 	import { interactivity, OrbitControls, Stars } from '@threlte/extras';
 	import { spring } from 'svelte/motion';

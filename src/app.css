@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 body {
-	@apply font-[Outfit] bg-white bg-gradient-radial from-sky-950 to-gray-950 dark:from-gray-900 dark:to-gray-950 text-black dark:text-white duration-300;
+	@apply font-[Outfit] bg-white bg-gradient-radial from-gray-950 to-black dark:from-gray-900 dark:to-gray-950 text-black dark:text-white duration-300;
 }
 
 * {
