@@ -4,7 +4,7 @@
 	import * as THREE from 'three';
 	import { TextureLoader } from 'three';
 	import { T, useTask, useLoader } from '@threlte/core';
-	import { interactivity, OrbitControls, Stars } from '@threlte/extras';
+	import { interactivity, OrbitControls, Stars, SoftShadows } from '@threlte/extras';
 	import { spring } from 'svelte/motion';
 
 	import { darkmode } from '$lib/store';
@@ -16,89 +16,119 @@
 	import atmosphereVS from '$lib/shaders/atmosphereVS.glsl?raw';
 	import atmosphereFS from '$lib/shaders/atmosphereFS.glsl?raw';
 
-	// Interactivity
-	interactivity();
-	const scale = spring(1);
-
-	// Animation
-	let rotation = 48;
-	useTask((delta) => {
-		rotation += delta;
-	});
-
 	// Textures
 	// Earth
-	// const earthTexture = useLoader(TextureLoader).load('/textures/bodies/earth.jpg');
-	// const earthNormal = useLoader(TextureLoader).load('/textures/bodies/earth_normal.tif');
-	// const earthSpecular = useLoader(TextureLoader).load('/textures/bodies/earth_specular.tif');
-	// const earthLights = useLoader(TextureLoader).load('/textures/bodies/earth_lights.jpg');
-	// const earthClouds = useLoader(TextureLoader).load('/textures/bodies/earth_clouds.jpg');
+	const earthTexture = useLoader(TextureLoader).load('/textures/bodies/earth_21k_edited6.jpg');
+	const earthBump = useLoader(TextureLoader).load('/textures/bodies/earth_topography.png');
+	// const earthNormal = useLoader(TextureLoader).load('/textures/bodies/earth_normal.png');
+	const earthSpecular = useLoader(TextureLoader).load('/textures/bodies/earth_specular_inverted.png');
+	const earthLights = useLoader(TextureLoader).load('/textures/bodies/earth_lights.jpg');
+	const earthClouds = useLoader(TextureLoader).load('/textures/bodies/earth_clouds_20k_brightness75.jpg');
 
 	// Moon
 	const moonTexture = useLoader(TextureLoader).load('/textures/bodies/moon_8k.jpg');
 	const moonDisplacement = useLoader(TextureLoader).load('/textures/bodies/moon_displacement.jpg');
 
-	// Halo
+	// Interactivity
+	interactivity();
+
+	// Animation
+	let rotation = 48;
+	useTask((delta) => {
+		rotation += delta;
+		if ($earthClouds) $earthClouds.offset.set( rotation / 8000, 0 );
+	});
 
 </script>
 
 <!-- Earth -->
 <T.Group>
 	<!-- Terrain -->
-	<!-- <T.Mesh
+	<T.Mesh
 		scale={1}
-		rotation.y={rotation / 20}
+		position={[0, 0, 0]}
+		rotation.y={0.5 + rotation / 200}
 		rotation.x={23.4 * Math.PI / 180}
 	>
-		<T.SphereGeometry/>
-		{#if $earthTexture}
-			<T.MeshStandardMaterial map={$earthTexture} normalMap={$earthNormal} specularMap={$earthSpecular}  />
+		<T.IcosahedronGeometry args={[3, 64]}/>
+		{#if $earthTexture && $earthSpecular}
+			<T.MeshStandardMaterial map={$earthTexture} bumpMap={$earthBump} bumpScale={1.5} roughnessMap={$earthSpecular} lightMap={$earthClouds} lightMapIntensity={-1}/>
 		{/if}
-	</T.Mesh> -->
+		<T.ShadowMaterial  />
+	</T.Mesh>
 
 	<!-- City lights -->
 	<!-- <T.Mesh
-		scale={2}
+		scale={1}
+		position={[0, 0, 0]}
+		rotation.y={0.5 + rotation / 200}
+		rotation.x={23.4 * Math.PI / 180}
 	>
-		<T.SphereGeometry/>
-		{#if $textureLights}
-			<T.MeshStandardMaterial map={$textureLights} blending={THREE.AdditiveBlending}/>
+		<T.IcosahedronGeometry args={[3, 64]}/>
+		{#if $earthLights}
+			<T.MeshStandardMaterial color={'black'} transparent emissiveMap={$earthLights} emissiveIntensity={0.1} blending={THREE.AdditiveBlending}/>
 		{/if}
 	</T.Mesh> -->
 
 	<!-- Clouds -->
-	<!-- <T.Mesh
-		scale={1}
-		rotation.y={rotation / 20}
+	<T.Mesh
+		scale={1.003}
+		position={[0, 0, 0]}
+		rotation.y={0.5 + rotation / 200}
 		rotation.x={23.4 * Math.PI / 180}
 	>
-		<T.SphereGeometry/>
+		<T.IcosahedronGeometry args={[3, 64]}/>
 		{#if $earthClouds}
-			<T.MeshStandardMaterial map={$earthClouds} bumpMap={$earthClouds} alphaMap={$earthClouds} blending={THREE.AdditiveBlending} transparent={true}/>
+			<T.MeshStandardMaterial color={'white'} alphaMap={$earthClouds} bumpMap={$earthClouds} bumpScale={0.5} transparent/>
+		{/if}
+	</T.Mesh>
+
+	<!-- Clouds Shadows -->
+	<!-- <T.Mesh
+		scale={1.001}
+		rotation.y={0.5 + rotation / 80}
+		rotation.x={30 * Math.PI / 180}
+		castShadow
+	>
+		<T.IcosahedronGeometry args={[3, 64]}/>
+		{#if $earthClouds}
+			<T.MeshStandardMaterial color={'white'} lightMap={$earthClouds} lightMapIntensity={-1} />
+		{/if}
+	</T.Mesh> -->
+
+	<!-- Clouds Shadow -->
+	<!-- <T.Mesh
+		scale={1}
+		rotation.y={5 + rotation / 75}
+	>
+		<T.IcosahedronGeometry args={[3.001, 64]}/>
+		{#if $earthClouds}
+			<T.MeshStandardMaterial color={'black'} alphaMap={$earthClouds} transparent />
 		{/if}
 	</T.Mesh> -->
 
 	<!-- Atmosphere effect -->
 	<!-- Glow -->
-	<!-- <T.Mesh
-		scale={1.0}
-		rotation.y={rotation / 20}
-		rotation.x={23.4 * Math.PI / 180}
+	<T.Mesh
+		scale={1.003}
+		rotation.y={0.4 + rotation / 60}
+		rotation.x={30 * Math.PI / 180}
 	>
-		<T.SphereGeometry/>
+		<T.IcosahedronGeometry args={[3.01, 64]}/>
 		<T.ShaderMaterial
 			{vertexShader}
 			{fragmentShader}
 			uniforms={{
-				atmosphereColor: { value: new THREE.Color(0x38bdf8) }
+				atmosphereColor: { value: new THREE.Color(0xffffff) }
 			}}
 			blending={THREE.AdditiveBlending}
+			transparent={true}
 		/>
-	</T.Mesh> -->
+	</T.Mesh>
 
 	<!-- Halo -->
 	<!-- <T.Mesh
-		scale={1.2}
+		scale={2}
 	>
 		<T.SphereGeometry/>
 		<T.ShaderMaterial
@@ -119,8 +149,8 @@
 <!-- Moon -->
 {#if $moonTexture}
 <T.Mesh
-	rotation.y={0}
-	position={[0, 0, 0]}
+	rotation.y={1.8}
+	position={[5, 0, 0]}
 >
 	<T.IcosahedronGeometry args={[1, 64]}
 	/>
@@ -130,16 +160,22 @@
 
 <!-- Camera -->
 <T.PerspectiveCamera position={[0, 0, 5]} zoom={1} fov={60} near={0.1} far={20000} makeDefault>
-	<OrbitControls autoRotate={true} autoRotateSpeed={0.1} enableZoom={true} />
+	<OrbitControls autoRotate={true} autoRotateSpeed={0} enableZoom={true} />
 </T.PerspectiveCamera>
 
 <!-- Ligh (Sun)-->
-<T.DirectionalLight color={0xffffff} intensity={1.5} position={[0, 0, 10]}  />
+<T.DirectionalLight
+	color={0xffffff}
+	intensity={$darkmode ? 1 : 2}
+	position={[0, 0, 100]}
+	castShadow
+/>
+
+<!-- <SoftShadows focus={1} samples={20} size={20}/> -->
 
 <!-- Ligh (ambient) -->
-<T.AmbientLight intensity={0.05}/>
+<!-- <T.AmbientLight intensity={0.1}/> -->
 
-<!-- Stars (New version) -->
-<!-- <Stars count={5000} depth={60} radius={50} speed={0}/> -->
+<!-- Stars (Old version) -->
 <!-- <Stars count={5000} depth={290} radius={50} speed={0} fade={false}/> -->
 

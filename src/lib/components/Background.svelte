@@ -14,9 +14,11 @@
 </script>
 
 <div id="Background" class="fixed w-screen h-screen">
-	<Canvas rendererParameters={{
-		antialias: true
-	}}>
+	<Canvas
+		rendererParameters={{
+			antialias: true,
+		}}
+	>
 	    <!-- Background -->
         <Environment
 			{path}
