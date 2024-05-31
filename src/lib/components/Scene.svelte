@@ -17,6 +17,16 @@
 	import atmosphereFS from '$lib/shaders/atmosphereFS.glsl?raw';
 
 	// Postprocess
+	import { useThrelte, useRender } from '@threlte/core';
+    import {
+        EffectComposer,
+        EffectPass,
+        RenderPass,
+        SMAAEffect,
+        SMAAPreset,
+        BloomEffect,
+        KernelSize
+    } from 'postprocessing';
 
 	// Textures
 	// Earth
@@ -44,6 +54,51 @@
 	// Loading screen
 	// const suspend = useSuspense();
 
+	// Postprocess
+	const { scene, renderer, camera, size } = useThrelte();
+
+	// To use the EffectComposer we need to pass arguments to the
+	// default WebGLRenderer: https://github.com/pmndrs/postprocessing#usage
+	const composer = new EffectComposer(renderer);
+
+	const setupEffectComposer = (camera) => {
+		composer.removeAllPasses();
+
+		composer.addPass(new RenderPass(scene, camera));
+
+		composer.addPass(
+			new EffectPass(
+				camera,
+				new BloomEffect({
+					intensity: 1.0,
+					luminanceThreshold: 0.15,
+					height: 512,
+					width: 512,
+					luminanceSmoothing: 0.08,
+					mipmapBlur: true,
+					kernelSize: KernelSize.MEDIUM
+				})
+			)
+		);
+
+		composer.addPass(
+			new EffectPass(
+				camera,
+				new SMAAEffect({
+					preset: SMAAPreset.LOW
+				})
+			)
+		)
+	};
+
+	// We need to set up the passes according to the camera in use
+	$: setupEffectComposer($camera);
+
+	$: composer.setSize($size.width, $size.height);
+
+	useRender((_, delta) => {
+		composer.render(delta)
+	});
 </script>
 
 <!-- Earth -->
@@ -75,7 +130,7 @@
 
 		<!-- Clouds -->
 		<T.Mesh
-			scale={1.003}
+			scale={1.004}
 			position={[0, 0, 0]}
 			rotation.y={0.5 + rotation / 200}
 			rotation.x={23.4 * Math.PI / 180}
@@ -86,8 +141,8 @@
 
 		<!-- Atmosphere -->
 		<!-- Sky effect -->
-		<T.Mesh
-			scale={1.003}
+		<!-- <T.Mesh
+			scale={1.004}
 			rotation.y={0.4 + rotation / 60}
 			rotation.x={30 * Math.PI / 180}
 		>
@@ -101,7 +156,7 @@
 				blending={THREE.AdditiveBlending}
 				transparent={true}
 			/>
-		</T.Mesh>
+		</T.Mesh> -->
 
 		<!-- Halo effect -->
 		<!-- <T.Mesh
@@ -140,16 +195,15 @@
 
 <!-- Ligh (Sun)-->
 <T.DirectionalLight
-	color={0xffffff}
-	intensity={$darkmode ? 1 : 2}
+	color={0xe8f7ff}
+	intensity={2.4}
 	position={[0, 0, 100]}
-	castShadow
 />
 
 <!-- <SoftShadows focus={1} samples={20} size={20}/> -->
 
 <!-- Ligh (ambient) -->
-<!-- <T.AmbientLight intensity={0.1}/> -->
+<T.AmbientLight color={0x07215c} intensity={0.1}/>
 
 <!-- Stars (Old version) -->
 <!-- <Stars count={5000} depth={290} radius={50} speed={0} fade={false}/> -->
