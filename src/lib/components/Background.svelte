@@ -5,21 +5,17 @@
 
 	let path = '/textures/background/';
 	let files: string | string[] = 'starmap_16k_edited4.png';
-
-
-	let useGround = true
-    let scale = { x: 100, y: 100, z: 100 }
-    let radius = 100
-    let height = 5
 </script>
 
 <div id="Background" class="fixed w-screen h-screen">
 	<Canvas
 		rendererParameters={{
-			antialias: true,
+			powerPreference: "high-performance",
+			antialias: false,
+			stencil: false,
+			depth: false
 		}}
 	>
-	    <!-- Background -->
         <Environment
 			{path}
             {files}

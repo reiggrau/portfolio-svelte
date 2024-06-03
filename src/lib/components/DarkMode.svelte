@@ -1,3 +1,4 @@
+<!-- JS -->
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { darkmode } from '$lib/store';

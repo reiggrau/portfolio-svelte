@@ -7,7 +7,8 @@
         SMAAEffect,
         SMAAPreset,
         BloomEffect,
-        KernelSize
+        KernelSize,
+        GodRaysEffect
     } from 'postprocessing';
 
     const { scene, renderer, camera, size } = useThrelte();
@@ -25,7 +26,8 @@
             new EffectPass(
                 camera,
                 new BloomEffect({
-                    intensity: 1,
+                    intensity: 0.5,
+                    radius: 0.9,
                     luminanceThreshold: 0.15,
                     height: 512,
                     width: 512,
@@ -43,7 +45,8 @@
                     preset: SMAAPreset.LOW
                 })
             )
-        )
+        );
+
     };
 
     // We need to set up the passes according to the camera in use
