@@ -43,7 +43,7 @@ export default {
 				lg: '1px 0 15px var(--tw-shadow-color)'
 			},
 			backgroundImage: {
-				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))'
 			},
 			animation: {
 				wiggle: 'wiggle 1s ease-in-out forwards',

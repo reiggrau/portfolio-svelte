@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Canvas } from '@threlte/core';
-    import { Environment } from '@threlte/extras'
+	import { Environment } from '@threlte/extras';
 	import Scene from './Scene.svelte';
 
 	let path = '/textures/background/';
@@ -10,17 +10,13 @@
 <div id="Background" class="fixed w-screen h-screen">
 	<Canvas
 		rendererParameters={{
-			powerPreference: "high-performance",
+			powerPreference: 'high-performance',
 			antialias: false,
 			stencil: false,
 			depth: false
 		}}
 	>
-        <Environment
-			{path}
-            {files}
-            isBackground={true}
-        />
-		<Scene/>
+		<Environment {path} {files} isBackground={true} />
+		<Scene />
 	</Canvas>
 </div>

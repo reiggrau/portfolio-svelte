@@ -1,60 +1,59 @@
 <script>
-    import { useThrelte, useRender } from '@threlte/core';
-    import {
-        EffectComposer,
-        EffectPass,
-        RenderPass,
-        SMAAEffect,
-        SMAAPreset,
-        BloomEffect,
-        KernelSize,
-        GodRaysEffect
-    } from 'postprocessing';
+	import { useThrelte, useRender } from '@threlte/core';
+	import {
+		EffectComposer,
+		EffectPass,
+		RenderPass,
+		SMAAEffect,
+		SMAAPreset,
+		BloomEffect,
+		KernelSize,
+		GodRaysEffect
+	} from 'postprocessing';
 
-    const { scene, renderer, camera, size } = useThrelte();
+	const { scene, renderer, camera, size } = useThrelte();
 
-    // To use the EffectComposer we need to pass arguments to the
-    // default WebGLRenderer: https://github.com/pmndrs/postprocessing#usage
-    const composer = new EffectComposer(renderer);
+	// To use the EffectComposer we need to pass arguments to the
+	// default WebGLRenderer: https://github.com/pmndrs/postprocessing#usage
+	const composer = new EffectComposer(renderer);
 
-    const setupEffectComposer = (camera) => {
-        composer.removeAllPasses();
+	const setupEffectComposer = (camera) => {
+		composer.removeAllPasses();
 
-        composer.addPass(new RenderPass(scene, camera));
+		composer.addPass(new RenderPass(scene, camera));
 
-        composer.addPass(
-            new EffectPass(
-                camera,
-                new BloomEffect({
-                    intensity: 0.5,
-                    radius: 0.9,
-                    luminanceThreshold: 0.15,
-                    height: 512,
-                    width: 512,
-                    luminanceSmoothing: 0.08,
-                    mipmapBlur: true,
-                    kernelSize: KernelSize.MEDIUM
-                })
-            )
-        );
+		composer.addPass(
+			new EffectPass(
+				camera,
+				new BloomEffect({
+					intensity: 1,
+					radius: 0.2,
+					luminanceThreshold: 0.15,
+					height: 512,
+					width: 512,
+					luminanceSmoothing: 0.08,
+					mipmapBlur: true,
+					kernelSize: KernelSize.MEDIUM
+				})
+			)
+		);
 
-        composer.addPass(
-            new EffectPass(
-                camera,
-                new SMAAEffect({
-                    preset: SMAAPreset.LOW
-                })
-            )
-        );
+		composer.addPass(
+			new EffectPass(
+				camera,
+				new SMAAEffect({
+					preset: SMAAPreset.LOW
+				})
+			)
+		);
+	};
 
-    };
+	// We need to set up the passes according to the camera in use
+	$: setupEffectComposer($camera);
 
-    // We need to set up the passes according to the camera in use
-    $: setupEffectComposer($camera);
+	$: composer.setSize($size.width, $size.height);
 
-    $: composer.setSize($size.width, $size.height);
-
-    useRender((_, delta) => {
-        composer.render(delta)
-    });
+	useRender((_, delta) => {
+		composer.render(delta);
+	});
 </script>
