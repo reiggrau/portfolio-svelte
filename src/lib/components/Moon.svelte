@@ -28,7 +28,7 @@
 </script>
 
 <!-- Moon -->
-<T.Group rotation.y={rotation / 10000}>
+<T.Group rotation.y={rotation / 1000}>
 	{#if $moonTexture}
 		<T.Mesh {position} rotation.y={1.8}>
 			<T.IcosahedronGeometry args={[2.1, 64]} />

@@ -74,7 +74,7 @@
 			uColor: { type: 'v4', value: vector },
 			viewVector: { type: 'v3', value: $camera.position },
 			uTop: { type: 'f', value: 0.94 }, // 0.94
-			uPower: { type: 'f', value: 0.65 }, // 0.65555555555
+			uPower: { type: 'f', value: 0.85 }, // 0.65555555555
 			usingDirectionalLighting: { type: 'i', value: true },
 			directionalLightDirection: { type: 'v3', value: sunPosition }
 		};
@@ -121,7 +121,7 @@
 				displacementMap={$earthBump}
 				displacementScale={0.01}
 				lightMap={$earthClouds}
-				lightMapIntensity={-1.2}
+				lightMapIntensity={-2}
 				emissive={0xffffff}
 				emissiveMap={$earthLights}
 				emissiveIntensity={$darkmode ? 0.7 : 0}
@@ -164,8 +164,8 @@
 	</T.Mesh>
 
 	<!-- Sky effect -->
-	<T.Mesh scale={1.02} rotation.y={rotation} matrixAutoUpdate={false}>
-		<T.IcosahedronGeometry args={[7.95, 64]} />
+	<T.Mesh scale={1.02} rotation.y={rotation} matrixAutoUpdate={false} position={[0, 5, 0]}>
+		<T.IcosahedronGeometry args={[7.95, 64]}/>
 		<T.ShaderMaterial
 			vertexShader={skyVS}
 			fragmentShader={skyFS}
@@ -178,4 +178,5 @@
 			lights
 		/>
 	</T.Mesh>
+
 {/await}

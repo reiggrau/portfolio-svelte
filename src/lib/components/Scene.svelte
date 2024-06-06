@@ -18,6 +18,8 @@
 	// Sun position
 	const sunPosition: [number, number, number] = [500, 0, 0];
 
+	const { camera } = useThrelte();
+
 </script>
 
 <Suspense final>
@@ -36,14 +38,14 @@
 
 	<Earth position={[0, 0, 0]} {sunPosition} />
 
-	<Moon position={[0, 0, -200]} />
+	<Moon position={[0, 0, -100]} />
 </Suspense>
 
 <!-- Camera -->
 <T.PerspectiveCamera
-	position={$darkmode ? [-12, 2, 15] : [12, 2, 15]}
+	position={$darkmode ? [-23, 0, 23] : [23, 0, 23]}
 	zoom={1}
-	fov={50}
+	fov={30}
 	near={0.1}
 	far={20000}
 	makeDefault
@@ -54,8 +56,13 @@
 		enableZoom={true}
 		zoomSpeed={0.25}
 		enableDamping
+		on:change={()=>{console.log($camera.position)}}
 	/>
-	<TrackballControls staticMoving={false} zoomSpeed={0.25} />
+	<TrackballControls
+		staticMoving={false}
+		zoomSpeed={0.1}
+		target={[ 0, 0, -15]}
+	/>
 </T.PerspectiveCamera>
 
 <!-- Ligh (Sun)-->
@@ -63,7 +70,7 @@
 
 <!-- Sun -->
 <T.Mesh scale={1} position={sunPosition}>
-	<T.IcosahedronGeometry args={[1, 32]} />
+	<T.IcosahedronGeometry args={[4, 32]} />
 	<T.MeshStandardMaterial color={0xffffff} emissive={0xffffff} emissiveIntensity={10} />
 </T.Mesh>
 

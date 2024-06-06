@@ -7,6 +7,8 @@
 //     gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
 // }
 
+// SOURCE: https://github.com/boyaquito/abovetheclouds/tree/master
+
 uniform vec3 viewVector;
 attribute vec4 tangent;
 varying vec3 vNormal;

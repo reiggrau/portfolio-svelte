@@ -59,6 +59,8 @@
 
 // }
 
+// SOURCE: https://github.com/boyaquito/abovetheclouds/tree/master
+
 uniform vec4 uColor;
 varying vec3 vNormal;
 varying float intensity;
