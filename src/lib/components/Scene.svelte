@@ -1,7 +1,7 @@
 <!-- https://threlte.xyz/docs/learn/getting-started/your-first-scene -->
 
 <script lang="ts">
-	import { T } from '@threlte/core';
+	import { T, useThrelte } from '@threlte/core';
 	import { Suspense, Text, interactivity, OrbitControls, TrackballControls } from '@threlte/extras';
 
 	import { darkmode } from '$lib/store';
@@ -14,6 +14,10 @@
 
 	// Interactivity
 	interactivity();
+
+	// Sun position
+	const sunPosition: [number, number, number] = [500, 0, 0];
+
 </script>
 
 <Suspense final>
@@ -30,14 +34,14 @@
 		}}
 	/>
 
-	<Earth position={[0, 2, 15]} />
+	<Earth position={[0, 0, 0]} {sunPosition} />
 
 	<Moon position={[0, 0, -200]} />
 </Suspense>
 
 <!-- Camera -->
 <T.PerspectiveCamera
-	position={$darkmode ? [-14, 5, 30] : [14, 5, 30]}
+	position={$darkmode ? [-12, 2, 15] : [12, 2, 15]}
 	zoom={1}
 	fov={50}
 	near={0.1}
@@ -55,10 +59,10 @@
 </T.PerspectiveCamera>
 
 <!-- Ligh (Sun)-->
-<T.DirectionalLight color={0xe8f7ff} intensity={4} position={[500, 0, 0]} />
+<T.DirectionalLight color={0xe8f7ff} intensity={4} position={sunPosition} />
 
 <!-- Sun -->
-<T.Mesh scale={1} position={[500, 0, 0]}>
+<T.Mesh scale={1} position={sunPosition}>
 	<T.IcosahedronGeometry args={[1, 32]} />
 	<T.MeshStandardMaterial color={0xffffff} emissive={0xffffff} emissiveIntensity={10} />
 </T.Mesh>

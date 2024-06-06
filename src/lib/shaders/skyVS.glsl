@@ -4,8 +4,7 @@
 // void main() {
 //     vertexUV = uv;
 //     vertexNormal = normalize(normalMatrix * normal);
-//     gl_Position = projectionMatrix *
-//     modelViewMatrix * vec4( position, 1.0 );
+//     gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
 // }
 
 uniform vec3 viewVector;
@@ -16,7 +15,6 @@ uniform float uTop;
 uniform float uPower;
 
 void main() {
-
     vNormal = normalize( normalMatrix * normal );
     vec3 vNormel = normalize( normalMatrix * viewVector );
     intensity = pow( uTop - dot(vNormal, vNormel), uPower );

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as THREE from 'three';
-	import { T, useTask, useLoader } from '@threlte/core';
+	import { T, useTask, useLoader, useThrelte } from '@threlte/core';
 	import { useSuspense, useTexture } from '@threlte/extras';
 
 	import { darkmode } from '$lib/store';
@@ -11,8 +11,11 @@
 	import atmosphereFS from '$lib/shaders/atmosphereFS.glsl?raw';
 
 	export let position: [number, number, number];
+	export let sunPosition: [number, number, number];
 
 	const suspend = useSuspense();
+
+	const { camera } = useThrelte();
 
 	// Textures
 	const earthTexture = suspend(
@@ -44,46 +47,62 @@
 		}
 	});
 
-	// Animation
-	let rotation = 0;
-	useTask((delta) => {
-		rotation += delta;
-		if ($earthClouds) {
-			$earthClouds.offset.set(0.4 - rotation / 5000, 0);
-		}
-	});
-
 	// Atmosphere
 	const color = new THREE.Color('#95D3F4');
 
 	const atmospherePosition: [number, number, number] = [...position];
 	atmospherePosition[0] += 0.2;
 
-	const atmosphereUniforms = { 
-		aperture: { type : "f", value: 0.71 },
-		scale: { type : "f", value : 28.0 },
-		color : { type: "c", value: color },
-		opacity: { type: "f", value: 1.0 }
+	const atmosphereUniforms = {
+		aperture: { type: 'f', value: 0.71 },
+		scale: { type: 'f', value: 28.0 },
+		color: { type: 'c', value: color },
+		opacity: { type: 'f', value: 1.0 }
 	};
 
 	// Sky
 	const skyPosition: [number, number, number] = [...position];
 	skyPosition[0] += 0;
 
-	const vector = new THREE.Vector4( color.r, color.g, color.b, 0.1 );
+	const vector = new THREE.Vector4(color.r, color.g, color.b, 0.1);
 
-	const skyUniforms = {
-		uColor: { type: "v4", value: vector },
-		viewVector: { type: "v3", value: new THREE.Vector4( 1.0, 1.0, 1.0, 1.0 ) },
-		uTop:  { type: "f", value: 0.9999999999 }, // 0.94
-		uPower:  { type: "f", value: 0.5555555555 }, // 0.65555555555
-		usingDirectionalLighting: { type: "i", value: true }
+	let skyUniforms = getSkyUniforms();
+
+	function getSkyUniforms() {
+
+		const baseSkyUniforms = {
+			uColor: { type: 'v4', value: vector },
+			viewVector: { type: 'v3', value: $camera.position },
+			uTop: { type: 'f', value: 0.94 }, // 0.94
+			uPower: { type: 'f', value: 0.65 }, // 0.65555555555
+			usingDirectionalLighting: { type: 'i', value: true },
+			directionalLightDirection: { type: 'v3', value: sunPosition }
+		};
+
+		const completeSkyUniforms = THREE.UniformsUtils.merge([
+			THREE.UniformsLib['lights'],
+			baseSkyUniforms
+		]);
+
+		console.log('cameraPosition :', $camera.position);
+		return completeSkyUniforms;
 	}
 
-	const skyUniformsComplete = THREE.UniformsUtils.merge([
-		THREE.UniformsLib[ "lights" ],
-		skyUniforms
-	]);
+	// Animation
+	let rotation = 0;
+
+	useTask((delta) => {
+		rotation += delta;
+		if ($earthClouds) {
+			$earthClouds.offset.set(0.4 - rotation / 5000, 0);
+		}
+		
+		// Link camera view to shader uniform value
+		if (skyUniforms.viewVector.value != $camera.position) {
+			console.log('update!')
+			skyUniforms.viewVector.value = $camera.position;
+		}
+	});
 
 </script>
 
@@ -102,7 +121,7 @@
 				displacementMap={$earthBump}
 				displacementScale={0.01}
 				lightMap={$earthClouds}
-				lightMapIntensity={-1}
+				lightMapIntensity={-1.2}
 				emissive={0xffffff}
 				emissiveMap={$earthLights}
 				emissiveIntensity={$darkmode ? 0.7 : 0}
@@ -132,11 +151,8 @@
 	</T.Group>
 
 	<!-- Atmosphere effect -->
-	<T.Mesh
-		scale={1.02}
-		position={atmospherePosition}
-	>
-		<T.IcosahedronGeometry args={[7.9, 64]}/>
+	<T.Mesh scale={1.02} position={atmospherePosition}>
+		<T.IcosahedronGeometry args={[7.9, 64]} />
 		<T.ShaderMaterial
 			vertexShader={atmosphereVS}
 			fragmentShader={atmosphereFS}
@@ -148,16 +164,12 @@
 	</T.Mesh>
 
 	<!-- Sky effect -->
-	<T.Mesh
-		scale={1.02}
-		position={atmospherePosition}
-		matrixAutoUpdate={false}
-	>
-		<T.IcosahedronGeometry args={[7.9, 64]}/>
+	<T.Mesh scale={1.02} rotation.y={rotation} matrixAutoUpdate={false}>
+		<T.IcosahedronGeometry args={[7.95, 64]} />
 		<T.ShaderMaterial
 			vertexShader={skyVS}
 			fragmentShader={skyFS}
-			uniforms={skyUniformsComplete}
+			uniforms={skyUniforms}
 			transparent
 			blending={THREE.AdditiveBlending}
 			depthWrite={false}
