@@ -20,15 +20,15 @@
 		'/textures/bodies/moon_displacement.jpg'
 	);
 
-	// Animation
-	let rotation = 0;
-	useTask((delta) => {
-		rotation += delta;
-	});
+	// // Animation
+	// let rotation = 0;
+	// useTask((delta) => {
+	// 	rotation += delta;
+	// });
 </script>
 
 <!-- Moon -->
-<T.Group rotation.y={rotation / 1000}>
+<T.Group>
 	{#if $moonTexture}
 		<T.Mesh {position} rotation.y={1.8}>
 			<T.IcosahedronGeometry args={[2.1, 64]} />

@@ -9,56 +9,6 @@
 //     gl_FragColor = vec4(atmosphere, 1.0);
 // }
 
-// uniform vec4 uColor;
-// varying vec3 vNormal;
-// varying float intensity;
-// uniform bool usingDirectionalLighting;
-
-// #if MAX_DIR_LIGHTS > 0
-
-//     uniform vec3 directionalLightColor[ MAX_DIR_LIGHTS ];
-//     uniform vec3 directionalLightDirection[ MAX_DIR_LIGHTS ];
-
-// #endif
-
-// void main() {
-
-//     vec3 dirDiffuse = vec3( 0.0 );
-//     vec3 dirSpecular = vec3( 0.0 );
-
-//     #if MAX_DIR_LIGHTS > 0',
-
-//         if ( usingDirectionalLighting ) {
-
-//             for ( int i = 0; i < MAX_DIR_LIGHTS; i++ ) {
-
-//                 vec4 lDirection = viewMatrix * vec4( directionalLightDirection[ i ], 0.0 );
-//                 vec3 dirVector = normalize( lDirection.xyz );
-                
-//                 float directionalLightWeightingFull = max( dot( vNormal, dirVector ), 0.0 );
-//                 float directionalLightWeightingHalf = max( 10.0 * dot( vNormal, dirVector ) + 0.5, 0.0 );
-//                 vec3 dirDiffuseWeight = mix( vec3( directionalLightWeightingFull ), vec3( directionalLightWeightingHalf ), uColor.xyz );
-
-//                 dirDiffuse += dirDiffuseWeight;
-
-//             }
-
-//         } else {
-
-//             dirDiffuse = vec3( 1.0 );
-
-//         }
-
-//     #else
-
-//             dirDiffuse = vec3( 1.0 );
-
-//     #endif
-
-//     gl_FragColor = intensity * intensity * vec4( dirDiffuse, 1.0 );
-
-// }
-
 // SOURCE: https://github.com/boyaquito/abovetheclouds/tree/master
 
 uniform vec4 uColor;
@@ -67,7 +17,6 @@ varying float intensity;
 uniform bool usingDirectionalLighting;
 
 uniform vec3 directionalLightDirection;
-
 
 void main() {
 

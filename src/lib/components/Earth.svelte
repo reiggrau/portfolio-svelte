@@ -84,7 +84,6 @@
 			baseSkyUniforms
 		]);
 
-		console.log('cameraPosition :', $camera.position);
 		return completeSkyUniforms;
 	}
 
@@ -99,7 +98,6 @@
 		
 		// Link camera view to shader uniform value
 		if (skyUniforms.viewVector.value != $camera.position) {
-			console.log('update!')
 			skyUniforms.viewVector.value = $camera.position;
 		}
 	});

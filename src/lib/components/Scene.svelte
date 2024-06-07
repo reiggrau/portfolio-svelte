@@ -1,8 +1,11 @@
 <!-- https://threlte.xyz/docs/learn/getting-started/your-first-scene -->
 
 <script lang="ts">
+	import * as THREE from 'three';
 	import { T, useThrelte } from '@threlte/core';
 	import { Suspense, Text, interactivity, OrbitControls, TrackballControls } from '@threlte/extras';
+
+	import { onMount } from 'svelte'
 
 	import { darkmode } from '$lib/store';
 
@@ -20,6 +23,19 @@
 
 	const { camera } = useThrelte();
 
+	let fov = 30;
+	let position: any = $darkmode ? [ -23, 0, 25 ] : [ 22, 0, 24 ];
+
+	onMount(() => {
+		console.log(window.innerWidth);
+		if (window.innerWidth < 640) {
+			position = $darkmode ? [ -11, 0, 44 ] : [ 11, 0, 44 ];
+		}
+	});
+
+	// function adjustCameraPosition(position) {
+
+	// }
 </script>
 
 <Suspense final>
@@ -38,14 +54,14 @@
 
 	<Earth position={[0, 0, 0]} {sunPosition} />
 
-	<Moon position={[0, 0, -100]} />
+	<Moon position={[0, 0, -200]} />
 </Suspense>
 
 <!-- Camera -->
 <T.PerspectiveCamera
-	position={$darkmode ? [-23, 0, 23] : [23, 0, 23]}
+	{position}
+	{fov}
 	zoom={1}
-	fov={30}
 	near={0.1}
 	far={20000}
 	makeDefault
@@ -61,7 +77,7 @@
 	<TrackballControls
 		staticMoving={false}
 		zoomSpeed={0.1}
-		target={[ 0, 0, -15]}
+		target={[ 0, 0, -16]}
 	/>
 </T.PerspectiveCamera>
 
