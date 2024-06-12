@@ -2,8 +2,8 @@
 
 <script lang="ts">
 	import * as THREE from 'three';
-	import { T, useThrelte } from '@threlte/core';
-	import { Suspense, Text, interactivity, OrbitControls, TrackballControls } from '@threlte/extras';
+	import { T, useThrelte, useTask } from '@threlte/core';
+	import { interactivity, OrbitControls, TrackballControls, Grid, Suspense, Text } from '@threlte/extras';
 
 	import { onMount } from 'svelte'
 
@@ -11,6 +11,8 @@
 
 	import Earth from './Earth.svelte';
 	import Moon from './Moon.svelte';
+
+	import { debug } from './state';
 
 	// Postprocess
 	import Renderer from './Renderer.svelte';
@@ -24,36 +26,68 @@
 	const { camera } = useThrelte();
 
 	let fov = 30;
-	let position: any = $darkmode ? [ -23, 0, 25 ] : [ 22, 0, 24 ];
+	let position: any = $darkmode ? [ -22, 0, 24 ] : [ 22, 0, 24 ];
 
 	onMount(() => {
-		console.log(window.innerWidth);
-		if (window.innerWidth < 640) {
-			position = $darkmode ? [ -11, 0, 44 ] : [ 11, 0, 44 ];
-		}
+		console.log('window.innerWidth :', window.innerWidth);
+		position = getCameraPosition(position, window.innerWidth);
 	});
 
-	// function adjustCameraPosition(position) {
+	function getCameraPosition(coordinates: [number, number, number], windowWidth: number) {
+		// 1850 => 1420 => 1 => [ 22, 0, 24 ]
+		// 430 => 0 => 2 => [ 11, 0, 44 ]
 
-	// }
+		const ratio = 2 - ((windowWidth - 430) / 1420);
+
+		coordinates[0] = coordinates[0] / ratio;
+		coordinates[2] = coordinates[2] * ratio;
+
+		return coordinates;
+	}
+
+	// Navigation + debug
+	let newPosition = [ ...position ];
+
+	const onKeyDown = (e: KeyboardEvent) => {
+		if (e.key === 'd') {
+			console.log('debug:', !debug.current);
+			debug.set(!debug.current);
+		}
+
+		if (e.key === 'ArrowDown') newPosition = [ 2.5, 0, -210 ];
+		if (e.key === 'ArrowUp') newPosition = getCameraPosition([ 22, 0, 24 ], window.innerWidth);
+	}
+
+	// useTask((delta) => {
+	// 	position = position.map((n, i) => n + (newPosition[i] / 60));
+	// });
+
+	function cameraGoTo(newPosition: [ number, number, number ]) {
+		
+	}
+
 </script>
+
+<svelte:window
+	on:keydown={onKeyDown}
+/>
 
 <Suspense final>
 	<Text
 		position.z={-8}
 		slot="fallback"
-		text="Loading..."
+		text="Loading"
 		fontSize={1}
 		color="white"
 		anchorX="50%"
 		anchorY="50%"
 		on:create={({ ref }) => {
-			ref.lookAt(-40, 25, 40);
+			ref.lookAt(22, 0, 24)
 		}}
 	/>
 
 	<Earth position={[0, 0, 0]} {sunPosition} />
-
+	
 	<Moon position={[0, 0, -200]} />
 </Suspense>
 
@@ -65,18 +99,22 @@
 	near={0.1}
 	far={20000}
 	makeDefault
+	let:ref={camera}
 >
-	<OrbitControls
-		autoRotate={true}
-		autoRotateSpeed={0}
-		enableZoom={true}
-		zoomSpeed={0.25}
-		enableDamping
-		on:change={()=>{console.log($camera.position)}}
-	/>
+	{#if $debug}
+		<OrbitControls
+			autoRotate={true}
+			autoRotateSpeed={0.0}
+			enableZoom={true}
+			zoomSpeed={0.5}
+			enableDamping
+			on:change={()=>{console.log(camera.position)}}
+		/>
+	{/if}
 	<TrackballControls
+		enabled={false}
 		staticMoving={false}
-		zoomSpeed={0.1}
+		zoomSpeed={0.5}
 		target={[ 0, 0, -16]}
 	/>
 </T.PerspectiveCamera>
@@ -98,3 +136,8 @@
 
 <!-- Postprocess -->
 <Renderer />
+
+{#if $debug}
+  	<Grid />
+{/if}
+

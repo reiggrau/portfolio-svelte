@@ -1,7 +1,7 @@
 <script lang="ts">
 	import * as THREE from 'three';
 	import { T, useTask, useLoader, useThrelte } from '@threlte/core';
-	import { useSuspense, useTexture } from '@threlte/extras';
+	import { useTexture } from '@threlte/extras';
 
 	import { darkmode } from '$lib/store';
 
@@ -13,19 +13,15 @@
 	export let position: [number, number, number];
 	export let sunPosition: [number, number, number];
 
-	const suspend = useSuspense();
-
 	const { camera } = useThrelte();
 
 	// Textures
-	const earthTexture = suspend(
-		useTexture('/textures/bodies/earth_16k_edited6_-50saturation.jpg', {
-			transform: (texture) => {
-				texture.anisotropy = 4;
-				return texture;
-			}
-		})
-	);
+	const earthTexture = useTexture('/textures/bodies/earth_16k_edited6_-50saturation.jpg', {
+		transform: (texture) => {
+			texture.anisotropy = 4;
+			return texture;
+		}
+	});
 	const earthBump = useLoader(THREE.TextureLoader).load(
 		'/textures/bodies/earth_topography_16k.jpg'
 	);
@@ -104,7 +100,7 @@
 
 </script>
 
-{#await earthTexture then}
+{#if $earthTexture && $earthClouds}
 	<T.Group {position} rotation.x={((23.4 * Math.PI) / 180) * 1} rotation.y={2.2 + rotation / 100}>
 		<!-- Earth surface -->
 		<T.Mesh scale={1}>
@@ -176,5 +172,4 @@
 			lights
 		/>
 	</T.Mesh>
-
-{/await}
+{/if}

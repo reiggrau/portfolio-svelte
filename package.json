@@ -35,8 +35,11 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@theatre/core": "^0.7.2",
+		"@theatre/studio": "^0.7.2",
 		"@threlte/core": "^7.3.0",
 		"@threlte/extras": "^8.11.2",
+		"@threlte/theatre": "^2.1.7",
 		"postprocessing": "^6.35.4",
 		"three": "^0.164.1"
 	}

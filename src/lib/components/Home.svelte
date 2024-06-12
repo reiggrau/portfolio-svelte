@@ -7,7 +7,7 @@
 </script>
 
 <!-- <div id='Welcome' class='w-full h-screen bg-white dark:bg-black' style='background-image: url({src})'> -->
-<div id="Welcome" class="w-full h-screen flex flex-col justify-center">
+<div id="Welcome" class="w-full h-screen flex flex-col justify-center bg-red-500">
 	<div class="px-10 max-w-[1000px] mx-auto">
 		<h3 class="text-lg text-sky-800 dark:text-sky-500">Hi! My name is</h3>
 		<h1 class="text-5xl sm:text-7xl font-semibold text-gray-700 dark:text-gray-200">
