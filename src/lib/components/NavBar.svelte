@@ -1,6 +1,9 @@
 <script lang="ts">
-	import DarkMode from './DarkMode.svelte';
 	import { BarsSolid } from 'flowbite-svelte-icons';
+
+	import { view } from '$lib/store';
+
+	import DarkMode from './DarkMode.svelte';
 
 	let mobileNav = false;
 	let fadeIn = true;
@@ -22,8 +25,8 @@
 
 	<!-- Wide navigation bar -->
 	<ul class="hidden md:flex flex gap-4 mr-12">
-		<li class="text-glow">HOME</li>
-		<li class="text-glow">ABOUT</li>
+		<li class="text-glow" on:click={()=> view.set('earth')}>HOME</li>
+		<li class="text-glow" on:click={()=> view.set('moon')}>ABOUT</li>
 		<li class="text-glow">SKILLS</li>
 		<li class="text-glow">PROJECTS</li>
 		<li class="text-glow">CONTACT</li>

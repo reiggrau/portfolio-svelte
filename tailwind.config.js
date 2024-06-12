@@ -48,7 +48,9 @@ export default {
 			animation: {
 				wiggle: 'wiggle 1s ease-in-out forwards',
 				appear: 'appear 0.15s linear forwards',
-				disappear: 'disappear 0.15s linear forwards'
+				disappear: 'disappear 0.15s linear forwards',
+				appearSlow: 'appear 0.5s linear forwards',
+				disappearSlow: 'disappear 0.5s linear forwards'
 			},
 			keyframes: {
 				wiggle: {

@@ -2,10 +2,10 @@
 <!-- Source: https://codepen.io/shawnrossouw/pen/qeBxxb -->
 
 <button
-	class="btn mt-4 border border-neutral-400 dark:border-[#00d6fc4d] text-neutral-500 dark:text-[#00d6fc80] hover:text-neutral-800 dark:hover:text-[#00d6fc] hover:shadow dark:hover:shadow-[1px_1px_8px_#00d6fc4d] hover:text-shadow before:bg-neutral-700 dark:before:bg-[#00d6fc] after:bg-neutral-700 dark:after:bg-[#00d6fc]"
+	class="btn mt-4 border border-[#00d6fc4d] text-[#00d6fc80] hover:text-[#00d6fc] hover:shadow hover:shadow-[1px_1px_8px_#00d6fc4d] hover:text-shadow before:bg-[#00d6fc] after:bg-[#00d6fc]"
 >
 	<span
-		class="line before:bg-neutral-700 dark:before:bg-[#00d6fc] after:bg-neutral-700 dark:after:bg-[#00d6fc]"
+		class="line before:bg-[#00d6fc] after:bg-[#00d6fc]"
 	></span>
 	View my work
 </button>

@@ -14,6 +14,15 @@
 
 	import { debug } from './state';
 
+	import { mouseCoordsSpring, springScrollPos } from './scrollPos';
+
+	import { spring } from 'svelte/motion';
+
+	import { view } from '$lib/store';
+
+	// Camera transition
+
+
 	// Postprocess
 	import Renderer from './Renderer.svelte';
 
@@ -23,10 +32,12 @@
 	// Sun position
 	const sunPosition: [number, number, number] = [500, 0, 0];
 
+	// Camera
 	const { camera } = useThrelte();
 
 	let fov = 30;
-	let position: any = $darkmode ? [ -22, 0, 24 ] : [ 22, 0, 24 ];
+	let position: any = $darkmode ? [ -22, 0, 24 ] : [ 22, 0, 24 ]; // Default is 'earth'
+	let target: any = $debug ? [ 0, 0, 0 ] : [ 0, 0, -16]; // Default is 'earth'
 
 	onMount(() => {
 		console.log('window.innerWidth :', window.innerWidth);
@@ -46,25 +57,38 @@
 	}
 
 	// Navigation + debug
-	let newPosition = [ ...position ];
-
 	const onKeyDown = (e: KeyboardEvent) => {
+		console.log('onKeyDown :', e.key);
 		if (e.key === 'd') {
 			console.log('debug:', !debug.current);
 			debug.set(!debug.current);
 		}
 
-		if (e.key === 'ArrowDown') newPosition = [ 2.5, 0, -210 ];
-		if (e.key === 'ArrowUp') newPosition = getCameraPosition([ 22, 0, 24 ], window.innerWidth);
+		if (e.key === 'e') view.set('earth');
+		if (e.key === 'm') view.set('moon');
 	}
 
-	// useTask((delta) => {
-	// 	position = position.map((n, i) => n + (newPosition[i] / 60));
-	// });
+	// Trigger at view change
+	$: $darkmode, viewChanged();
+	$: $view, viewChanged();
+	// $: $debug, viewChanged();
 
-	function cameraGoTo(newPosition: [ number, number, number ]) {
-		
+	function viewChanged() {
+		console.log('view :', $view);
+
+		switch ($view) {
+			case 'earth':
+				position = getCameraPosition($darkmode ? [ -22, 0, 24 ] : [ 22, 0, 24 ], window.innerWidth);
+				// target = $debug ? [ 0, 0, 0 ] : [ 0, 0, -16];
+				break;
+			case 'moon':
+				position = $darkmode ? [-3, 0, -210 ] : [ 2.5, 0, -210 ];
+				// target = $debug ? [ 0, 0, -200 ] : [ 0, 0, 0 ];
+				break;
+		}
 	}
+
+
 
 </script>
 
@@ -99,7 +123,6 @@
 	near={0.1}
 	far={20000}
 	makeDefault
-	let:ref={camera}
 >
 	{#if $debug}
 		<OrbitControls
@@ -108,14 +131,13 @@
 			enableZoom={true}
 			zoomSpeed={0.5}
 			enableDamping
-			on:change={()=>{console.log(camera.position)}}
 		/>
 	{/if}
 	<TrackballControls
+		target={target}
 		enabled={false}
 		staticMoving={false}
 		zoomSpeed={0.5}
-		target={[ 0, 0, -16]}
 	/>
 </T.PerspectiveCamera>
 
@@ -137,7 +159,7 @@
 <!-- Postprocess -->
 <Renderer />
 
-{#if $debug}
+<!-- {#if $debug}
   	<Grid />
-{/if}
+{/if} -->
 
