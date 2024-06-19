@@ -3,6 +3,8 @@
 	import { T, useTask, useLoader } from '@threlte/core';
 	import { useSuspense, useTexture } from '@threlte/extras';
 
+	import { view } from '$lib/store';
+
 	export let position: [number, number, number];
 
 	// Textures
@@ -25,16 +27,14 @@
 
 <!-- Moon -->
  {#if $moonTexture}
-	<T.Group rotation.y={rotation / 10000}>
+	<T.Group rotation.y={rotation / 50000}>
 		<T.Mesh {position} rotation.y={1.8}>
 			<T.IcosahedronGeometry args={[2.1, 64]} />
 			<T.MeshStandardMaterial
 				color={0xffffff}
 				map={$moonTexture}
 				bumpMap={$moonDisplacement}
-				bumpScale={5}
-				displacementMap={$moonDisplacement}
-				displacementScale={0.01}
+				bumpScale={$view === 'moon' ? 2 : 0}
 			/>
 		</T.Mesh>
 	</T.Group>

@@ -11,6 +11,7 @@
 
 	import Earth from './Earth.svelte';
 	import Moon from './Moon.svelte';
+	import Mars from './Mars.svelte';
 
 	import { debug } from './state';
 
@@ -30,7 +31,7 @@
 	interactivity();
 
 	// Sun position
-	const sunPosition: [number, number, number] = [500, 0, 0];
+	const sunPosition: [number, number, number] = [200000, 0, 0];
 
 	// Camera
 	const { camera } = useThrelte();
@@ -62,10 +63,13 @@
 		if (e.key === 'd') {
 			console.log('debug:', !debug.current);
 			debug.set(!debug.current);
+		} else if (e.key === '1') {
+			view.set('earth');
+		} else if (e.key === '2') {
+			view.set('moon');
+		} else if (e.key === '3') {
+			view.set('mars');
 		}
-
-		if (e.key === 'e') view.set('earth');
-		if (e.key === 'm') view.set('moon');
 	}
 
 	// Trigger at view change
@@ -74,16 +78,20 @@
 	// $: $debug, viewChanged();
 
 	function viewChanged() {
-		console.log('view :', $view);
+		console.log('view :', $view, 'debug :', $debug);
 
 		switch ($view) {
 			case 'earth':
 				position = getCameraPosition($darkmode ? [ -22, 0, 24 ] : [ 22, 0, 24 ], window.innerWidth);
-				// target = $debug ? [ 0, 0, 0 ] : [ 0, 0, -16];
+				target = $debug ? [ 0, 0, 0 ] : [ 0, 0, -16];
 				break;
 			case 'moon':
 				position = $darkmode ? [-3, 0, -210 ] : [ 2.5, 0, -210 ];
-				// target = $debug ? [ 0, 0, -200 ] : [ 0, 0, 0 ];
+				target = $debug ? [ 0, 0, -200 ] : [ 0, 0, 0 ];
+				break;
+			case 'mars':
+				position = $darkmode ? [-3, 0, -20020 ] : [ 2.5, 0, -20020 ];
+				target = $debug ? [ -2, 0, -20000 ] : [ 0, 0, -16];
 				break;
 		}
 	}
@@ -113,6 +121,8 @@
 	<Earth position={[0, 0, 0]} {sunPosition} />
 	
 	<Moon position={[0, 0, -200]} />
+
+	<Mars position={[0, 0, -20000]} {sunPosition} />
 </Suspense>
 
 <!-- Camera -->
@@ -121,7 +131,7 @@
 	{fov}
 	zoom={1}
 	near={0.1}
-	far={20000}
+	far={2000000}
 	makeDefault
 >
 	{#if $debug}
@@ -131,6 +141,9 @@
 			enableZoom={true}
 			zoomSpeed={0.5}
 			enableDamping
+			on:change={()=>{
+				console.log('camera position :', position);
+			}}
 		/>
 	{/if}
 	<TrackballControls
@@ -146,7 +159,7 @@
 
 <!-- Sun -->
 <T.Mesh scale={1} position={sunPosition}>
-	<T.IcosahedronGeometry args={[4, 32]} />
+	<T.IcosahedronGeometry args={[800, 32]} />
 	<T.MeshStandardMaterial color={0xffffff} emissive={0xffffff} emissiveIntensity={10} />
 </T.Mesh>
 

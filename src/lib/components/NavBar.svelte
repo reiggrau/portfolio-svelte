@@ -20,14 +20,24 @@
 	id="NavBar"
 	class="fixed w-full h-20 md:h-16 shadow-lg bg-black bg-opacity-30 flex justify-between items-center text-white z-10"
 >
-	<!-- Dark mode button -->
-	<DarkMode />
+	<!-- Settings buttons -->
+	<div>
+		<!-- Dark mode button -->
+		<DarkMode />
+
+		<!-- Free view button -->
+
+		<!-- Sound button -->
+
+	</div>
+
+	<!--  -->
 
 	<!-- Wide navigation bar -->
 	<ul class="hidden md:flex flex gap-4 mr-12">
 		<li class="text-glow" on:click={()=> view.set('earth')}>HOME</li>
 		<li class="text-glow" on:click={()=> view.set('moon')}>ABOUT</li>
-		<li class="text-glow">SKILLS</li>
+		<li class="text-glow" on:click={()=> view.set('mars')}>SKILLS</li>
 		<li class="text-glow">PROJECTS</li>
 		<li class="text-glow">CONTACT</li>
 	</ul>
