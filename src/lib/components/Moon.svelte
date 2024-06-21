@@ -5,7 +5,7 @@
 
 	import { view } from '$lib/store';
 
-	export let position: [number, number, number];
+	export let moonPosition: [number, number, number];
 
 	// Textures
 	const moonTexture = useTexture('/textures/bodies/moon_8k.jpg', {
@@ -28,13 +28,13 @@
 <!-- Moon -->
  {#if $moonTexture}
 	<T.Group rotation.y={rotation / 50000}>
-		<T.Mesh {position} rotation.y={1.8}>
+		<T.Mesh position={moonPosition} rotation.y={1.8}>
 			<T.IcosahedronGeometry args={[2.1, 64]} />
 			<T.MeshStandardMaterial
 				color={0xffffff}
 				map={$moonTexture}
 				bumpMap={$moonDisplacement}
-				bumpScale={$view === 'moon' ? 2 : 0}
+				bumpScale={2}
 			/>
 		</T.Mesh>
 	</T.Group>

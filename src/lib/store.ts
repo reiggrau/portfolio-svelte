@@ -4,4 +4,4 @@ import { writable } from 'svelte/store';
 export const darkmode = writable(false as boolean);
 
 // Scene focus
-export const view = writable('earth'); // 'earth' | 'moon'
+export const view = writable('earth'); // 'earth' | 'moon' | 'mars'

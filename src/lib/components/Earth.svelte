@@ -10,10 +10,13 @@
 	import atmosphereVS from '$lib/shaders/atmosphereVS.glsl?raw';
 	import atmosphereFS from '$lib/shaders/atmosphereFS.glsl?raw';
 
-	export let position: [number, number, number];
+	export let earthPosition: [number, number, number];
 	export let sunPosition: [number, number, number];
+	export let earthViewVector: { x: number; y: number; z: number };
 
 	const { camera } = useThrelte();
+
+	let viewVector = { x: 0, y: 0, z: 0 };
 
 	// Textures
 	const earthTexture = useTexture('/textures/bodies/earth_16k_edited6_-50saturation.jpg', {
@@ -44,31 +47,26 @@
 	});
 
 	// Atmosphere
-	const color = new THREE.Color('#95D3F4');
+	const atmosphereColor = new THREE.Color('#95D3F4');
 
-	const atmospherePosition: [number, number, number] = [...position];
+	const atmospherePosition: [number, number, number] = [...earthPosition];
 	atmospherePosition[0] += 0.2;
 
 	const atmosphereUniforms = {
 		aperture: { type: 'f', value: 0.71 },
 		scale: { type: 'f', value: 28.0 },
-		color: { type: 'c', value: color },
+		color: { type: 'c', value: atmosphereColor },
 		opacity: { type: 'f', value: 1.0 }
 	};
 
 	// Sky
-	const skyPosition: [number, number, number] = [...position];
-	skyPosition[0] += 0;
-
-	const vector = new THREE.Vector4(color.r, color.g, color.b, 0.1);
-
-	let skyUniforms = getSkyUniforms();
+	const skyUniforms = getSkyUniforms();
 
 	function getSkyUniforms() {
 
 		const baseSkyUniforms = {
-			uColor: { type: 'v4', value: vector },
-			viewVector: { type: 'v3', value: $camera.position },
+			uColor: { type: 'v4', value: new THREE.Vector4(atmosphereColor.r, atmosphereColor.g, atmosphereColor.b, 0.1) },
+			viewVector: { type: 'v3', value: earthViewVector },
 			uTop: { type: 'f', value: 0.94 }, // 0.94
 			uPower: { type: 'f', value: 0.85 }, // 0.65555555555
 			usingDirectionalLighting: { type: 'i', value: true },
@@ -93,15 +91,16 @@
 		}
 		
 		// Link camera view to shader uniform value
-		if (skyUniforms.viewVector.value != $camera.position) {
-			skyUniforms.viewVector.value = $camera.position;
+		if (skyUniforms.viewVector.value != earthViewVector) {
+			console.log('earthViewVector :', earthViewVector);
+			skyUniforms.viewVector.value = earthViewVector;
 		}
 	});
 
 </script>
 
 {#if $earthTexture && $earthClouds}
-	<T.Group {position} rotation.x={((23.4 * Math.PI) / 180) * 1} rotation.y={2.2 + rotation / 100}>
+	<T.Group position={earthPosition} rotation.x={((23.4 * Math.PI) / 180) * 1} rotation.y={2.2 + rotation / 100}>
 		<!-- Earth surface -->
 		<T.Mesh scale={1}>
 			<T.IcosahedronGeometry args={[7.9, 64]} />
@@ -112,8 +111,6 @@
 				bumpScale={2}
 				roughnessMap={$earthSpecular}
 				roughness={0.99}
-				displacementMap={$earthBump}
-				displacementScale={0.01}
 				lightMap={$earthClouds}
 				lightMapIntensity={-2}
 				emissive={0xffffff}
@@ -158,7 +155,7 @@
 	</T.Mesh>
 
 	<!-- Sky effect -->
-	<T.Mesh scale={1.02} rotation.y={rotation} matrixAutoUpdate={false} position={[0, 5, 0]}>
+	<T.Mesh scale={1.001} position={earthPosition}>
 		<T.IcosahedronGeometry args={[7.95, 64]}/>
 		<T.ShaderMaterial
 			vertexShader={skyVS}

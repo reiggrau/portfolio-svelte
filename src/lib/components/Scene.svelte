@@ -7,61 +7,43 @@
 
 	import { onMount } from 'svelte'
 
-	import { darkmode } from '$lib/store';
+	import { debug } from './state';
+	import { darkmode, view } from '$lib/store'; // 'earth' | 'moon' | 'mars'
 
 	import Earth from './Earth.svelte';
 	import Moon from './Moon.svelte';
 	import Mars from './Mars.svelte';
 
-	import { debug } from './state';
-
-	import { mouseCoordsSpring, springScrollPos } from './scrollPos';
-
-	import { spring } from 'svelte/motion';
-
-	import { view } from '$lib/store';
-
-	// Camera transition
-
-
-	// Postprocess
 	import Renderer from './Renderer.svelte';
 
-	// Interactivity
 	interactivity();
 
-	// Sun position
+	// Positions
 	const sunPosition: [number, number, number] = [200000, 0, 0];
+
+	const earthPosition: [number, number, number] = [ 0, 0, 0 ];
+	const moonPosition: [number, number, number] = [0, 0, -200 ];
+	const marsPosition: [number, number, number] = [ 0, 0, -10000 ];
 
 	// Camera
 	const { camera } = useThrelte();
+	
+	let cameraPosition: any = $darkmode ? [ -22, 0, 24 ] : [ 22, 0, 24 ]; // Default
+	let cameraTarget: any = $debug ? [ 0, 0, 0 ] : [ 0, 0, -16]; // Default
 
-	let fov = 30;
-	let position: any = $darkmode ? [ -22, 0, 24 ] : [ 22, 0, 24 ]; // Default is 'earth'
-	let target: any = $debug ? [ 0, 0, 0 ] : [ 0, 0, -16]; // Default is 'earth'
+	// View vectors (required for atmosphere shaders)
+	let earthViewVector = getViewVector(earthPosition);
+	let marsViewVector = getViewVector(marsPosition);
 
-	onMount(() => {
-		console.log('window.innerWidth :', window.innerWidth);
-		position = getCameraPosition(position, window.innerWidth);
-	});
-
-	function getCameraPosition(coordinates: [number, number, number], windowWidth: number) {
-		// 1850 => 1420 => 1 => [ 22, 0, 24 ]
-		// 430 => 0 => 2 => [ 11, 0, 44 ]
-
-		const ratio = 2 - ((windowWidth - 430) / 1420);
-
-		coordinates[0] = coordinates[0] / ratio;
-		coordinates[2] = coordinates[2] * ratio;
-
-		return coordinates;
+	function getViewVector(bodyPosition: any) {
+		const viewVector = { x: $camera.position.x - bodyPosition[0],  y: $camera.position.y - bodyPosition[1], z: $camera.position.z - bodyPosition[2] };
+		return viewVector;
 	}
 
 	// Navigation + debug
 	const onKeyDown = (e: KeyboardEvent) => {
 		console.log('onKeyDown :', e.key);
 		if (e.key === 'd') {
-			console.log('debug:', !debug.current);
 			debug.set(!debug.current);
 		} else if (e.key === '1') {
 			view.set('earth');
@@ -73,29 +55,57 @@
 	}
 
 	// Trigger at view change
-	$: $darkmode, viewChanged();
-	$: $view, viewChanged();
-	// $: $debug, viewChanged();
+	$: $darkmode || $view || $debug, viewChange();
 
-	function viewChanged() {
-		console.log('view :', $view, 'debug :', $debug);
+	async function viewChange() {
+		console.log('viewChange()', { $darkmode, $view, $debug });
 
 		switch ($view) {
 			case 'earth':
-				position = getCameraPosition($darkmode ? [ -22, 0, 24 ] : [ 22, 0, 24 ], window.innerWidth);
-				target = $debug ? [ 0, 0, 0 ] : [ 0, 0, -16];
+				cameraTarget = $debug ? [ 0, 0, 0 ] : [ 0, 0, -16];
+				cameraPosition = $darkmode ? [ -22, 0, 24 ] : [ 22, 0, 24 ];
 				break;
 			case 'moon':
-				position = $darkmode ? [-3, 0, -210 ] : [ 2.5, 0, -210 ];
-				target = $debug ? [ 0, 0, -200 ] : [ 0, 0, 0 ];
+				cameraTarget = $debug ? [ 0, 0, -200 ] : [ 0, 0, 0 ];
+				cameraPosition = $darkmode ? [-3, 0, -210 ] : [ 2.5, 0, -210 ];
 				break;
 			case 'mars':
-				position = $darkmode ? [-3, 0, -20020 ] : [ 2.5, 0, -20020 ];
-				target = $debug ? [ -2, 0, -20000 ] : [ 0, 0, -16];
+				cameraTarget = $debug ? [ 0, 0, -10000 ] : [ 0, 0, -10000 ];
+				cameraPosition = [ 2.5, 0, -10018 ];
 				break;
 		}
+
+		setCameraPosition(cameraPosition);
+		updateViewVectors();
 	}
 
+	function setCameraPosition(position: [number, number, number]) {
+		$camera.position.set(position[0], position[1], position[2]);
+	}(cameraPosition);
+
+	function updateViewVectors() {
+		console.log('updateViewVectors() new $camera.position :', $camera.position );
+		earthViewVector = getViewVector(earthPosition);
+		marsViewVector = getViewVector(marsPosition);
+	}
+
+	// Adapt camera position to window width
+	// onMount(() => {
+	// 	// console.log('window.innerWidth :', window.innerWidth);
+	// 	position = getCameraPosition(position, window.innerWidth);
+	// });
+
+	// function getCameraPosition(coordinates: [number, number, number], windowWidth: number) {
+	// 	// 1850 => 1420 => 1 => [ 22, 0, 24 ]
+	// 	// 430 => 0 => 2 => [ 11, 0, 44 ]
+
+	// 	const ratio = 2 - ((windowWidth - 430) / 1420);
+
+	// 	coordinates[0] = coordinates[0] / ratio;
+	// 	coordinates[2] = coordinates[2] * ratio;
+
+	// 	return coordinates;
+	// }
 
 
 </script>
@@ -118,17 +128,17 @@
 		}}
 	/>
 
-	<Earth position={[0, 0, 0]} {sunPosition} />
+	<Earth {earthPosition} {sunPosition} {earthViewVector}/>
 	
-	<Moon position={[0, 0, -200]} />
+	<Moon {moonPosition} />
 
-	<Mars position={[0, 0, -20000]} {sunPosition} />
+	<Mars {marsPosition} {sunPosition} {marsViewVector}/>
 </Suspense>
 
 <!-- Camera -->
 <T.PerspectiveCamera
-	{position}
-	{fov}
+	position={cameraPosition}
+	fov={30}
 	zoom={1}
 	near={0.1}
 	far={2000000}
@@ -141,13 +151,12 @@
 			enableZoom={true}
 			zoomSpeed={0.5}
 			enableDamping
-			on:change={()=>{
-				console.log('camera position :', position);
-			}}
+			target={cameraTarget}
+			on:change={updateViewVectors}
 		/>
 	{/if}
 	<TrackballControls
-		target={target}
+		target={cameraTarget}
 		enabled={false}
 		staticMoving={false}
 		zoomSpeed={0.5}
@@ -164,7 +173,7 @@
 </T.Mesh>
 
 <!-- Ligh (ambient) -->
-<T.AmbientLight color={0x07215c} intensity={0.2} />
+<T.AmbientLight color={0x07215c} intensity={0.3} />
 
 <!-- Stars (Old version) -->
 <!-- <Stars count={5000} depth={290} radius={50} speed={0} fade={false}/> -->

@@ -10,10 +10,18 @@
 	import atmosphereVS from '$lib/shaders/atmosphereVS.glsl?raw';
 	import atmosphereFS from '$lib/shaders/atmosphereFS.glsl?raw';
 
-	export let position: [number, number, number];
+	export let marsPosition: [number, number, number];
 	export let sunPosition: [number, number, number];
+	export let marsViewVector: any;
 
 	const { camera } = useThrelte();
+
+	// let viewVector: any = getViewVector();
+
+	// function getViewVector() {
+	// 	const viewVector = { x: $camera.position.x - marsPosition[0],  y: $camera.position.y - marsPosition[1], z: $camera.position.z - marsPosition[2] };
+	// 	return viewVector;
+	// }
 
 	// Textures
 	// Source: https://www.solarsystemscope.com/textures/
@@ -39,7 +47,7 @@
 	// Atmosphere
 	const color = new THREE.Color('#ad6242');
 
-	const atmospherePosition: [number, number, number] = [...position];
+	const atmospherePosition: [number, number, number] = [...marsPosition];
 	atmospherePosition[0] += 0.1;
 
 	const atmosphereUniforms = {
@@ -50,9 +58,6 @@
 	};
 
 	// Sky
-	const skyPosition: [number, number, number] = [...position];
-	skyPosition[0] += 0;
-
 	const vector = new THREE.Vector4(color.r, color.g, color.b, 0.1);
 
 	let skyUniforms = getSkyUniforms();
@@ -61,7 +66,7 @@
 
 		const baseSkyUniforms = {
 			uColor: { type: 'v4', value: vector },
-			viewVector: { type: 'v3', value: $camera.position },
+			viewVector: { type: 'v3', value: marsViewVector },
 			uTop: { type: 'f', value: 0.94 }, // 0.94
 			uPower: { type: 'f', value: 0.85 }, // 0.65555555555
 			usingDirectionalLighting: { type: 'i', value: true },
@@ -82,46 +87,37 @@
 	useTask((delta) => {
 		rotation += delta;
 		if ($marsClouds) {
-			$marsClouds.offset.set(0.4 - rotation / 5000, 0);
+			$marsClouds.offset.set(0.4 - rotation / 2000, 0);
 		}
-		
+
 		// Link camera view to shader uniform value
-		if (skyUniforms.viewVector.value != $camera.position) {
-			skyUniforms.viewVector.value = $camera.position;
+		if (skyUniforms.viewVector.value != marsViewVector) {
+			console.log('marsViewVector :', marsViewVector);
+			skyUniforms.viewVector.value = marsViewVector;
 		}
 	});
 
 </script>
 
 {#if $marsTexture && $marsClouds}
-	<T.Group {position} rotation.x={((23.4 * Math.PI) / 180) * 1} rotation.y={2.2 + rotation / 100}>
+	<T.Group position={marsPosition} rotation.x={((25.2 * Math.PI) / 180) * 1} rotation.y={2.2 + rotation / 100}>
 		<!-- Mars surface -->
 		<T.Mesh scale={1}>
-			<T.IcosahedronGeometry args={[4, 64]} />
+			<T.IcosahedronGeometry args={[4.2, 64]} />
 			<T.MeshStandardMaterial
 				color={0xffffff}
 				map={$marsTexture}
 				bumpMap={$marsBump}
 				bumpScale={2}
 				roughness={0.99}
-				displacementMap={$marsBump}
-				displacementScale={0.01}
 				lightMap={$marsClouds}
-				lightMapIntensity={-0.5}
+				lightMapIntensity={-1}
 			/>
 		</T.Mesh>
 
-		<!-- City lights -->
-		<!-- <T.Mesh
-			scale={1}
-		>
-			<T.IcosahedronGeometry args={[7.9, 64]}/>
-			<T.MeshStandardMaterial map={$earthLights} emissiveMap={$earthLights} emissiveIntensity={10} blending={THREE.AdditiveBlending}/>
-		</T.Mesh> -->
-
 		<!-- Clouds -->
 		<T.Mesh scale={1.004}>
-			<T.IcosahedronGeometry args={[4, 64]} />
+			<T.IcosahedronGeometry args={[4.2, 64]} />
 			<T.MeshStandardMaterial
 				color={'white'}
 				alphaMap={$marsClouds}
@@ -135,7 +131,7 @@
 
 	<!-- Atmosphere effect -->
 	<T.Mesh scale={1.02} position={atmospherePosition}>
-		<T.IcosahedronGeometry args={[4, 64]} />
+		<T.IcosahedronGeometry args={[4.2, 64]} />
 		<T.ShaderMaterial
 			vertexShader={atmosphereVS}
 			fragmentShader={atmosphereFS}
@@ -147,8 +143,8 @@
 	</T.Mesh>
 
 	<!-- Sky effect -->
-	<T.Mesh scale={1.02} rotation.y={rotation} matrixAutoUpdate={false} position={[0, 5, 0]}>
-		<T.IcosahedronGeometry args={[4.1, 64]}/>
+	<T.Mesh scale={1.001} position={marsPosition}>
+		<T.IcosahedronGeometry args={[4.2, 64]}/>
 		<T.ShaderMaterial
 			vertexShader={skyVS}
 			fragmentShader={skyFS}

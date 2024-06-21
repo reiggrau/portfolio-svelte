@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { BarsSolid } from 'flowbite-svelte-icons';
 
+	import { debug } from './state';
+
 	import { view } from '$lib/store';
 
 	import DarkMode from './DarkMode.svelte';
@@ -34,7 +36,7 @@
 	<!--  -->
 
 	<!-- Wide navigation bar -->
-	<ul class="hidden md:flex flex gap-4 mr-12">
+	<ul class="hidden md:flex flex gap-4 mr-12" on:click={()=> debug.set(false)}>
 		<li class="text-glow" on:click={()=> view.set('earth')}>HOME</li>
 		<li class="text-glow" on:click={()=> view.set('moon')}>ABOUT</li>
 		<li class="text-glow" on:click={()=> view.set('mars')}>SKILLS</li>
