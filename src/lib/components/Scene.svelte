@@ -71,7 +71,7 @@
 				break;
 			case 'mars':
 				cameraTarget = $debug ? [ 0, 0, -10000 ] : [ 0, 0, -10000 ];
-				cameraPosition = [ 2.5, 0, -10018 ];
+				cameraPosition = $darkmode ? [ -7, 0, -10016 ] : [ 7, 0, -10016 ];
 				break;
 		}
 

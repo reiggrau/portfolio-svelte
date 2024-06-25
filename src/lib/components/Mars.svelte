@@ -100,7 +100,7 @@
 </script>
 
 {#if $marsTexture && $marsClouds}
-	<T.Group position={marsPosition} rotation.x={((25.2 * Math.PI) / 180) * 1} rotation.y={2.2 + rotation / 100}>
+	<T.Group position={marsPosition} rotation.x={((25.2 * Math.PI) / 180) * 1} rotation.y={5.3 + rotation / 100}>
 		<!-- Mars surface -->
 		<T.Mesh scale={1}>
 			<T.IcosahedronGeometry args={[4.2, 64]} />

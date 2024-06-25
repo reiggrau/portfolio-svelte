@@ -19,6 +19,7 @@
 	import FadeIn from './FadeIn.svelte';
 	import Home from './Home.svelte';
 	import About from './About.svelte';
+	import Skills from './Skills.svelte';
 
 	const onScroll = () => {
 		// get normalized scroll position in document. 0 should equal top of page, 1
@@ -86,6 +87,11 @@
 		<div class='fixed w-screen'>
 			<FadeIn active={$view === 'moon'}>
 				<About />
+			</FadeIn>
+		</div>
+		<div class='fixed w-screen'>
+			<FadeIn active={$view === 'mars'}>
+				<Skills/>
 			</FadeIn>
 		</div>
 	{/if}
