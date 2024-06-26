@@ -5,7 +5,7 @@
 
 <div id="About" class="w-full h-screen flex flex-col justify-center">
     <div class="max-w-[700px] mx-auto {!$darkmode ? 'mr-[55%] ml-[5%]' : 'ml-[55%] mr-[5%]'}">
-        <h1 class="text-3xl sm:text-4xl font-semibold text-gray-300 inline border-b-2 border-cyan-500">
+        <h1 class="text-3xl sm:text-4xl font-light text-gray-300 inline border-b-2 border-cyan-500">
             A little about me
         </h1>
         <p class="mt-6 text-lg font-light text-gray-200 text-justify">

@@ -19,19 +19,24 @@
 	let viewVector = { x: 0, y: 0, z: 0 };
 
 	// Textures
-	const earthTexture = useTexture('/textures/bodies/earth_16k_edited6_-50saturation.jpg', {
+	import Device from 'svelte-device-info';
+
+	const device = Device.isPhone ? 'mobile' : 'desktop';
+	console.log(Device)
+
+	const earthTexture = useTexture(`/textures/${device}/earth_diffuse.jpg`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			return texture;
 		}
 	});
 	const earthBump = useLoader(THREE.TextureLoader).load(
-		'/textures/bodies/earth_topography_16k.jpg'
+		`/textures/${device}/earth_topography.jpg`
 	);
 	const earthSpecular = useLoader(THREE.TextureLoader).load(
-		'/textures/bodies/earth_specular_inverted_gray.png'
+		`/textures/${device}/earth_specular.png`
 	);
-	const earthClouds = useTexture('/textures/bodies/earth_clouds_16k_brightness-30.jpg', {
+	const earthClouds = useTexture(`/textures/${device}/earth_clouds.jpg`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			texture.wrapS = THREE.RepeatWrapping;
@@ -39,7 +44,7 @@
 			return texture;
 		}
 	});
-	const earthLights = useTexture('/textures/bodies/earth_lights.jpg', {
+	const earthLights = useTexture(`/textures/${device}/earth_lights.jpg`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			return texture;

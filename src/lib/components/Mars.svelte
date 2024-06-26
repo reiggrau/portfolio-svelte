@@ -25,7 +25,11 @@
 
 	// Textures
 	// Source: https://www.solarsystemscope.com/textures/
-	const marsTexture = useTexture('/textures/bodies/mars_8k.jpg', {
+	import Device from 'svelte-device-info';
+
+	const device = Device.isPhone ? 'mobile' : 'desktop';
+
+	const marsTexture = useTexture(`/textures/${device}/mars_diffuse.jpg`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			return texture;
@@ -33,9 +37,9 @@
 	});
 	// Source: https://www.deviantart.com/slimysomething
 	const marsBump = useLoader(THREE.TextureLoader).load(
-		'/textures/bodies/mars_topography_8k.png'
+		`/textures/${device}/mars_topography.jpg`
 	);
-	const marsClouds = useTexture('/textures/bodies/mars_clouds_2k.png', {
+	const marsClouds = useTexture(`/textures/${device}/mars_clouds.png`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			texture.wrapS = THREE.RepeatWrapping;

@@ -5,12 +5,4 @@
 <main id="page-main">
 	<!-- Threlte scene -->
 	<Threlte />
-
-	<!-- <About/> -->
-
-	<!-- <Skills/> -->
-
-	<!-- <Projects/> -->
-
-	<!-- <Contact/> -->
 </main>

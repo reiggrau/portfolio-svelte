@@ -40,7 +40,7 @@
 		<li class="text-glow" on:click={()=> view.set('earth')}>HOME</li>
 		<li class="text-glow" on:click={()=> view.set('moon')}>ABOUT</li>
 		<li class="text-glow" on:click={()=> view.set('mars')}>SKILLS</li>
-		<li class="text-glow">PROJECTS</li>
+		<li class="text-glow" on:click={()=> view.set('venus')}>PROJECTS</li>
 		<li class="text-glow">CONTACT</li>
 	</ul>
 

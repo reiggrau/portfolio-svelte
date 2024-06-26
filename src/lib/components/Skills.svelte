@@ -19,27 +19,27 @@
     import vue from '$lib/assets/vue.png';
 </script>
 
-<div id="About" class="w-full h-screen flex flex-col justify-center text-center">
-    <div class="max-w-screen px-[26%] flex flex-col items-center">
-        <h1 class="text-3xl sm:text-4xl font-semibold text-gray-300 inline border-b-2 border-cyan-500">
+<div id="Skills" class="w-full h-screen flex flex-col justify-center text-center">
+    <div class="max-w-screen flex flex-col items-center">
+        <h1 class="text-3xl sm:text-4xl font-light text-gray-300 inline border-b-2 border-cyan-500">
             My skills
         </h1>
         <p class="mt-4 max-w-[700px] text-lg font-light text-gray-200">
 			These are the languages, UI frameworks, and other skills I have experience with:
 		</p>
-        <div class='mt-8 text-white text-xl font-light flex gap-6 flex-wrap justify-center'>
+        <div class='my-8 w-[900px] text-white text-xl font-light flex gap-6 flex-wrap justify-center'>
+            <SkillCard skillName={'three.js'} src={threejs}/>
             <SkillCard skillName={'HTML'} src={html}/>
             <SkillCard skillName={'CSS'} src={css}/>
             <SkillCard skillName={'JavaScript'} src={javascript}/>
             <SkillCard skillName={'TypeScript'} src={typescript}/>
             <SkillCard skillName={'Node.js'} src={node}/>
             <SkillCard skillName={'Svelte'} src={svelte}/>
-            <SkillCard skillName={'React'} src={react}/>
             <SkillCard skillName={'Next'} src={next}/>
-            <SkillCard skillName={'Vue.js'} src={vue}/>
+            <SkillCard skillName={'React'} src={react}/>
             <SkillCard skillName={'Nuxt'} src={nuxt}/>
+            <SkillCard skillName={'Vue.js'} src={vue}/>
             <SkillCard skillName={'Tailwind'} src={tailwind}/>
-            <SkillCard skillName={'three.js'} src={threejs}/>
             <SkillCard skillName={'Threlte'} src={threlte}/>
             <SkillCard skillName={'AWS'} src={aws}/>
         </div>

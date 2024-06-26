@@ -51,6 +51,8 @@
 			view.set('moon');
 		} else if (e.key === '3') {
 			view.set('mars');
+		} else if (e.key === '4') {
+			view.set('venus');
 		}
 	}
 
@@ -72,6 +74,10 @@
 			case 'mars':
 				cameraTarget = $debug ? [ 0, 0, -10000 ] : [ 0, 0, -10000 ];
 				cameraPosition = $darkmode ? [ -7, 0, -10016 ] : [ 7, 0, -10016 ];
+				break;
+			case 'venus':
+				cameraTarget = $debug ? [ 0, 0, 0 ] : [ 0, 0, -16];
+				cameraPosition = $darkmode ? [ -22, 0, 24 ] : [ 22, 0, 24 ];
 				break;
 		}
 
