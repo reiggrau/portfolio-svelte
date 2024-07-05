@@ -2,6 +2,7 @@
 	import { browser } from '$app/environment';
 	import { darkmode } from '$lib/store';
 	import { SunSolid, MoonSolid } from 'flowbite-svelte-icons';
+    import { Tooltip } from 'flowbite-svelte';
 
 	let systemDarkmode;
 	let htmlClassList: any;
@@ -29,7 +30,7 @@
 	</script>
 </svelte:head>
 
-<button id="DarkMode" on:click={toggleDarkMode} class="text-gray">
+<button id="DarkModeButton" on:click={toggleDarkMode} class="text-gray">
 	{#if $darkmode}
 		<MoonSolid
 			class="h-6 w-8 md:h-4 md:w-5 animate-[spin_1s_ease-out_forwards] hover:box-shadow shadow-white"
@@ -38,3 +39,4 @@
 		<SunSolid class="h-7 w-7 md:h-5 md:w-5 animate-[spin_1s_ease-out_forwards]" />
 	{/if}
 </button>
+<Tooltip triggeredBy="#DarkModeButton">Toggle dark mode</Tooltip>

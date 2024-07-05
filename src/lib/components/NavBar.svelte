@@ -5,8 +5,9 @@
 
 	import { view } from '$lib/store';
 
-	import DarkMode from './DarkMode.svelte';
+	import DarkModeButton from './DarkModeButton.svelte';
 	import DebugButton from './DebugButton.svelte';
+	import SoundButton from './SoundButton.svelte';
 
 	let mobileNav = false;
 	let fadeIn = true;
@@ -26,13 +27,13 @@
 	<!-- Settings buttons -->
 	<div class='ml-8 flex gap-6 items-center'>
 		<!-- Dark mode button -->
-		<DarkMode />
+		<DarkModeButton />
 
 		<!-- Free view button -->
 		<DebugButton />
 
 		<!-- Sound button -->
-
+		<SoundButton />
 	</div>
 
 	<!--  -->

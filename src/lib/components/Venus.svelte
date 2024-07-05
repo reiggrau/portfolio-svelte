@@ -71,7 +71,7 @@
         rotation += delta;
 
         if ($venusClouds) {
-            $venusClouds.offset.set(0.4 + rotation / 5000, 0);
+            $venusClouds.offset.set(0.4 + rotation / 2000, 0);
         }
 
         // Link camera view to shader uniform value
