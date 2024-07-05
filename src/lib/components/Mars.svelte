@@ -3,8 +3,6 @@
 	import { T, useTask, useLoader, useThrelte } from '@threlte/core';
 	import { useTexture } from '@threlte/extras';
 
-	import { darkmode } from '$lib/store';
-
 	import skyVS from '$lib/shaders/skyVS.glsl?raw';
 	import skyFS from '$lib/shaders/skyFS.glsl?raw';
 	import atmosphereVS from '$lib/shaders/atmosphereVS.glsl?raw';
@@ -13,15 +11,6 @@
 	export let marsPosition: [number, number, number];
 	export let sunPosition: [number, number, number];
 	export let marsViewVector: any;
-
-	const { camera } = useThrelte();
-
-	// let viewVector: any = getViewVector();
-
-	// function getViewVector() {
-	// 	const viewVector = { x: $camera.position.x - marsPosition[0],  y: $camera.position.y - marsPosition[1], z: $camera.position.z - marsPosition[2] };
-	// 	return viewVector;
-	// }
 
 	// Textures
 	// Source: https://www.solarsystemscope.com/textures/
@@ -90,13 +79,13 @@
 
 	useTask((delta) => {
 		rotation += delta;
+
 		if ($marsClouds) {
 			$marsClouds.offset.set(0.4 - rotation / 2000, 0);
 		}
 
 		// Link camera view to shader uniform value
 		if (skyUniforms.viewVector.value != marsViewVector) {
-			console.log('marsViewVector :', marsViewVector);
 			skyUniforms.viewVector.value = marsViewVector;
 		}
 	});

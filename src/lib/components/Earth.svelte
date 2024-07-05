@@ -97,7 +97,6 @@
 		
 		// Link camera view to shader uniform value
 		if (skyUniforms.viewVector.value != earthViewVector) {
-			console.log('earthViewVector :', earthViewVector);
 			skyUniforms.viewVector.value = earthViewVector;
 		}
 	});

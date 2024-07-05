@@ -13,6 +13,7 @@
 	import Earth from './Earth.svelte';
 	import Moon from './Moon.svelte';
 	import Mars from './Mars.svelte';
+	import Venus from './Venus.svelte';
 
 	import Renderer from './Renderer.svelte';
 
@@ -24,6 +25,7 @@
 	const earthPosition: [number, number, number] = [ 0, 0, 0 ];
 	const moonPosition: [number, number, number] = [0, 0, -200 ];
 	const marsPosition: [number, number, number] = [ 0, 0, -10000 ];
+	const venusPosition: [number, number, number] = [ 0, 0, -20000 ];
 
 	// Camera
 	const { camera } = useThrelte();
@@ -34,6 +36,7 @@
 	// View vectors (required for atmosphere shaders)
 	let earthViewVector = getViewVector(earthPosition);
 	let marsViewVector = getViewVector(marsPosition);
+	let venusViewVector = getViewVector(venusPosition);
 
 	function getViewVector(bodyPosition: any) {
 		const viewVector = { x: $camera.position.x - bodyPosition[0],  y: $camera.position.y - bodyPosition[1], z: $camera.position.z - bodyPosition[2] };
@@ -53,6 +56,30 @@
 			view.set('mars');
 		} else if (e.key === '4') {
 			view.set('venus');
+		} else if (e.key === 'ArrowDown') {
+			switch($view) {
+				case 'earth':
+					view.set('moon');
+					break;
+				case 'moon':
+					view.set('mars');
+					break;
+				case 'mars':
+					view.set('venus');
+					break;
+			}
+		} else if (e.key === 'ArrowUp') {
+			switch($view) {
+				case 'moon':
+					view.set('earth');
+					break;
+				case 'mars':
+					view.set('moon');
+					break;
+				case 'venus':
+					view.set('mars');
+					break;
+			}
 		}
 	}
 
@@ -73,11 +100,11 @@
 				break;
 			case 'mars':
 				cameraTarget = $debug ? [ 0, 0, -10000 ] : [ 0, 0, -10000 ];
-				cameraPosition = $darkmode ? [ -7, 0, -10016 ] : [ 7, 0, -10016 ];
+				cameraPosition = $darkmode ? [ -7, 0, -10017 ] : [ 7, 0, -10017 ];
 				break;
 			case 'venus':
-				cameraTarget = $debug ? [ 0, 0, 0 ] : [ 0, 0, -16];
-				cameraPosition = $darkmode ? [ -22, 0, 24 ] : [ 22, 0, 24 ];
+				cameraTarget = $debug ? [ 0, 0, -20000 ] : [ 0, 0, -20000 ];
+				cameraPosition = $darkmode ? [ 23, 0, -19978 ] : [ 23, 0, -19978 ];
 				break;
 		}
 
@@ -90,9 +117,10 @@
 	}(cameraPosition);
 
 	function updateViewVectors() {
-		console.log('updateViewVectors() new $camera.position :', $camera.position );
+		// console.log('updateViewVectors() new $camera.position :', $camera.position );
 		earthViewVector = getViewVector(earthPosition);
 		marsViewVector = getViewVector(marsPosition);
+		venusViewVector = getViewVector(venusPosition);
 	}
 
 	// Adapt camera position to window width
@@ -139,6 +167,8 @@
 	<Moon {moonPosition} />
 
 	<Mars {marsPosition} {sunPosition} {marsViewVector}/>
+
+	<Venus {venusPosition} {sunPosition} {venusViewVector}/>
 </Suspense>
 
 <!-- Camera -->

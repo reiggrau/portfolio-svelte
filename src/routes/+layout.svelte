@@ -2,6 +2,7 @@
 	import '../app.css';
 	import NavBar from '$lib/components/NavBar.svelte';
 	import SocialsIcons from '$lib/components/SocialsIcons.svelte';
+	import Footer from '$lib/components/Footer.svelte';
 </script>
 
 <head>
@@ -19,4 +20,5 @@
 	<slot />
 
 	<!-- Footer -->
+	<Footer/>
 </div>

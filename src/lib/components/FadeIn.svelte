@@ -4,8 +4,8 @@
     export let active: boolean;
 
     let progress = spring(0, {
-        stiffness: 0.1,
-        damping: 1.9
+        stiffness: 0.04,
+        damping: 1.0
     });
 
     $: if (active) {

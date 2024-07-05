@@ -60,8 +60,8 @@
 	on:mousemove={onMouseMove}
 />
 
-<div id="Threlte" class="relative h-[500vh]">
-	<div class="fixed left-0 top-0 h-[100lvh] w-full {$debug ? '' : '-z-10'}">
+<div id="Threlte" class="z-10 h-[500vh]">
+	<div class="fixed h-[100lvh] w-full {$debug ? '' : '-z-10'}">
 		<Canvas
 			rendererParameters={{
 				powerPreference: 'high-performance',
@@ -80,7 +80,7 @@
 
 	<!-- Scene text -->
 	{#if !$debug}
-		<div class='fixed w-screen'>
+		<div class='fixed top-0 left-0 w-screen z-20'>
 			<FadeIn active={$view === 'earth'}>
 				<Home />
 			</FadeIn>
@@ -96,9 +96,9 @@
 			</FadeIn>
 		</div>
 		<div class='fixed w-screen'>
-			<FadeIn active={$view === 'venus'}>
+			<!-- <FadeIn active={$view === 'venus'}>
 				<Projects/>
-			</FadeIn>
+			</FadeIn> -->
 		</div>
 	{/if}
 </div>

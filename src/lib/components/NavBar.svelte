@@ -6,6 +6,7 @@
 	import { view } from '$lib/store';
 
 	import DarkMode from './DarkMode.svelte';
+	import DebugButton from './DebugButton.svelte';
 
 	let mobileNav = false;
 	let fadeIn = true;
@@ -20,14 +21,15 @@
 
 <div
 	id="NavBar"
-	class="fixed w-full h-20 md:h-16 shadow-lg bg-black bg-opacity-30 flex justify-between items-center text-white z-10"
+	class="fixed w-full h-20 md:h-16 shadow-lg bg-black bg-opacity-30 flex justify-between items-center text-white z-30"
 >
 	<!-- Settings buttons -->
-	<div>
+	<div class='ml-8 flex gap-6 items-center'>
 		<!-- Dark mode button -->
 		<DarkMode />
 
 		<!-- Free view button -->
+		<DebugButton />
 
 		<!-- Sound button -->
 
@@ -46,7 +48,7 @@
 
 	<!-- Hamburger -->
 	<button class="md:hidden p-2 mr-8" on:click={() => toggleMovileNav(true)}>
-		<BarsSolid size="xl" />
+		<BarsSolid size="lg" />
 	</button>
 </div>
 

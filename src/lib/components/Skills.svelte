@@ -21,7 +21,7 @@
 
 <div id="Skills" class="w-full h-screen flex flex-col justify-center text-center">
     <div class="max-w-screen flex flex-col items-center">
-        <h1 class="text-3xl sm:text-4xl font-light text-gray-300 inline border-b-2 border-cyan-500">
+        <h1 class="text-3xl sm:text-4xl font-bold text-gray-300 inline border-b-2 border-cyan-500">
             My skills
         </h1>
         <p class="mt-4 max-w-[700px] text-lg font-light text-gray-200">

@@ -6,7 +6,7 @@
 </script>
 
 <div id="Home" class="w-full h-screen flex flex-col justify-center">
-	<div class="px-10 max-w-[1000px] mx-auto {$darkmode ? 'mr-[50%] ml-[10%]' : 'ml-[50%] mr-[5%]'}">
+	<div class="px-10 max-w-[1000px] mx-auto {$darkmode ? 'mr-[50%] ml-[10%]' : 'ml-[52%] mr-[5%]'}">
 		<h3 class="text-lg font-light text-[#00d6fc] text-shadow shadow-cyan-200">Hi! My name is</h3>
 		<h1 class="text-5xl sm:text-7xl font-semibold text-gray-200">
 			Guillem Reig

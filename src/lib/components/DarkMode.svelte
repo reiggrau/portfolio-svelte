@@ -1,4 +1,3 @@
-<!-- JS -->
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { darkmode } from '$lib/store';
@@ -30,12 +29,12 @@
 	</script>
 </svelte:head>
 
-<button id="DarkMode" on:click={toggleDarkMode} class="text-gray p-2 ml-8">
+<button id="DarkMode" on:click={toggleDarkMode} class="text-gray">
 	{#if $darkmode}
 		<MoonSolid
-			class="h-7 w-8 md:h-4 md:w-5 animate-[spin_1s_ease-out_forwards] hover:box-shadow shadow-white"
+			class="h-6 w-8 md:h-4 md:w-5 animate-[spin_1s_ease-out_forwards] hover:box-shadow shadow-white"
 		/>
 	{:else}
-		<SunSolid class="h-8 w-8 md:h-5 md:w-5 animate-[spin_1s_ease-out_forwards]" />
+		<SunSolid class="h-7 w-7 md:h-5 md:w-5 animate-[spin_1s_ease-out_forwards]" />
 	{/if}
 </button>
