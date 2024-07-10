@@ -10,7 +10,7 @@
 <!-- Icons -->
 <div
 	id="SocialsIcons"
-	class="hidden sm:block fixed top-[35%] left-0 flex flex-col text-2xl text-white z-30 opacity-90"
+	class="hidden sm:block fixed top-[40%] left-0 flex flex-col text-2xl text-white z-30 opacity-90"
 >
 	<!-- LinkedIn -->
 	<a
@@ -30,11 +30,11 @@
 		<span class="w-32 text-center">Github</span>
 		<div class="w-12 h-12 flex justify-center items-center"><GithubSolid size="lg" /></div>
 	</a>
-	<!-- LinkedIn -->
-	<a href="/" class="drawer bg-[#de5246] dark:bg-[#b63e34]">
+	<!-- Email -->
+	<!-- <a href="/" class="drawer bg-[#de5246] dark:bg-[#b63e34]">
 		<span class="w-32 text-center">Email</span>
 		<div class="w-12 h-12 flex justify-center items-center"><EnvelopeOutline size="lg" /></div>
-	</a>
+	</a> -->
 	<!-- Resume -->
 	<a href="/" class="drawer bg-gray-500 dark:bg-gray-600">
 		<span class="w-32 text-center">My CV</span>

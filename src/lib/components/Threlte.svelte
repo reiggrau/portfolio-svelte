@@ -1,20 +1,11 @@
 <script lang="ts">
-  	import { onMount } from 'svelte';
+	import { onMount } from 'svelte';
 	import { Canvas } from '@threlte/core';
 	import { Environment } from '@threlte/extras';
 
 	import { debug } from './state';
 	import { view } from '$lib/store';
 
-	
-	import {
-		_springScrollPos,
-		mouseCoords,
-		mouseCoordsSpring,
-		scrollPos,
-		springScrollPos
-		} from './scrollPos';
-		
 	import Scene from './Scene.svelte';
 	import FadeIn from './FadeIn.svelte';
 	import Home from './Home.svelte';
@@ -22,46 +13,13 @@
 	import Skills from './Skills.svelte';
 	import Projects from './Projects.svelte';
 
-	const onScroll = () => {
-		// get normalized scroll position in document. 0 should equal top of page, 1
-		// should equal 1 page height from top, 2 should equal 2 page heights from
-		// top, etc. This allows easier addition of content to the bottom as opposed
-		// to a normalized scroll position where 1 is the bottom of the page.
-		const newScrollPos = Math.max(window.scrollY / window.innerHeight, 0);
-
-		scrollPos.set(newScrollPos);
-
-		_springScrollPos.set(newScrollPos);
-
-		console.log('newScrollPos:', newScrollPos);
-	}
-
-	const onMouseMove = (e: MouseEvent) => {
-		// get normalized mouse coords
-		const x = e.clientX / window.innerWidth
-		const y = e.clientY / window.innerHeight
-		mouseCoords.set({ x, y })
-		mouseCoordsSpring.set({ x, y })
-	}
-
-	onMount(() => {
-		const newScrollPos = Math.max(window.scrollY / window.innerHeight, 0);
-
-		scrollPos.set(newScrollPos);
-
-		_springScrollPos.set(newScrollPos, {
-			hard: true
-		});
-	})
+	const onScroll = () => {};
 </script>
 
-<svelte:window
-  	on:scroll={onScroll}
-	on:mousemove={onMouseMove}
-/>
+<svelte:window on:scroll={onScroll} />
 
-<div id="Threlte" class="z-10 h-[500vh]">
-	<div class="fixed h-[100lvh] w-full {$debug ? '' : '-z-10'}">
+<div id="Threlte" class="w-screen h-screen">
+	<div class="fixed w-full h-full {$debug ? 'z-20' : ''}">
 		<Canvas
 			rendererParameters={{
 				powerPreference: 'high-performance',
@@ -71,8 +29,12 @@
 			}}
 		>
 			<!-- Background stars -->
-			<Environment path={'/textures/background/'} files={'starmap_16k_edited4.png'} isBackground={true} />
-	
+			<Environment
+				path={'/textures/background/'}
+				files={'starmap_16k_edited4.png'}
+				isBackground={true}
+			/>
+
 			<!-- 3D models + lights + camera -->
 			<Scene />
 		</Canvas>
@@ -80,22 +42,22 @@
 
 	<!-- Scene text -->
 	{#if !$debug}
-		<div class='fixed top-0 left-0 w-screen z-20'>
+		<div class="fixed top-0 left-0 w-screen z-10">
 			<FadeIn active={$view === 'earth'}>
 				<Home />
 			</FadeIn>
 		</div>
-		<div class='fixed w-screen'>
+		<div class="fixed w-screen">
 			<FadeIn active={$view === 'moon'}>
 				<About />
 			</FadeIn>
 		</div>
-		<div class='fixed w-screen'>
+		<div class="fixed w-screen">
 			<FadeIn active={$view === 'mars'}>
-				<Skills/>
+				<Skills />
 			</FadeIn>
 		</div>
-		<div class='fixed w-screen'>
+		<div class="fixed w-screen">
 			<!-- <FadeIn active={$view === 'venus'}>
 				<Projects/>
 			</FadeIn> -->

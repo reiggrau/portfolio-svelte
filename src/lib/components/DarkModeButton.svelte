@@ -2,7 +2,7 @@
 	import { browser } from '$app/environment';
 	import { darkmode } from '$lib/store';
 	import { SunSolid, MoonSolid } from 'flowbite-svelte-icons';
-    import { Tooltip } from 'flowbite-svelte';
+	import { Tooltip } from 'flowbite-svelte';
 
 	let systemDarkmode;
 	let htmlClassList: any;

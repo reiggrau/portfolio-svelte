@@ -9,7 +9,7 @@
 	<title>Welcome - ReigGrau</title>
 </head>
 
-<div class="">
+<div id="layout-main">
 	<!-- Top navbar -->
 	<NavBar />
 
@@ -20,5 +20,5 @@
 	<slot />
 
 	<!-- Footer -->
-	<Footer/>
+	<Footer />
 </div>

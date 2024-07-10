@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
 
 </script>
 
@@ -9,4 +9,4 @@
         and
         <a href='https://threlte.xyz/' target='_blank' class="text-[#fe3d00] font-bold">Threlte</a>.
     </div>
-</div>
+</div> -->

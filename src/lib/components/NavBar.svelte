@@ -22,10 +22,10 @@
 
 <div
 	id="NavBar"
-	class="fixed w-full h-20 md:h-16 shadow-lg bg-black bg-opacity-30 flex justify-between items-center text-white z-30"
+	class="fixed w-full h-20 md:h-16 p-6 pr-12 shadow-lg bg-black bg-opacity-30 flex justify-between items-center text-white z-30"
 >
 	<!-- Settings buttons -->
-	<div class='ml-8 flex gap-6 items-center'>
+	<div class="flex gap-6 items-center">
 		<!-- Dark mode button -->
 		<DarkModeButton />
 
@@ -33,17 +33,17 @@
 		<DebugButton />
 
 		<!-- Sound button -->
-		<SoundButton />
+		<!-- <SoundButton /> -->
 	</div>
 
 	<!--  -->
 
 	<!-- Wide navigation bar -->
-	<ul class="hidden md:flex flex gap-4 mr-12" on:click={()=> debug.set(false)}>
-		<li class="text-glow" on:click={()=> view.set('earth')}>HOME</li>
-		<li class="text-glow" on:click={()=> view.set('moon')}>ABOUT</li>
-		<li class="text-glow" on:click={()=> view.set('mars')}>SKILLS</li>
-		<li class="text-glow" on:click={()=> view.set('venus')}>PROJECTS</li>
+	<ul class="hidden md:flex flex gap-4" on:click={() => debug.set(false)}>
+		<li class="text-glow" on:click={() => view.set('earth')}>HOME</li>
+		<li class="text-glow" on:click={() => view.set('moon')}>ABOUT</li>
+		<li class="text-glow" on:click={() => view.set('mars')}>SKILLS</li>
+		<li class="text-glow" on:click={() => view.set('venus')}>PROJECTS</li>
 		<li class="text-glow">CONTACT</li>
 	</ul>
 

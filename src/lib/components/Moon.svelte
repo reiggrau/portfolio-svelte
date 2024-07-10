@@ -30,7 +30,7 @@
 </script>
 
 <!-- Moon -->
- {#if $moonTexture}
+{#if $moonTexture}
 	<T.Group rotation.y={rotation / 50000}>
 		<T.Mesh position={moonPosition} rotation.y={1.8}>
 			<T.IcosahedronGeometry args={[2.1, 64]} />

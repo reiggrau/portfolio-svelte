@@ -22,7 +22,7 @@
 	import Device from 'svelte-device-info';
 
 	const device = Device.isPhone ? 'mobile' : 'desktop';
-	console.log(Device)
+	console.log(Device);
 
 	const earthTexture = useTexture(`/textures/${device}/earth_diffuse.jpg`, {
 		transform: (texture) => {
@@ -30,9 +30,7 @@
 			return texture;
 		}
 	});
-	const earthBump = useLoader(THREE.TextureLoader).load(
-		`/textures/${device}/earth_topography.jpg`
-	);
+	const earthBump = useLoader(THREE.TextureLoader).load(`/textures/${device}/earth_topography.jpg`);
 	const earthSpecular = useLoader(THREE.TextureLoader).load(
 		`/textures/${device}/earth_specular.png`
 	);
@@ -68,9 +66,11 @@
 	const skyUniforms = getSkyUniforms();
 
 	function getSkyUniforms() {
-
 		const baseSkyUniforms = {
-			uColor: { type: 'v4', value: new THREE.Vector4(atmosphereColor.r, atmosphereColor.g, atmosphereColor.b, 0.1) },
+			uColor: {
+				type: 'v4',
+				value: new THREE.Vector4(atmosphereColor.r, atmosphereColor.g, atmosphereColor.b, 0.1)
+			},
 			viewVector: { type: 'v3', value: earthViewVector },
 			uTop: { type: 'f', value: 0.94 }, // 0.94
 			uPower: { type: 'f', value: 0.85 }, // 0.65555555555
@@ -94,17 +94,20 @@
 		if ($earthClouds) {
 			$earthClouds.offset.set(0.4 - rotation / 5000, 0);
 		}
-		
+
 		// Link camera view to shader uniform value
 		if (skyUniforms.viewVector.value != earthViewVector) {
 			skyUniforms.viewVector.value = earthViewVector;
 		}
 	});
-
 </script>
 
 {#if $earthTexture && $earthClouds}
-	<T.Group position={earthPosition} rotation.x={((23.4 * Math.PI) / 180) * 1} rotation.y={2.2 + rotation / 100}>
+	<T.Group
+		position={earthPosition}
+		rotation.x={((23.4 * Math.PI) / 180) * 1}
+		rotation.y={2.2 + rotation / 100}
+	>
 		<!-- Earth surface -->
 		<T.Mesh scale={1}>
 			<T.IcosahedronGeometry args={[7.9, 64]} />
@@ -160,7 +163,7 @@
 
 	<!-- Sky effect -->
 	<T.Mesh scale={1.001} position={earthPosition}>
-		<T.IcosahedronGeometry args={[7.95, 64]}/>
+		<T.IcosahedronGeometry args={[7.95, 64]} />
 		<T.ShaderMaterial
 			vertexShader={skyVS}
 			fragmentShader={skyFS}

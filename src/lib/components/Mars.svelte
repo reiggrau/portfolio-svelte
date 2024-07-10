@@ -25,9 +25,7 @@
 		}
 	});
 	// Source: https://www.deviantart.com/slimysomething
-	const marsBump = useLoader(THREE.TextureLoader).load(
-		`/textures/${device}/mars_topography.jpg`
-	);
+	const marsBump = useLoader(THREE.TextureLoader).load(`/textures/${device}/mars_topography.jpg`);
 	const marsClouds = useTexture(`/textures/${device}/mars_clouds.png`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
@@ -56,7 +54,6 @@
 	let skyUniforms = getSkyUniforms();
 
 	function getSkyUniforms() {
-
 		const baseSkyUniforms = {
 			uColor: { type: 'v4', value: vector },
 			viewVector: { type: 'v3', value: marsViewVector },
@@ -89,11 +86,14 @@
 			skyUniforms.viewVector.value = marsViewVector;
 		}
 	});
-
 </script>
 
 {#if $marsTexture && $marsClouds}
-	<T.Group position={marsPosition} rotation.x={((25.2 * Math.PI) / 180) * 1} rotation.y={5.3 + rotation / 100}>
+	<T.Group
+		position={marsPosition}
+		rotation.x={((25.2 * Math.PI) / 180) * 1}
+		rotation.y={5.3 + rotation / 100}
+	>
 		<!-- Mars surface -->
 		<T.Mesh scale={1}>
 			<T.IcosahedronGeometry args={[4.2, 64]} />
@@ -137,7 +137,7 @@
 
 	<!-- Sky effect -->
 	<T.Mesh scale={1.001} position={marsPosition}>
-		<T.IcosahedronGeometry args={[4.2, 64]}/>
+		<T.IcosahedronGeometry args={[4.2, 64]} />
 		<T.ShaderMaterial
 			vertexShader={skyVS}
 			fragmentShader={skyFS}
