@@ -1,0 +1,53 @@
+[
+    {
+        "name": "Startup Business Cockpit",
+        "images": [
+            {   
+                "alt": "Login screen preview",
+                "src": "/previews/sbc_preview_1.png",
+                "title": "Login screen"
+            },
+            {   
+                "alt": "Time tracking preview",
+                "src": "/previews/sbc_preview_2.png",
+                "title": "Time tracking"
+            },
+            {   
+                "alt": "Company values and insights preview",
+                "src": "/previews/sbc_preview_3.png",
+                "title": "Company values and insights"
+            },
+            {   
+                "alt": "Holiday tracking preview",
+                "src": "/previews/sbc_preview_4.png",
+                "title": "Holiday tracking"
+            },
+            {   
+                "alt": "Key Performance Indicators preview",
+                "src": "/previews/sbc_preview_5.png",
+                "title": "Key Performance Indicators"
+            }
+        ],
+        "text": [
+            "The Startup Business Cockpit is a business support tool designed to assist in the creation and management of a startup business.",
+            "SBC text 2"
+        ],
+        "demo": "https://app.startup-business-cockpit.de/login",
+        "code": ""
+    },
+    {
+        "name": "Tribes",
+        "images": [
+            {
+                "alt": "Preview",
+                "src": "/previews/tribes_preview.jpeg",
+                "title": "test"
+            }
+        ],
+        "text": [
+            "TRIBES text."
+        ],
+        "demo": "https://tribes-the-game.onrender.com/",
+        "code": "https://github.com/reiggrau/tribes-frontend_react"
+    }
+]

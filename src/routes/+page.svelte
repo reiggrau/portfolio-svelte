@@ -1,9 +1,7 @@
 <script>
-	import Threlte from '$lib/components/Threlte.svelte';
-	// import AfterScene from '$lib/components/AfterScene.svelte';
+	import Theater from '$lib/components/Theater.svelte';
 </script>
 
 <main id="page-main">
-	<!-- Threlte scene -->
-	<Threlte />
+	<Theater />
 </main>

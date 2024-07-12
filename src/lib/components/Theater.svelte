@@ -6,19 +6,19 @@
 	import { debug } from './state';
 	import { view } from '$lib/store';
 
-	import Scene from './Scene.svelte';
+	import Scene from './threlte/Scene.svelte';
+	import Home from './theater/Home.svelte';
+	import About from './theater/About.svelte';
+	import Skills from './theater/Skills.svelte';
+	import Projects from './theater/Projects.svelte';
 	import FadeIn from './FadeIn.svelte';
-	import Home from './Home.svelte';
-	import About from './About.svelte';
-	import Skills from './Skills.svelte';
-	import Projects from './Projects.svelte';
 
 	const onScroll = () => {};
 </script>
 
 <svelte:window on:scroll={onScroll} />
 
-<div id="Threlte" class="w-screen h-screen">
+<div id="Theater" class="w-screen h-screen">
 	<div class="fixed w-full h-full {$debug ? 'z-20' : ''}">
 		<Canvas
 			rendererParameters={{
@@ -42,25 +42,17 @@
 
 	<!-- Scene text -->
 	{#if !$debug}
-		<div class="fixed top-0 left-0 w-screen z-10">
-			<FadeIn active={$view === 'earth'}>
-				<Home />
-			</FadeIn>
-		</div>
-		<div class="fixed w-screen">
-			<FadeIn active={$view === 'moon'}>
-				<About />
-			</FadeIn>
-		</div>
-		<div class="fixed w-screen">
-			<FadeIn active={$view === 'mars'}>
-				<Skills />
-			</FadeIn>
-		</div>
-		<div class="fixed w-screen">
-			<!-- <FadeIn active={$view === 'venus'}>
-				<Projects/>
-			</FadeIn> -->
-		</div>
+		<FadeIn active={$view === 'earth'}>
+			<Home />
+		</FadeIn>
+		<FadeIn active={$view === 'moon'}>
+			<About />
+		</FadeIn>
+		<FadeIn active={$view === 'mars'}>
+			<Skills />
+		</FadeIn>
+		<FadeIn active={$view === 'venus'}>
+			<Projects/>
+		</FadeIn>
 	{/if}
 </div>

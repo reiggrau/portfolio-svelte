@@ -106,7 +106,7 @@
 	<T.Group
 		position={earthPosition}
 		rotation.x={((23.4 * Math.PI) / 180) * 1}
-		rotation.y={2.2 + rotation / 100}
+		rotation.y={2.2 + rotation / 200}
 	>
 		<!-- Earth surface -->
 		<T.Mesh scale={1}>

@@ -1,4 +1,4 @@
-<script>
+<script lang='ts'>
 	import { useThrelte, useRender } from '@threlte/core';
 	import {
 		EffectComposer,
@@ -17,7 +17,7 @@
 	// default WebGLRenderer: https://github.com/pmndrs/postprocessing#usage
 	const composer = new EffectComposer(renderer);
 
-	const setupEffectComposer = (camera) => {
+	function setupEffectComposer(camera: any) {
 		composer.removeAllPasses();
 
 		composer.addPass(new RenderPass(scene, camera));

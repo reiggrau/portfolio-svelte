@@ -17,7 +17,7 @@
 
 <!-- <div class={progress === target ? 'animate-appearSlow' : 'animate-disappearSlow'}> -->
 {#if $progress}
-	<div class="reveal" style="--progress: {$progress};">
+	<div id='FadeIn' class="reveal fixed w-full" style="--progress: {$progress};">
 		<slot />
 	</div>
 {/if}

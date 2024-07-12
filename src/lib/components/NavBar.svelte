@@ -5,8 +5,8 @@
 
 	import { view } from '$lib/store';
 
-	import DarkModeButton from './DarkModeButton.svelte';
-	import DebugButton from './DebugButton.svelte';
+	import DarkModeButton from './navbar/DarkModeButton.svelte';
+	import DebugButton from './navbar/DebugButton.svelte';
 	import SoundButton from './SoundButton.svelte';
 
 	let mobileNav = false;

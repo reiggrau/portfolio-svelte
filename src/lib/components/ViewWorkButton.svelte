@@ -1,8 +1,13 @@
 <!-- Thanks to Shawn @shawnrossouw: https://codepen.io/shawnrossouw -->
 <!-- Source: https://codepen.io/shawnrossouw/pen/qeBxxb -->
 
+<script>
+	import { view } from "$lib/store";
+</script>
+
 <button
 	class="btn mt-4 border border-[#00d6fc4d] text-[#00d6fc80] hover:text-[#00d6fc] hover:shadow hover:shadow-[1px_1px_8px_#00d6fc4d] hover:text-shadow before:bg-[#00d6fc] after:bg-[#00d6fc]"
+	on:click={()=> view.set('venus')}
 >
 	<span class="line before:bg-[#00d6fc] after:bg-[#00d6fc]"></span>
 	View my work

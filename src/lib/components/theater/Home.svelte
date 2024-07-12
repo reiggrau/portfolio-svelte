@@ -1,6 +1,6 @@
 <script lang="ts">
-	import ViewWorkButton from './ViewWorkButton.svelte';
-	import ArrowsDown from './ArrowsDown.svelte';
+	import ViewWorkButton from '../ViewWorkButton.svelte';
+	import ArrowsDown from '../ArrowsDown.svelte';
 
 	import { darkmode } from '$lib/store';
 </script>
@@ -12,7 +12,6 @@
 		<h1 class="mt-2 text-4xl sm:text-5xl font-semibold text-gray-300">
 			<span class="text-3xl">I'm a </span>Full Stack Web Developer
 		</h1>
-		<h1 class="mt-2 text-4xl sm:text-6xl font-semibold text-gray-300"></h1>
 		<p class="mt-4 max-w-[700px] text-lg font-light text-gray-200">
 			And I'd like us to get to know each other on this journey through the solar system.
 		</p>

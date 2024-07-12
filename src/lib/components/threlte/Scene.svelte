@@ -14,7 +14,7 @@
 
 	import { onMount } from 'svelte';
 
-	import { debug } from './state';
+	import { debug } from '../state';
 	import { darkmode, view } from '$lib/store'; // 'earth' | 'moon' | 'mars'
 
 	import Earth from './Earth.svelte';
@@ -102,20 +102,20 @@
 
 		switch ($view) {
 			case 'earth':
-				cameraTarget = $debug ? [0, 0, 0] : [0, 0, -16];
+				cameraTarget = $debug ? [ ...earthPosition ] : [0, 0, -16];
 				cameraPosition = $darkmode ? [-22, 0, 24] : [22, 0, 24];
 				break;
 			case 'moon':
-				cameraTarget = $debug ? [0, 0, -200] : [0, 0, 0];
+				cameraTarget = $debug ? [ ...moonPosition ] : [0, 0, 0];
 				cameraPosition = $darkmode ? [-3, 0, -210] : [2.5, 0, -210];
 				break;
 			case 'mars':
-				cameraTarget = $debug ? [0, 0, -10000] : [0, 0, -10000];
+				cameraTarget = $debug ? [ ...marsPosition ] : [0, 0, -10000];
 				cameraPosition = $darkmode ? [-7, 0, -10017] : [7, 0, -10017];
 				break;
 			case 'venus':
-				cameraTarget = $debug ? [0, 0, -20000] : [0, 0, -20000];
-				cameraPosition = $darkmode ? [23, 0, -19978] : [23, 0, -19978];
+				cameraTarget = $debug ? [0, 0, -20000] : [0, 0, -20020];
+				cameraPosition = $darkmode ? [-15, 0, -19972] : [20, 0, -19975];
 				break;
 		}
 
@@ -129,7 +129,7 @@
 	cameraPosition;
 
 	function updateViewVectors() {
-		// console.log('updateViewVectors() new $camera.position :', $camera.position );
+		console.log('updateViewVectors() new $camera.position :', $camera.position );
 		earthViewVector = getViewVector(earthPosition);
 		marsViewVector = getViewVector(marsPosition);
 		venusViewVector = getViewVector(venusPosition);
@@ -219,7 +219,3 @@
 
 <!-- Postprocess -->
 <Renderer />
-
-<!-- {#if $debug}
-  	<Grid />
-{/if} -->

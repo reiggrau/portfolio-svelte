@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { darkmode } from '$lib/store';
-	import SkillCard from './SkillCard.svelte';
-	import ArrowsDown from './ArrowsDown.svelte';
+	import SkillCard from '../SkillCard.svelte';
+	import ArrowsDown from '../ArrowsDown.svelte';
 
 	import aws from '$lib/assets/aws.png';
 	import css from '$lib/assets/css.png';

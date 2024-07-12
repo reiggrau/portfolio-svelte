@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { darkmode } from '$lib/store';
-	import ArrowsDown from './ArrowsDown.svelte';
+	import ArrowsDown from '../ArrowsDown.svelte';
 </script>
 
 <div id="About" class="w-full h-screen flex flex-col justify-center">
