@@ -14,7 +14,8 @@
 		Earth: 'earth',
 		Moon: 'moon',
 		Mars: 'mars',
-		Venus: 'venus'
+		Venus: 'venus',
+		Mercury: 'mercury'
 	};
 
 	let selection: string = $view;

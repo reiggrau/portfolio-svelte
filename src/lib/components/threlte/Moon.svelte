@@ -1,9 +1,7 @@
 <script lang="ts">
 	import * as THREE from 'three';
 	import { T, useTask, useLoader } from '@threlte/core';
-	import { useSuspense, useTexture } from '@threlte/extras';
-
-	import { view } from '$lib/store';
+	import { useTexture } from '@threlte/extras';
 
 	export let moonPosition: [number, number, number];
 

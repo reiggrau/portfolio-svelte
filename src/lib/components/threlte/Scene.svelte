@@ -1,18 +1,14 @@
 <!-- https://threlte.xyz/docs/learn/getting-started/your-first-scene -->
 
 <script lang="ts">
-	import * as THREE from 'three';
-	import { T, useThrelte, useTask } from '@threlte/core';
+	import { T, useThrelte } from '@threlte/core';
 	import {
 		interactivity,
 		OrbitControls,
 		TrackballControls,
-		Grid,
 		Suspense,
 		Text
 	} from '@threlte/extras';
-
-	import { onMount } from 'svelte';
 
 	import { debug } from '../state';
 	import { darkmode, view } from '$lib/store'; // 'earth' | 'moon' | 'mars'
@@ -23,6 +19,7 @@
 	import Venus from './Venus.svelte';
 
 	import Renderer from './Renderer.svelte';
+	import Mercury from './Mercury.svelte';
 
 	interactivity();
 
@@ -33,6 +30,7 @@
 	const moonPosition: [number, number, number] = [0, 0, -200];
 	const marsPosition: [number, number, number] = [0, 0, -10000];
 	const venusPosition: [number, number, number] = [0, 0, -20000];
+	const mercuryPosition: [number, number, number] = [0, 0, -30000];
 
 	// Camera
 	const { camera } = useThrelte();
@@ -56,7 +54,6 @@
 
 	// Navigation + debug
 	const onKeyDown = (e: KeyboardEvent) => {
-		console.log('onKeyDown :', e.key);
 		if (e.key === 'd') {
 			debug.set(!debug.current);
 		} else if (e.key === '1') {
@@ -67,7 +64,9 @@
 			view.set('mars');
 		} else if (e.key === '4') {
 			view.set('venus');
-		} else if (e.key === 'ArrowDown') {
+		} else if (e.key === '5') {
+			view.set('mercury');
+		}else if (e.key === 'ArrowDown') {
 			switch ($view) {
 				case 'earth':
 					view.set('moon');
@@ -77,6 +76,9 @@
 					break;
 				case 'mars':
 					view.set('venus');
+					break;
+				case 'venus':
+					view.set('mercury');
 					break;
 			}
 		} else if (e.key === 'ArrowUp') {
@@ -89,6 +91,9 @@
 					break;
 				case 'venus':
 					view.set('mars');
+					break;
+				case 'mercury':
+					view.set('venus');
 					break;
 			}
 		}
@@ -116,6 +121,10 @@
 			case 'venus':
 				cameraTarget = $debug ? [0, 0, -20000] : [0, 0, -20020];
 				cameraPosition = $darkmode ? [-15, 0, -19972] : [20, 0, -19975];
+				break;
+			case 'mercury':
+				cameraTarget = $debug ? [0, 0, -30000] : [0, 0, -30000];
+				cameraPosition = $darkmode ? [-6, 0, -30008] : [6, 0, -30008];
 				break;
 		}
 
@@ -177,6 +186,8 @@
 	<Mars {marsPosition} {sunPosition} {marsViewVector} />
 
 	<Venus {venusPosition} {sunPosition} {venusViewVector} />
+
+	<Mercury {mercuryPosition} />
 </Suspense>
 
 <!-- Camera -->

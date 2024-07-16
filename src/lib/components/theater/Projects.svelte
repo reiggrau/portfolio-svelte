@@ -22,10 +22,20 @@
 		}
 		project = projects[projectIndex];
 	}
+
+	const onKeyDown = (e: KeyboardEvent) => {
+		if (e.key === 'ArrowRight') {
+			changeProject(true);
+		} else if (e.key === 'ArrowLeft') {
+			changeProject(false);
+		}
+	};
 </script>
 
-<div id="Projects" class="w-full h-screen flex flex-col justify-center mt-6">
-	<div class="flex flex-col items-center {$darkmode ? 'mr-[40%] ml-[5%]' : 'ml-[45%]'}">
+<svelte:window on:keydown={onKeyDown} />
+
+<div id="Projects" class="w-full h-screen flex mt-16">
+	<div class="flex flex-col items-center {$darkmode ? 'ml-[5%] mr-[40%]' : 'ml-[50%] mr-[7%]'}">
 		<ArrowsDown rotated/>
 		<h1 class="text-3xl sm:text-4xl font-light text-gray-300 inline border-b-2 border-cyan-500">
 			My projects
@@ -39,7 +49,7 @@
 			<div class="my-4 flex flex-col gap-3 items-center">
 				<h2 class='text-white text-3xl'>{project.name}</h2>
 				{#key project}
-					<Carousel images={project.images} forward let:Indicators let:Controls bind:index class='w-[650px] h-[500px]'>
+					<Carousel images={project.images} forward let:Indicators let:Controls bind:index class='w-[750px] min-h-[450px]'>
 						<Controls let:ControlButton let:changeSlide>
 							<ControlButton name="Previous" forward={false} class="text-black" on:click={()=>changeSlide(false)}/>
 							<ControlButton name="Next" forward={true} class="text-black" on:click={()=>changeSlide(true)}/>
