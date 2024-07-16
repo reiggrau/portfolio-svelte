@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import { darkmode } from '$lib/store';
 	import { Button, GradientButton } from 'flowbite-svelte';
 	import ArrowsDown from './ArrowsDown.svelte';
@@ -12,7 +12,6 @@
 		</h1>
 		<p class="mt-4 text-lg font-light text-gray-200">These are some of my previous projects:</p>
 		<div class="my-6 flex gap-8 justify-center flex-wrap">
-			<!-- SBC -->
 			<div
 				class="w-[550px] h-[340px] bg-[url('/previews/sbc_preview.png')] bg-cover bg-center bg-black rounded shadow opacity-90"
 			>
@@ -28,7 +27,6 @@
 					</div>
 				</div>
 			</div>
-			<!-- TRIBES -->
 			<div
 				class="w-[550px] h-[340px] bg-[url('/previews/tribes_preview.jpeg')] bg-cover bg-center bg-black rounded shadow opacity-90"
 			>
@@ -47,7 +45,6 @@
 					</div>
 				</div>
 			</div>
-			<!-- ImageBoard -->
 			<div
 				class="w-[550px] h-[340px] bg-[url('/previews/imageboard_preview.jpeg')] bg-cover bg-center bg-black rounded shadow opacity-90"
 			>
@@ -70,4 +67,4 @@
 		</div>
 		<ArrowsDown />
 	</div>
-</div>
+</div> -->

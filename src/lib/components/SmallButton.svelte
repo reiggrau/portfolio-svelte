@@ -42,7 +42,7 @@
 		position: relative;
 		min-width: 100px;
 		min-height: 10px;
-		margin: 20px;
+		margin: 10px;
 		background: none;
 		border: none;
 		text-decoration: none;

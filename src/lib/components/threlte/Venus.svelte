@@ -18,7 +18,7 @@
 			return texture;
 		}
 	});
-	const venusClouds = useTexture(`/textures/desktop/venus_clouds.jpg`, {
+	const venusClouds = useTexture(`/textures/desktop/venus_clouds_2.webp`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			texture.wrapS = THREE.RepeatWrapping;
@@ -31,7 +31,7 @@
 	const color = new THREE.Color('#f8e2b0');
 
 	const atmospherePosition: [number, number, number] = [...venusPosition];
-	atmospherePosition[0] += 0.2;
+	atmospherePosition[0] += 0.22;
 
 	const atmosphereUniforms = {
 		aperture: { type: 'f', value: 0.71 },
@@ -70,7 +70,7 @@
 		rotation += delta;
 
 		if ($venusClouds) {
-			$venusClouds.offset.set(0.4 + rotation / 1000, 0);
+			$venusClouds.offset.set(0.4 + rotation / 400, 0);
 		}
 
 		// Link camera view to shader uniform value
@@ -84,7 +84,7 @@
 	<T.Group
 		position={venusPosition}
 		rotation.x={((2.64 * Math.PI) / 180) * 1}
-		rotation.y={0 - rotation / 400}
+		rotation.y={0 - rotation / 500}
 	>
 		<!-- Venus surface -->
 		<T.Mesh scale={1}>
@@ -95,12 +95,12 @@
 		<!-- Clouds -->
 		<T.Mesh scale={1.004}>
 			<T.IcosahedronGeometry args={[7.5, 64]} />
-			<T.MeshStandardMaterial map={$venusClouds} depthWrite={false} opacity={0.9} transparent />
+			<T.MeshStandardMaterial map={$venusClouds} depthWrite={false} opacity={0.95} transparent />
 		</T.Mesh>
 	</T.Group>
 
 	<!-- Atmosphere effect -->
-	<T.Mesh scale={1.02} position={atmospherePosition}>
+	<T.Mesh scale={1.015} position={atmospherePosition}>
 		<T.IcosahedronGeometry args={[7.5, 64]} />
 		<T.ShaderMaterial
 			vertexShader={atmosphereVS}

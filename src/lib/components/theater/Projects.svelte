@@ -1,43 +1,76 @@
 <script lang="ts">
 	import { darkmode } from '$lib/store';
-	import { Button, GradientButton } from 'flowbite-svelte';
+	import { AngleRightSolid, AngleLeftSolid } from 'flowbite-svelte-icons';
 	import ArrowsDown from '../ArrowsDown.svelte';
 	import SmallButton from '../SmallButton.svelte';
 
-	import { Carousel } from 'flowbite-svelte';
+	import { Carousel, Indicator } from 'flowbite-svelte';
 	import projects from './projects.json';
+	import Arrows from '../Arrows.svelte';
 
 	let projectIndex = 0;
-	$: project = projects[projectIndex];
-	let index = 0;
+	let project = projects[projectIndex];
+
+	let index = 0; // Picture index
+
+	function changeProject(direction: boolean) {
+		index = 0;
+		if (direction) {
+			projectIndex = projectIndex < projects.length - 1 ? projectIndex + 1 : 0
+		} else {
+			projectIndex = projectIndex < 1 ? projects.length - 1 : projectIndex - 1;
+		}
+		project = projects[projectIndex];
+	}
 </script>
 
-<div id="Projects" class="w-full h-screen flex flex-col justify-center">
-	<div class="{$darkmode ? 'w-[50%] mr-[40%] ml-[5%]' : 'ml-[40%] mr-[5%]'} flex flex-col items-center">
+<div id="Projects" class="w-full h-screen flex flex-col justify-center mt-6">
+	<div class="flex flex-col items-center {$darkmode ? 'mr-[40%] ml-[5%]' : 'ml-[45%]'}">
 		<ArrowsDown rotated/>
 		<h1 class="text-3xl sm:text-4xl font-light text-gray-300 inline border-b-2 border-cyan-500">
 			My projects
 		</h1>
-		<div class="my-6 h-[650px] flex flex-col items-center gap-4 opacity-90">
-			<h2 class='text-white text-3xl'>{project.name}</h2>
-			<Carousel images={project.images} forward let:Indicators let:Controls bind:index class='w-[650px] h-[500px]'>
-				<Controls />
-				<Indicators />
-			</Carousel>
-			<div class='w-[550px] bg-gray-800 opacity-90 px-6 py-4 rounded mt-4 flex justify-center'>
-				<p class="max-w-[500px] text-center text-white text-lg">
-					{project.text[index]}
-				</p>
+		<div class='flex gap-6 items-center text-white'>
+			<div>
+				<button class='rotate-90' on:click={()=> changeProject(false)}>
+					<Arrows />
+				</button>
 			</div>
-			<div class='flex gap-8'>
-				<SmallButton href={project.demo} target="_blank"
-					>Visit</SmallButton
-				>
-				{#if project.code}
-					<SmallButton href={project.code} target="_blank"
-						>Code</SmallButton
-					>
-				{/if}
+			<div class="my-4 flex flex-col gap-3 items-center">
+				<h2 class='text-white text-3xl'>{project.name}</h2>
+				{#key project}
+					<Carousel images={project.images} forward let:Indicators let:Controls bind:index class='w-[650px] h-[500px]'>
+						<Controls let:ControlButton let:changeSlide>
+							<ControlButton name="Previous" forward={false} class="text-black" on:click={()=>changeSlide(false)}/>
+							<ControlButton name="Next" forward={true} class="text-black" on:click={()=>changeSlide(true)}/>
+						</Controls>
+						<Indicators let:selected>
+							<Indicator class={selected ? 'bg-[#25ccf7]' : 'bg-gray-200'} size='sm'/>
+						</Indicators>
+					</Carousel>
+				{/key}
+				<div class='w-[550px] bg-gray-800 opacity-90 px-6 py-4 rounded mt-4 flex justify-center items-center h-28'>
+					<p class="max-w-[500px] text-center text-white text-lg">
+						{project.text[index]}
+					</p>
+				</div>
+				<div class='flex gap-8'>
+					{#if project.demo}
+						<SmallButton href={project.demo} target="_blank"
+							>Visit</SmallButton
+						>
+					{/if}
+					{#if project.code}
+						<SmallButton href={project.code} target="_blank"
+							>Code</SmallButton
+						>
+					{/if}
+				</div>
+			</div>
+			<div>
+				<button class='rotate-[270deg]'  on:click={()=> changeProject(true)}>
+					<Arrows />
+				</button>
 			</div>
 		</div>
 		<ArrowsDown />

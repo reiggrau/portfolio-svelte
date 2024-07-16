@@ -92,7 +92,7 @@
 	useTask((delta) => {
 		rotation += delta;
 		if ($earthClouds) {
-			$earthClouds.offset.set(0.4 - rotation / 5000, 0);
+			$earthClouds.offset.set(0.4 - rotation / 3000, 0);
 		}
 
 		// Link camera view to shader uniform value
