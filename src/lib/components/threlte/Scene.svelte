@@ -103,7 +103,7 @@
 	$: $darkmode || $view || $debug, viewChange();
 
 	async function viewChange() {
-		console.log('viewChange()', { $darkmode, $view, $debug });
+		// console.log('viewChange()', { $darkmode, $view, $debug });
 
 		switch ($view) {
 			case 'earth':
@@ -123,7 +123,7 @@
 				cameraPosition = $darkmode ? [-15, 0, -19972] : [20, 0, -19975];
 				break;
 			case 'mercury':
-				cameraTarget = $debug ? [0, 0, -30000] : [0, 0, -30000];
+				cameraTarget = $debug ? [0, 0, -30000] : [0, 0, -29995];
 				cameraPosition = $darkmode ? [-6, 0, -30008] : [6, 0, -30008];
 				break;
 		}

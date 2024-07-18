@@ -12,11 +12,12 @@
 	import Skills from './theater/Skills.svelte';
 	import Projects from './theater/Projects.svelte';
 	import FadeIn from './FadeIn.svelte';
+	import Contact from './theater/Contact.svelte';
 
-	const onScroll = () => {};
+	// const onScroll = () => {};
 </script>
 
-<svelte:window on:scroll={onScroll} />
+<!-- <svelte:window on:scroll={onScroll} /> -->
 
 <div id="Theater" class="w-screen h-screen">
 	<div class="fixed w-full h-full {$debug ? 'z-20' : ''}">
@@ -53,6 +54,9 @@
 		</FadeIn>
 		<FadeIn active={$view === 'venus'}>
 			<Projects/>
+		</FadeIn>
+		<FadeIn active={$view === 'mercury'}>
+			<Contact/>
 		</FadeIn>
 	{/if}
 </div>

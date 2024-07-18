@@ -1,18 +1,15 @@
 <!-- Source: https://codepen.io/nishchal-007/pen/vYZLrJB -->
 
 <script>
-	export let href;
-	export let target;
 	export let disabled = false;
+	export let submit = false;
 </script>
 
-<a {href} {target}>
-	<button class="corner-button" {disabled}>
-		<span>
-			<slot />
-		</span>
-	</button>
-</a>
+<button id='SmallButton' class="corner-button" {disabled} type={submit ? 'submit' : 'button'}>
+	<span>
+		<slot />
+	</span>
+</button>
 
 <style>
 	.outbutton {

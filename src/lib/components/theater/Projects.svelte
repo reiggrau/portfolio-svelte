@@ -34,10 +34,10 @@
 
 <svelte:window on:keydown={onKeyDown} />
 
-<div id="Projects" class="w-full h-screen flex mt-16">
+<div id="Projects" class="w-full h-screen flex items-center mt-6">
 	<div class="flex flex-col items-center {$darkmode ? 'ml-[5%] mr-[40%]' : 'ml-[50%] mr-[7%]'}">
 		<ArrowsDown rotated/>
-		<h1 class="text-3xl sm:text-4xl font-light text-gray-300 inline border-b-2 border-cyan-500">
+		<h1 class="text-3xl sm:text-4xl font-bold text-gray-300 inline border-b-2 border-cyan-500">
 			My projects
 		</h1>
 		<div class='flex gap-6 items-center text-white'>
@@ -46,7 +46,7 @@
 					<Arrows />
 				</button>
 			</div>
-			<div class="my-4 flex flex-col gap-3 items-center">
+			<div class="mt-4 flex flex-col gap-3 items-center">
 				<h2 class='text-white text-3xl'>{project.name}</h2>
 				{#key project}
 					<Carousel images={project.images} forward let:Indicators let:Controls bind:index class='w-[750px] min-h-[450px]'>
@@ -66,14 +66,14 @@
 				</div>
 				<div class='flex gap-8'>
 					{#if project.demo}
-						<SmallButton href={project.demo} target="_blank"
-							>Visit</SmallButton
-						>
+						<a href={project.demo} target="_blank">
+							<SmallButton>Visit</SmallButton>
+						</a>
 					{/if}
 					{#if project.code}
-						<SmallButton href={project.code} target="_blank"
-							>Code</SmallButton
-						>
+						<a href={project.code} target="_blank">
+							<SmallButton >Code</SmallButton>
+						</a>
 					{/if}
 				</div>
 			</div>

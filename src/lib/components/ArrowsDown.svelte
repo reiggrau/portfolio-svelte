@@ -16,7 +16,10 @@
 				view.set(rotated ? 'moon' : 'venus');
 				break;
 			case 'venus':
-				view.set(rotated ? 'mars' : 'earth');
+				view.set(rotated ? 'mars' : 'mercury');
+				break;
+			case 'mercury':
+				view.set('venus');
 				break;
 		}
 	}
