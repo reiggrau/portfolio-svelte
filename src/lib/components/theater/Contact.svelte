@@ -20,7 +20,7 @@
 		<h1 class="text-3xl sm:text-4xl font-bold text-gray-300 inline border-b-2 border-cyan-500">
 			Contact me
 		</h1>
-        <form action='?/sendEmail' method="POST" class='mt-4 w-[80%] flex flex-col gap-4 opacity-100 text-white' use:enhance>
+        <form action='?/sendEmail' method="POST" class='mt-4 w-[60%] flex flex-col gap-4 opacity-100 text-white' use:enhance>
             <Label class="text-white">Your Email
                 <Input name='email' type="email" placeholder="your@email.com" required on:keydown={(e)=> e.stopPropagation()}>
                     <EnvelopeSolid slot="left" class="w-5 h-5 text-gray-500 dark:text-gray-400" />

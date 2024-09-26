@@ -7,12 +7,12 @@
 	let systemDarkmode;
 	let htmlClassList: any;
 
-	if (browser) {
-		systemDarkmode = window.matchMedia('(prefers-color-scheme: dark)');
-		htmlClassList = window.document.documentElement.classList;
+	// if (browser) {
+	// 	systemDarkmode = window.matchMedia('(prefers-color-scheme: dark)');
+	// 	htmlClassList = window.document.documentElement.classList;
 
-		systemDarkmode.matches ? darkmode.set(true) : darkmode.set(false);
-	}
+	// 	systemDarkmode.matches ? darkmode.set(true) : darkmode.set(false);
+	// }
 
 	function toggleDarkMode() {
 		darkmode.set(!$darkmode);
