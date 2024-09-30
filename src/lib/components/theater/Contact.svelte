@@ -22,12 +22,12 @@
 		</h1>
         <form action='?/sendEmail' method="POST" class='mt-4 w-[60%] flex flex-col gap-4 opacity-100 text-white' use:enhance>
             <Label class="text-white">Your Email
-                <Input name='email' type="email" placeholder="your@email.com" required on:keydown={(e)=> e.stopPropagation()}>
-                    <EnvelopeSolid slot="left" class="w-5 h-5 text-gray-500 dark:text-gray-400" />
+                <Input name='email' type="email" placeholder="your@email.com" on:keydown={(e)=> e.stopPropagation()}>
+                    <EnvelopeSolid slot="left" class="w-4 h-4" />
                 </Input>
             </Label>
             <Label class="text-white">Your Message
-                <Textarea name='message' rows={6} placeholder='Write a message...' required on:keydown={(e)=> e.stopPropagation()}/>
+                <Textarea name='message' rows={6} placeholder='Write a message...' on:keydown={(e)=> e.stopPropagation()}/>
             </Label>
             <div class='flex justify-center'>
                 <SmallButton submit>Submit</SmallButton>
