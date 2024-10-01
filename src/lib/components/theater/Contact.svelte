@@ -8,6 +8,7 @@
     import { enhance } from '$app/forms';
 
     export let form;
+    export let data;
 
     function handleSubmit() {
         
@@ -22,7 +23,7 @@
 		</h1>
         <form action='?/sendEmail' method="POST" class='mt-4 w-[60%] flex flex-col gap-4 opacity-100 text-white' use:enhance>
             <Label class="text-white">Your Email
-                <Input name='email' type="email" placeholder="your@email.com" on:keydown={(e)=> e.stopPropagation()}>
+                <Input name='email' placeholder="your@email.com" on:keydown={(e)=> e.stopPropagation()}>
                     <EnvelopeSolid slot="left" class="w-4 h-4" />
                 </Input>
             </Label>
@@ -32,6 +33,9 @@
             <div class='flex justify-center'>
                 <SmallButton submit>Submit</SmallButton>
             </div>
+            {#if form?.success}
+                <p class='text-white'>Email sent successfully!</p>
+            {/if}
         </form>
 	</div>
 </div>

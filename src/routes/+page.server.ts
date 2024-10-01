@@ -13,13 +13,27 @@ export const actions = {
         const data = await request.formData();
         console.log('data :', data);
 
-        const email = data.get('email');
-        const message = data.get('message');
+        const email = data.get('email') as string;
+        const message = data.get('message') as string;
 
-        if (!email || !message) {
-			return fail(400);
-		}
+        // Check email
+        if (!email) {
+            console.log('Missing email!');
+            return fail(400, { email, missing: true });
+        }
 
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            console.log('Wrong email format!');
+            return fail(400, { email, incorrect: true });
+        }
+
+        // Check message
+        if (!message) {
+            console.log('Missing message!');
+            return fail(400, { message, missing: true });
+        }
+
+        // Send email
         const { data: emailData, error } = await resend.emails.send({
                 from: `ReigGrau Portfolio <onboarding@resend.dev>`,
                 to: ['guillemreiggrau@gmail.com'],
@@ -27,49 +41,14 @@ export const actions = {
                 html: `<strong>${message}</strong>`,
             });
 
+        // Handle error
         if (error) {
-            return console.error({ error });
+            console.error({ error });
+            return fail(400, { message, missing: true });
         }
         
+        // Success response
         console.log('emailData :', emailData);
         return { success: true };
-
-		// // TODO log the user in
-        // const data = await request.formData();
-
-        // const email = data.get('email');
-        // if (!email) {
-		// 	return fail(400, { email, missing: true });
-		// }
-
-        // const message = data.get('message');
-        // if (!message) {
-		// 	return fail(400, { message, missing: true });
-		// }
-        
-        // // console.log('SEND EMAIL :', data);
-        // return { success: true };
 	}
 };
-
-// import { fail } from '@sveltejs/kit';
-
-// export const actions = {
-// 	sendEmail: async ({ request }) => {
-// 		// TODO log the user in
-//         const data = await request.formData();
-
-//         const email = data.get('email');
-//         if (!email) {
-// 			return fail(400, { email, missing: true });
-// 		}
-
-//         const message = data.get('message');
-//         if (!message) {
-// 			return fail(400, { message, missing: true });
-// 		}
-        
-//         // console.log('SEND EMAIL :', data);
-//         return { success: true };
-// 	}
-// };
