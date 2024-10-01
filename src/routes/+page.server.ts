@@ -33,6 +33,11 @@ export const actions = {
             return fail(400, { message, missing: true });
         }
 
+        if (message.length > 280) {
+            console.log('Message exceeds character limit!');
+            return fail(400, { message, incorrect: true });
+        }
+
         // Send email
         const { data: emailData, error } = await resend.emails.send({
                 from: `ReigGrau Portfolio <onboarding@resend.dev>`,
