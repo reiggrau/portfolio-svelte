@@ -13,7 +13,7 @@
     let emailError: string = "";
     let messageError: string = "";
 
-    let characterCount = 0;
+    let buttonDisabled = false;
 </script>
 
 <div id="Projects" class="w-full h-screen flex mt-16">
@@ -22,35 +22,36 @@
 		<h1 class="text-3xl sm:text-4xl font-bold text-gray-300 inline border-b-2 border-cyan-500">Contact me</h1>
         <form action='?/sendEmail' method="POST" class='mt-4 w-[60%] flex flex-col gap-4 opacity-100 text-white'
             use:enhance={({ formElement, formData, action, cancel, submitter }) => {
-                // `formElement` is this `<form>` element
-                // `formData` is its `FormData` object that's about to be submitted
-                // `action` is the URL to which the form is posted
-                // calling `cancel()` will prevent the submission
-                if (!email) {
+                buttonDisabled = true; // Prevent double sending
+
+                // Frontend form checks
+                if (!email)
                     emailError = 'You must include an email!';
-                    cancel();
-                }
                 
-                if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
                     emailError = 'Wrong email format!';
-                    cancel();
-                }
 
-                if (!message) {
+                if (!message)
                     messageError = 'You must include a message!';
-                    cancel();
-                }
 
-                if (message.length > 280) {
+                if (message.length > 280)
                     messageError = 'Message must not exceed the character limit!';
+
+                if (emailError || messageError) {
                     cancel();
+                    buttonDisabled = false;
                 }
-                // `submitter` is the `HTMLElement` that caused the form to be submitted
         
                 return async ({ result, update }) => {
-                    // `result` is an `ActionResult` object
-                    console.log('result :', result);
-                    // `update` is a function which triggers the default logic that would be triggered if this callback wasn't set
+                    // Display success message
+                    if (result.status === 200) {
+                        email = "";
+                        message = "";
+                        alert('Email sent successfully!');
+                    }
+
+                    // Re-enable sending button
+                    buttonDisabled = false;
                 };
             }}
         >
@@ -78,7 +79,7 @@
                 </div>
             </Label>
             <div class='flex justify-center'>
-                <SmallButton submit>Submit</SmallButton>
+                <SmallButton submit disabled={buttonDisabled}>Submit</SmallButton>
             </div>
         </form>
 	</div>
