@@ -2,22 +2,23 @@
 	import * as THREE from 'three';
 	import { T, useTask, useLoader } from '@threlte/core';
 	import { useTexture } from '@threlte/extras';
+	import { HD } from '$lib/store';
 
 	export let moonPosition: [number, number, number];
 
 	// Textures
 	import Device from 'svelte-device-info';
 
-	const device = Device.isPhone ? 'mobile' : 'desktop';
+	$: textureRoure = $HD ? 'HD' : Device.isPhone ? 'mobile' : 'desktop';
 
-	const moonTexture = useTexture(`/textures/${device}/moon_diffuse.jpg`, {
+	$: moonTexture = useTexture(`/textures/${textureRoure}/moon_diffuse.jpg`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			return texture;
 		}
 	});
-	const moonDisplacement = useLoader(THREE.TextureLoader).load(
-		`/textures/${device}/moon_topography.jpg`
+	$: moonDisplacement = useLoader(THREE.TextureLoader).load(
+		`/textures/${textureRoure}/moon_topography.jpg`
 	);
 
 	// Animation

@@ -11,30 +11,25 @@ export const actions = {
 	sendEmail: async ({ request }) => {
 
         const data = await request.formData();
-        console.log('data :', data);
 
         const email = data.get('email') as string;
         const message = data.get('message') as string;
 
         // Check email
         if (!email) {
-            console.log('Missing email!');
             return fail(400, { email, missing: true });
         }
 
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            console.log('Wrong email format!');
             return fail(400, { email, incorrect: true });
         }
 
         // Check message
         if (!message) {
-            console.log('Missing message!');
             return fail(400, { message, missing: true });
         }
 
         if (message.length > 280) {
-            console.log('Message exceeds character limit!');
             return fail(400, { message, incorrect: true });
         }
 
@@ -53,7 +48,6 @@ export const actions = {
         }
         
         // Success response
-        console.log('emailData :', emailData);
         return { success: true };
 	}
 };

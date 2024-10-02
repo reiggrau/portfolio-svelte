@@ -3,7 +3,7 @@
 	import { T, useTask, useLoader, useThrelte } from '@threlte/core';
 	import { useTexture } from '@threlte/extras';
 
-	import { darkmode } from '$lib/store';
+	import { darkmode, HD } from '$lib/store';
 
 	import skyVS from '$lib/shaders/skyVS.glsl?raw';
 	import skyFS from '$lib/shaders/skyFS.glsl?raw';
@@ -21,20 +21,20 @@
 	// Textures
 	import Device from 'svelte-device-info';
 
-	const device = Device.isPhone ? 'mobile' : 'desktop';
-	console.log(Device);
+	$: textureRoure = $HD ? 'HD' : Device.isPhone ? 'mobile' : 'desktop';
+	$: console.log('textureRoure :', textureRoure);
 
-	const earthTexture = useTexture(`/textures/${device}/earth_diffuse.jpg`, {
+	$: earthTexture = useTexture(`/textures/${textureRoure}/earth_diffuse.jpg`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			return texture;
 		}
 	});
-	const earthBump = useLoader(THREE.TextureLoader).load(`/textures/${device}/earth_topography.jpg`);
-	const earthSpecular = useLoader(THREE.TextureLoader).load(
-		`/textures/${device}/earth_specular.png`
+	$: earthBump = useLoader(THREE.TextureLoader).load(`/textures/${textureRoure}/earth_topography.jpg`);
+	$: earthSpecular = useLoader(THREE.TextureLoader).load(
+		`/textures/${textureRoure}/earth_specular.png`
 	);
-	const earthClouds = useTexture(`/textures/${device}/earth_clouds.jpg`, {
+	$: earthClouds = useTexture(`/textures/${textureRoure}/earth_clouds.jpg`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			texture.wrapS = THREE.RepeatWrapping;
@@ -42,7 +42,7 @@
 			return texture;
 		}
 	});
-	const earthLights = useTexture(`/textures/${device}/earth_lights.jpg`, {
+	$: earthLights = useTexture(`/textures/${textureRoure}/earth_lights.jpg`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			return texture;

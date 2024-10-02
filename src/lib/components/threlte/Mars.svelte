@@ -2,6 +2,7 @@
 	import * as THREE from 'three';
 	import { T, useTask, useLoader, useThrelte } from '@threlte/core';
 	import { useTexture } from '@threlte/extras';
+	import { HD } from '$lib/store';
 
 	import skyVS from '$lib/shaders/skyVS.glsl?raw';
 	import skyFS from '$lib/shaders/skyFS.glsl?raw';
@@ -16,17 +17,17 @@
 	// Source: https://www.solarsystemscope.com/textures/
 	import Device from 'svelte-device-info';
 
-	const device = Device.isPhone ? 'mobile' : 'desktop';
+	$: textureRoure = $HD ? 'HD' : Device.isPhone ? 'mobile' : 'desktop';
 
-	const marsTexture = useTexture(`/textures/${device}/mars_diffuse.jpg`, {
+	$: marsTexture = useTexture(`/textures/${textureRoure}/mars_diffuse.jpg`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			return texture;
 		}
 	});
 	// Source: https://www.deviantart.com/slimysomething
-	const marsBump = useLoader(THREE.TextureLoader).load(`/textures/${device}/mars_topography.jpg`);
-	const marsClouds = useTexture(`/textures/${device}/mars_clouds.png`, {
+	$: marsBump = useLoader(THREE.TextureLoader).load(`/textures/${textureRoure}/mars_topography.jpg`);
+	$: marsClouds = useTexture(`/textures/${textureRoure}/mars_clouds.png`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			texture.wrapS = THREE.RepeatWrapping;

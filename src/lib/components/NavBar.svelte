@@ -7,6 +7,7 @@
 
 	import DarkModeButton from './navbar/DarkModeButton.svelte';
 	import DebugButton from './navbar/DebugButton.svelte';
+	import HDButton from './HDButton.svelte';
 	import SoundButton from './SoundButton.svelte';
 
 	let mobileNav = false;
@@ -31,6 +32,9 @@
 
 		<!-- Free view button -->
 		<DebugButton />
+
+		<!-- HD button -->
+		<HDButton />
 
 		<!-- Sound button -->
 		<!-- <SoundButton /> -->
