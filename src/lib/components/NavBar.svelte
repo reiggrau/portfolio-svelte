@@ -37,10 +37,8 @@
 		<HDButton />
 
 		<!-- Sound button -->
-		<!-- <SoundButton /> -->
+		<SoundButton />
 	</div>
-
-	<!--  -->
 
 	<!-- Wide navigation bar -->
 	<ul class="hidden md:flex flex gap-4" on:click={() => debug.set(false)}>

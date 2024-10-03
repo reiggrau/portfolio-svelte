@@ -4,6 +4,7 @@
 	import { useTexture } from '@threlte/extras';
 
 	import { darkmode, HD } from '$lib/store';
+    import { debug } from '$lib/components/state';
 
 	import skyVS from '$lib/shaders/skyVS.glsl?raw';
 	import skyFS from '$lib/shaders/skyFS.glsl?raw';
@@ -90,9 +91,9 @@
 	let rotation = 0;
 
 	useTask((delta) => {
-		rotation += delta;
+		rotation += delta * ($debug ? 0.5 : 1 );
 		if ($earthClouds) {
-			$earthClouds.offset.set(0.4 - rotation / 3000, 0);
+			$earthClouds.offset.set(0.4 - rotation / ($debug ? 15000 : 3000), 0);
 		}
 
 		// Link camera view to shader uniform value

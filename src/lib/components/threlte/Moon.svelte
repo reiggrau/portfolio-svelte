@@ -2,6 +2,7 @@
 	import * as THREE from 'three';
 	import { T, useTask, useLoader } from '@threlte/core';
 	import { useTexture } from '@threlte/extras';
+
 	import { HD } from '$lib/store';
     import { debug } from '$lib/components/state';
 
