@@ -2,21 +2,29 @@
 	import { VolumeUpOutline, VolumeUpSolid } from 'flowbite-svelte-icons';
 	import { Tooltip } from 'flowbite-svelte';
 
-	let sound = true;
+	import { overlay, sound } from '$lib/store';
 
-	function toggleSound() {
-		sound = !sound;
+	import music from '$lib/assets/media/cradle_of_the_galaxy.mp3';
+
+	let song = {
+		name: 'Cradle Of The Galaxy - By Andreas Waldetoft',
+		src: music
 	}
 
-	let song = 'Cradle Of The Galaxy - By Andreas Waldetoft'
+	function toggleSound() {
+		sound.set(!$sound);
+	}
 </script>
 
 <button id="SoundButton" class="text-gray" on:click={toggleSound}>
-	{#if sound}
+	{#if $sound}
 		<VolumeUpSolid class="h-7 w-7 md:h-5 md:w-5" />
+		<audio src={song.src} preload='auto' autoplay></audio>
 	{:else}
 		<VolumeUpOutline class="h-7 w-7 md:h-5 md:w-5" />
 	{/if}
 </button>
 <Tooltip triggeredBy="#SoundButton">Toggle sound</Tooltip>
-<span class={sound ? 'animate-appearSlow' : 'animate-disappearSlow'}>Now playing: {song}</span>
+{#if !$overlay}
+	<a class='{$sound ? 'animate-appearSlow' : 'animate-disappearSlow pointer-events-none'} hover:underline' href='https://open.spotify.com/track/4LOzzEEIxoAvHao0u9Qb1i?si=f07d5c1792fc46ea' target='_blank'>Now playing: {song.name}</a>
+{/if}

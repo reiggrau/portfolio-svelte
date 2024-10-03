@@ -3,6 +3,7 @@
 	import NavBar from '$lib/components/NavBar.svelte';
 	import SocialsIcons from '$lib/components/SocialsIcons.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+	import LoadingOverlay from '$lib/components/LoadingOverlay.svelte';
 </script>
 
 <head>
@@ -10,6 +11,9 @@
 </head>
 
 <div id="layout-main">
+	<!-- Loading Overlay -->
+	<LoadingOverlay />
+
 	<!-- Top navbar -->
 	<NavBar />
 

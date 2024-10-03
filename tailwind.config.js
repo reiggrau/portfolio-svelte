@@ -50,7 +50,9 @@ export default {
 				appear: 'appear 0.15s linear forwards',
 				disappear: 'disappear 0.15s linear forwards',
 				appearSlow: 'appear 0.5s linear forwards',
-				disappearSlow: 'disappear 0.5s linear forwards'
+				disappearSlow: 'disappear 0.5s linear forwards',
+				disappearVerySlow: 'disappear 1s linear forwards',
+				appearAndDisappear: 'appearAndDisappear 5s linear forwards'
 			},
 			keyframes: {
 				wiggle: {
@@ -64,6 +66,10 @@ export default {
 				disappear: {
 					'0%': { opacity: 100 },
 					'100%': { opacity: 0 }
+				},
+				appearAndDisappear: {
+					'0%, 100%': { opacity: 0 },
+					'25%, 75%': { opacity: 100 },
 				}
 			}
 		}
