@@ -26,5 +26,5 @@
 </button>
 <Tooltip triggeredBy="#SoundButton">Toggle sound</Tooltip>
 {#if !$overlay}
-	<a class='{$sound ? 'animate-appearSlow' : 'animate-disappearSlow pointer-events-none'} hover:underline' href='https://open.spotify.com/track/4LOzzEEIxoAvHao0u9Qb1i?si=f07d5c1792fc46ea' target='_blank'>Now playing: {song.name}</a>
+	<a class='link {$sound ? 'animate-appearSlow' : 'animate-disappearSlow pointer-events-none'} hover:underline font-light text-gray-200' href='https://open.spotify.com/track/4LOzzEEIxoAvHao0u9Qb1i?si=f07d5c1792fc46ea' target='_blank'>Now playing: {song.name}</a>
 {/if}
