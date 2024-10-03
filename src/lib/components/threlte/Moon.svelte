@@ -3,6 +3,7 @@
 	import { T, useTask, useLoader } from '@threlte/core';
 	import { useTexture } from '@threlte/extras';
 	import { HD } from '$lib/store';
+    import { debug } from '$lib/components/state';
 
 	export let moonPosition: [number, number, number];
 
@@ -30,7 +31,7 @@
 
 <!-- Moon -->
 {#if $moonTexture}
-	<T.Group rotation.y={rotation / 50000}>
+	<T.Group rotation.y={$debug ? 0 : (rotation / 50000)}>
 		<T.Mesh position={moonPosition} rotation.y={1.8}>
 			<T.IcosahedronGeometry args={[2.1, 64]} />
 			<T.MeshStandardMaterial

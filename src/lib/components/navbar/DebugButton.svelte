@@ -31,7 +31,7 @@
 <Tooltip triggeredBy="#DebugButton">Toggle free view</Tooltip>
 
 {#if $debug}
-	<div class="mt-24 fixed">
+	<div class="mt-32 fixed">
 		<Pane position="draggable" title="Debug Menu" width={300}>
 			<List bind:value={selection} label="View" {options} on:change={() => view.set(selection)} />
 		</Pane>
