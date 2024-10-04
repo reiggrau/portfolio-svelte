@@ -50,8 +50,9 @@ export default {
 				appear: 'appear 0.15s linear forwards',
 				disappear: 'disappear 0.15s linear forwards',
 				appearSlow: 'appear 0.5s linear forwards',
+				appearVerySlow: 'appear 2s linear forwards',
 				disappearSlow: 'disappear 0.5s linear forwards',
-				disappearVerySlow: 'disappear 1s linear forwards',
+				disappearVerySlow: 'disappear 2s linear forwards',
 				appearAndDisappear: 'appearAndDisappear 5s linear forwards'
 			},
 			keyframes: {
