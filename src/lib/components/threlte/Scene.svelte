@@ -140,7 +140,7 @@
 			//
 		} else {
 			// NEW: Smooth transition
-			setCameraAndTargetPositionSmooth(cameraTarget, endTargetPosition, cameraPosition, endCameraPosition);
+			// setCameraAndTargetPositionSmooth(cameraTarget, endTargetPosition, cameraPosition, endCameraPosition);
 	
 			// OLD: Just update the positions - Only in debug mode
 			cameraTarget = endTargetPosition;
@@ -148,6 +148,11 @@
 			setCameraPosition(endCameraPosition);
 			updateViewVectors();
 			//
+
+			// cameraTarget = endTargetPosition;
+			// cameraPosition = endCameraPosition;
+			// setCameraPosition(endCameraPosition);
+			// updateViewVectors();
 		}
 	}
 
@@ -155,33 +160,44 @@
 		$camera.position.set(position[0], position[1], position[2]);
 	}
 
-	function setCameraAndTargetPositionSmooth(startTargetPosition: [number, number, number], endTargetPosition: [number, number, number], startCameraPosition: [number, number, number], endCameraPosition: [number, number, number]) {
-		console.log('setCameraAndTargetPositionSmooth :', { startTargetPosition, endTargetPosition, startCameraPosition, endCameraPosition });
+	// function setCameraAndTargetPositionSmooth(startTargetPosition: [number, number, number], endTargetPosition: [number, number, number], startCameraPosition: [number, number, number], endCameraPosition: [number, number, number]) {
+	// 	console.log('setCameraAndTargetPositionSmooth :', { startTargetPosition, endTargetPosition, startCameraPosition, endCameraPosition });
 		
-		// 1. Use start and end positions to generate a vector for camera and target
-		// 1a. Target vector
-		// Moon to Mars > [0, 0, -200] to [0, 0, -10000] > [0, 0, -9800]
-		const targetVector = [ ...endTargetPosition ].map((x, i) => x - startTargetPosition[i]);
-		console.log('targetVector :', targetVector);
+	// 	// 1. Use start and end positions to generate a vector for camera and target
+	// 	// 1a. Target vector
+	// 	// Moon to Mars > [0, 0, -200] to [0, 0, -10000] > [0, 0, -9800]
+	// 	const targetVector = [ ...endTargetPosition ].map((x, i) => x - startTargetPosition[i]);
+	// 	console.log('targetVector :', targetVector);
 
-		// Moon to Mars (light mode)> [2.5, 0, -210] to [7, 0, -10017] > [4.5, 0, -9807]
-		const cameraVector = [ ...endCameraPosition ].map((x, i) => x - startCameraPosition[i]);
-		console.log('cameraVector :', cameraVector );
+	// 	// Moon to Mars (light mode)> [2.5, 0, -210] to [7, 0, -10017] > [4.5, 0, -9807]
+	// 	const cameraVector = [ ...endCameraPosition ].map((x, i) => x - startCameraPosition[i]);
+	// 	console.log('cameraVector :', cameraVector );
 
-		// 2. Get the increments in 1/60 (60 frames per second)
+	// 	// 2. Get the increments in 1/50 (50 frames per second)
+	// 	const targetIncrement = targetVector.map(x => x / 50);
+	// 	const cameraIncrement = cameraVector.map(x => x / 50);
+	// 	console.log('increment vectors :', { targetIncrement, cameraIncrement });
 
-		// 3. Run a loop for each frame and update the positions with the increments
-		for (let i = 0; i < 60; i++) {
+	// 	// 3. Run a loop for each frame and update the positions with the increments
+	// 	for (let f = 1; f <= 50; f++) {
+	// 		setTimeout(()=>{
+	// 			// Update target position
+	// 			const currentTargetPosition = [ ...startTargetPosition ].map((x, i) => x + (targetIncrement[i] * f));
+	// 			cameraTarget = [ ...currentTargetPosition ];
 
-		}
+	// 			// Update camera position
+	// 			const currentCameraPosition = [ ...startCameraPosition ].map((x, i) => x + (cameraIncrement[i] * f));
+	// 			setCameraPosition([ ...currentCameraPosition ]);
 
-		// 4. Once loop ends, set the end positions
-		cameraTarget = [ endTargetPosition[0], endTargetPosition[1], endTargetPosition[2] ];
-		$camera.position.set(endCameraPosition[0], endCameraPosition[1], endCameraPosition[2]);
-	}
+	// 			updateViewVectors();
+
+	// 			console.log('positions at frame :', { f, currentTargetPosition, currentCameraPosition });
+	// 		} , 200 * f)
+	// 	}
+	// }
 
 	function updateViewVectors() {
-		console.log('updateViewVectors() new $camera.position :', $camera.position );
+		// console.log('updateViewVectors() new $camera.position :', $camera.position );
 		earthViewVector = getViewVector(earthPosition);
 		marsViewVector = getViewVector(marsPosition);
 		venusViewVector = getViewVector(venusPosition);
