@@ -7,7 +7,8 @@
             <span></span>
             <span></span>
             <span></span>
-            Continue
+            <p class='absolute blur'>Continue</p>
+            <p>Continue</p>
         </a>
     </div>
 </div>
@@ -28,7 +29,6 @@
     #ContinueButton a:hover {
         background: #03e9f4;
         color: #fff;
-        border-radius: 5px;
         box-shadow: 0 0 5px #03e9f4,
                     0 0 25px #03e9f4,
                     0 0 50px #03e9f4,

@@ -73,8 +73,8 @@
 				value: new THREE.Vector4(atmosphereColor.r, atmosphereColor.g, atmosphereColor.b, 0.1)
 			},
 			viewVector: { type: 'v3', value: earthViewVector },
-			uTop: { type: 'f', value: 0.94 }, // 0.94
-			uPower: { type: 'f', value: 0.85 }, // 0.65555555555
+			uTop: { type: 'f', value: 0.95 }, // 0.94
+			uPower: { type: 'f', value: 0.9 }, // 0.65555555555
 			usingDirectionalLighting: { type: 'i', value: true },
 			directionalLightDirection: { type: 'v3', value: sunPosition }
 		};

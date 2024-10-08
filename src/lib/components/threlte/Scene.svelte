@@ -1,6 +1,7 @@
 <!-- https://threlte.xyz/docs/learn/getting-started/your-first-scene -->
 
 <script lang="ts">
+	import * as THREE from 'three';
 	import { T, useThrelte } from '@threlte/core';
 	import {
 		interactivity,
@@ -158,6 +159,8 @@
 
 	function setCameraPosition(position: [number, number, number]) {
 		$camera.position.set(position[0], position[1], position[2]);
+		// console.log('setCameraPosition :', position);
+		// $camera.position.lerp(new THREE.Vector3(position[0], position[1], position[2]), 0.4);
 	}
 
 	// function setCameraAndTargetPositionSmooth(startTargetPosition: [number, number, number], endTargetPosition: [number, number, number], startCameraPosition: [number, number, number], endCameraPosition: [number, number, number]) {
@@ -192,7 +195,7 @@
 	// 			updateViewVectors();
 
 	// 			console.log('positions at frame :', { f, currentTargetPosition, currentCameraPosition });
-	// 		} , 200 * f)
+	// 		} , 20 * f)
 	// 	}
 	// }
 

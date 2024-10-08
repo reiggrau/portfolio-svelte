@@ -46,6 +46,7 @@
             {:else}
                 <div class='px-[20px] py-[10px] h-[50px] flex justify-center'>
                     <span class='text-[#03e9f4] tracking-[4px] animate-appearVerySlow'>LOADING...</span>
+                    <span class='absolute blur text-[#03e9f4] tracking-[4px] animate-appearVerySlow'>LOADING...</span>
                 </div>
             {/if}
             <!-- <button class={continueReady ? 'animate-appearSlow' : 'opacity-0'} >Continue</button> -->
