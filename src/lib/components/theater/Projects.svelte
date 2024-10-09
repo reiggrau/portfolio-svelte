@@ -34,22 +34,22 @@
 
 <svelte:window on:keydown={onKeyDown} />
 
-<div id="Projects" class="w-full h-screen flex items-center mt-6">
+<div id="Projects" class="w-full h-screen flex items-center">
 	<div class="flex flex-col items-center {$darkmode ? 'ml-[5%] mr-[40%]' : 'ml-[50%] mr-[7%]'}">
 		<ArrowsDown rotated/>
-		<h1 class="text-3xl sm:text-4xl font-bold text-gray-300 inline border-b-2 border-cyan-500">
+		<!-- <h1 class="text-3xl sm:text-3xl font-bold text-gray-300 inline border-b-2 border-cyan-500">
 			My projects
-		</h1>
+		</h1> -->
 		<div class='flex gap-6 items-center text-white'>
 			<div>
-				<button class='rotate-90' on:click={()=> changeProject(false)}>
+				<button class='rotate-90  z-40' on:click={()=> changeProject(false)}>
 					<Arrows />
 				</button>
 			</div>
-			<div class="mt-4 flex flex-col gap-3 items-center">
-				<h2 class='text-white text-3xl'>{project.name}</h2>
+			<div class="flex flex-col gap-2 items-center">
+				<h2 class='text-white text-2xl'>{project.name}</h2>
 				{#key project}
-					<Carousel images={project.images} forward let:Indicators let:Controls bind:index class='w-[750px] min-h-[450px]'>
+					<Carousel images={project.images} forward let:Indicators let:Controls bind:index class='w-[600px] min-h-[250px] max-h-[350px]'>
 						<Controls let:ControlButton let:changeSlide>
 							<ControlButton name="Previous" forward={false} class="text-black" on:click={()=>changeSlide(false)}/>
 							<ControlButton name="Next" forward={true} class="text-black" on:click={()=>changeSlide(true)}/>
@@ -59,8 +59,8 @@
 						</Indicators>
 					</Carousel>
 				{/key}
-				<div class='w-[550px] bg-gray-800 opacity-90 px-6 py-4 rounded mt-4 flex justify-center items-center h-28'>
-					<p class="max-w-[500px] text-center text-white text-lg">
+				<div class='w-[550px] bg-gray-800 opacity-90 px-4 py-2 rounded mt-2 flex justify-center items-center h-24'>
+					<p class="max-w-[500px] text-center text-white font-light">
 						{project.text[index]}
 					</p>
 				</div>
@@ -78,7 +78,7 @@
 				</div>
 			</div>
 			<div>
-				<button class='rotate-[270deg]'  on:click={()=> changeProject(true)}>
+				<button class='rotate-[270deg] z-40'  on:click={()=> changeProject(true)}>
 					<Arrows />
 				</button>
 			</div>

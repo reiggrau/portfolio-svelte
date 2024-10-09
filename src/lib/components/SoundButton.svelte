@@ -18,10 +18,10 @@
 
 <button id="SoundButton" class="text-gray" on:click={toggleSound}>
 	{#if $sound}
-		<VolumeUpSolid class="h-7 w-7 md:h-5 md:w-5" />
+		<VolumeUpSolid class="h-7 w-7 md:h-4 md:w-5" />
 		<audio src={song.src} preload='auto' autoplay></audio>
 	{:else}
-		<VolumeUpOutline class="h-7 w-7 md:h-5 md:w-5" />
+		<VolumeUpOutline class="h-7 w-7 md:h-4 md:w-5" />
 	{/if}
 </button>
 <Tooltip triggeredBy="#SoundButton">Toggle sound</Tooltip>

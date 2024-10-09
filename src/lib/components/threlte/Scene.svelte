@@ -120,7 +120,7 @@
 				break;
 			case 'mars':
 				endTargetPosition = $debug ? [ ...marsPosition ] : [0, 0, -10000];
-				endCameraPosition = $darkmode ? [-7, 0, -10017] : [7, 0, -10017];
+				endCameraPosition = $darkmode ? [-7, 0, -10016] : [7, 0, -10016];
 				break;
 			case 'venus':
 				endTargetPosition = $debug ? [ ...venusPosition ] : [0, 0, -20020];

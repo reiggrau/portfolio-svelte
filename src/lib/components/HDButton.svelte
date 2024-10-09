@@ -20,8 +20,8 @@
 
 {#if device === 'desktop' && $debug}
     <button id="HDButton" on:click={toggleHD} class="h-7 w-7 md:h-5 md:w-5 flex flex-col justify-center">
-        <span class="pt-1 text-3xl md:text-2xl font-bold italic font-mono {$HD ? '' : 'text-gray-400'}">HD</span>
-        <span class="pt-1 text-3xl md:text-2xl font-bold italic font-mono {$HD ? '' : 'text-gray-400'} absolute animate-[ping_1s_ease-out_forwards]">HD</span>
+        <span class="text-3xl md:text-2xl font-bold italic font-mono {$HD ? '' : 'text-gray-400'}">HD</span>
+        <span class="text-3xl md:text-2xl font-bold italic font-mono {$HD ? '' : 'text-gray-400'} absolute animate-[ping_1s_ease-out_forwards]">HD</span>
     </button>
     <Tooltip triggeredBy="#HDButton">Toggle HD mode</Tooltip>
 {/if}

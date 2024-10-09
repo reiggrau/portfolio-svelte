@@ -23,7 +23,7 @@
 
 <div
 	id="NavBar"
-	class="fixed w-full h-20 md:h-16 p-6 pr-12 shadow-lg bg-black bg-opacity-30 flex justify-between items-center text-white z-30"
+	class="text-sm font-light fixed w-full h-20 md:h-14 p-6 pr-12 shadow-lg bg-black bg-opacity-30 flex justify-between items-center text-white z-30"
 >
 	<!-- Settings buttons -->
 	<div class="flex gap-6 items-center">

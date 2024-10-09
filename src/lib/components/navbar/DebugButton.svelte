@@ -23,9 +23,9 @@
 
 <button id="DebugButton" on:click={toggleDebug} class="text-gray">
 	{#if $debug}
-		<GlobeSolid class="h-7 w-7 md:h-5 md:w-5 animate-[spin_1s_ease-out_forwards]" />
+		<GlobeSolid class="h-6 w-7 md:h-4 md:w-5 animate-[spin_1s_ease-out_forwards]" />
 	{:else}
-		<GlobeOutline class="h-7 w-7 md:h-5 md:w-5 animate-[spin_1s_ease-out_forwards]" />
+		<GlobeOutline class="h-6 w-7 md:h-4 md:w-5 animate-[spin_1s_ease-out_forwards]" />
 	{/if}
 </button>
 <Tooltip triggeredBy="#DebugButton">Toggle free view</Tooltip>

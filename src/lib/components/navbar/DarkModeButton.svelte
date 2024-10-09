@@ -33,10 +33,10 @@
 <button id="DarkModeButton" on:click={toggleDarkMode} class="text-gray">
 	{#if $darkmode}
 		<MoonSolid
-			class="h-6 w-8 md:h-4 md:w-5 animate-[spin_1s_ease-out_forwards] hover:box-shadow shadow-white"
+			class="h-5 w-8 md:h-3 md:w-5 animate-[spin_1s_ease-out_forwards] hover:box-shadow shadow-white"
 		/>
 	{:else}
-		<SunSolid class="h-7 w-7 md:h-5 md:w-5 animate-[spin_1s_ease-out_forwards]" />
+		<SunSolid class="h-6 w-7 md:h-4 md:w-5 animate-[spin_1s_ease-out_forwards]" />
 	{/if}
 </button>
 <Tooltip triggeredBy="#DarkModeButton">Toggle dark mode</Tooltip>

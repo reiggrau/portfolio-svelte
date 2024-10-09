@@ -28,7 +28,7 @@
 		<p class="mt-4 max-w-[700px] text-lg font-light text-gray-200">
 			These are the languages, UI frameworks, and other skills I have experience with:
 		</p>
-		<div class="my-8 w-[900px] text-white text-xl font-light flex gap-6 flex-wrap justify-center">
+		<div class="my-8 w-[700px] text-white text-xl font-light flex gap-4 flex-wrap justify-center">
 			<SkillCard skillName={'three.js'} src={threejs} />
 			<SkillCard skillName={'HTML'} src={html} />
 			<SkillCard skillName={'CSS'} src={css} />
