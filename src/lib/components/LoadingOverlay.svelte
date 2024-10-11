@@ -11,7 +11,7 @@
     onMount(()=>{
         setTimeout(()=>{
             continueReady = true;
-        }, 200);
+        }, 1000);
     })
 
     function handleContinue() {
