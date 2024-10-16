@@ -70,7 +70,7 @@ export default {
 				},
 				appearAndDisappear: {
 					'0%, 100%': { opacity: 0 },
-					'25%, 75%': { opacity: 100 },
+					'25%, 75%': { opacity: 100 }
 				}
 			}
 		}

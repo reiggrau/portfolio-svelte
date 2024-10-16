@@ -26,7 +26,9 @@
 		}
 	});
 	// Source: https://www.deviantart.com/slimysomething
-	$: marsBump = useLoader(THREE.TextureLoader).load(`/textures/${textureRoure}/mars_topography.jpg`);
+	$: marsBump = useLoader(THREE.TextureLoader).load(
+		`/textures/${textureRoure}/mars_topography.jpg`
+	);
 	$: marsClouds = useTexture(`/textures/${textureRoure}/mars_clouds.png`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;

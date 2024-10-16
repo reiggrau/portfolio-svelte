@@ -36,7 +36,11 @@
 		<div class="w-12 h-12 flex justify-center items-center"><EnvelopeOutline size="lg" /></div>
 	</a> -->
 	<!-- Resume -->
-	<a href="/" class="drawer bg-gray-500 dark:bg-gray-600">
+	<a
+		href="https://www.dropbox.com/scl/fi/fnzqlqj9nbmuk0dh7nu5z/CV-Guillem-Reig-Grau-2024-07-EN.pdf?rlkey=a3qvtixyb59gyngf3nakqfcr7&st=1bmx72f4&dl=0"
+		target="_blank"
+		class="drawer bg-gray-500 dark:bg-gray-600"
+	>
 		<span class="w-28 text-center font-extralight">My CV</span>
 		<div class="w-10 h-10 flex justify-center items-center"><NewspapperOutline /></div>
 	</a>

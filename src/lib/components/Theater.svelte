@@ -53,10 +53,10 @@
 			<Skills />
 		</FadeIn>
 		<FadeIn active={$view === 'venus'}>
-			<Projects/>
+			<Projects />
 		</FadeIn>
 		<FadeIn active={$view === 'mercury'}>
-			<Contact/>
+			<Contact />
 		</FadeIn>
 	{/if}
 </div>

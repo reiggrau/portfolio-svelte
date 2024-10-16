@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
 	import { useThrelte, useRender } from '@threlte/core';
 	import {
 		EffectComposer,
@@ -46,7 +46,7 @@
 				})
 			)
 		);
-	};
+	}
 
 	// We need to set up the passes according to the camera in use
 	$: setupEffectComposer($camera);

@@ -95,7 +95,7 @@
 		<!-- Clouds -->
 		<T.Mesh scale={1.004}>
 			<T.IcosahedronGeometry args={[7.5, 64]} />
-			<T.MeshStandardMaterial map={$venusClouds} depthWrite={false} opacity={0.90} transparent />
+			<T.MeshStandardMaterial map={$venusClouds} depthWrite={false} opacity={0.9} transparent />
 		</T.Mesh>
 	</T.Group>
 

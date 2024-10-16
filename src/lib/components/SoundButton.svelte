@@ -9,7 +9,7 @@
 	let song = {
 		name: 'Cradle Of The Galaxy - By Andreas Waldetoft',
 		src: music
-	}
+	};
 
 	function toggleSound() {
 		sound.set(!$sound);
@@ -19,12 +19,18 @@
 <button id="SoundButton" class="text-gray" on:click={toggleSound}>
 	{#if $sound}
 		<VolumeUpSolid class="h-7 w-7 md:h-4 md:w-5" />
-		<audio src={song.src} preload='auto' autoplay></audio>
+		<audio src={song.src} preload="auto" autoplay></audio>
 	{:else}
 		<VolumeUpOutline class="h-7 w-7 md:h-4 md:w-5" />
 	{/if}
 </button>
 <Tooltip triggeredBy="#SoundButton">Toggle sound</Tooltip>
 {#if !$overlay}
-	<a class='link {$sound ? 'animate-appearSlow' : 'animate-disappearSlow pointer-events-none'} hover:underline font-light text-gray-200' href='https://open.spotify.com/track/4LOzzEEIxoAvHao0u9Qb1i?si=f07d5c1792fc46ea' target='_blank'>Now playing: {song.name}</a>
+	<a
+		class="link {$sound
+			? 'animate-appearSlow'
+			: 'animate-disappearSlow pointer-events-none'} hover:underline font-light text-gray-200"
+		href="https://open.spotify.com/track/4LOzzEEIxoAvHao0u9Qb1i?si=f07d5c1792fc46ea"
+		target="_blank">Now playing: {song.name}</a
+	>
 {/if}

@@ -5,7 +5,7 @@
 	export let submit = false;
 </script>
 
-<button id='SmallButton' class="corner-button" {disabled} type={submit ? 'submit' : 'button'}>
+<button id="SmallButton" class="corner-button" {disabled} type={submit ? 'submit' : 'button'}>
 	<span>
 		<slot />
 	</span>

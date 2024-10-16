@@ -3,13 +3,7 @@
 <script lang="ts">
 	import * as THREE from 'three';
 	import { T, useThrelte } from '@threlte/core';
-	import {
-		interactivity,
-		OrbitControls,
-		TrackballControls,
-		Suspense,
-		Text
-	} from '@threlte/extras';
+	import { interactivity, OrbitControls, TrackballControls, Suspense, Text } from '@threlte/extras';
 
 	import { debug } from '../state';
 	import { darkmode, view } from '$lib/store'; // 'earth' | 'moon' | 'mars'
@@ -67,7 +61,7 @@
 			view.set('venus');
 		} else if (e.key === '5') {
 			view.set('mercury');
-		}else if (e.key === 'ArrowDown') {
+		} else if (e.key === 'ArrowDown') {
 			switch ($view) {
 				case 'earth':
 					view.set('moon');
@@ -111,23 +105,23 @@
 
 		switch ($view) {
 			case 'earth':
-				endTargetPosition = $debug ? [ ...earthPosition ] : [0, 0, -16];
+				endTargetPosition = $debug ? [...earthPosition] : [0, 0, -16];
 				endCameraPosition = $darkmode ? [-22, 0, 24] : [22, 0, 24];
 				break;
 			case 'moon':
-				endTargetPosition = $debug ? [ ...moonPosition ] : [0, 0, 0];
+				endTargetPosition = $debug ? [...moonPosition] : [0, 0, 0];
 				endCameraPosition = $darkmode ? [-3, 0, -210] : [2.5, 0, -210];
 				break;
 			case 'mars':
-				endTargetPosition = $debug ? [ ...marsPosition ] : [0, 0, -10000];
+				endTargetPosition = $debug ? [...marsPosition] : [0, 0, -10000];
 				endCameraPosition = $darkmode ? [-7, 0, -10016] : [7, 0, -10016];
 				break;
 			case 'venus':
-				endTargetPosition = $debug ? [ ...venusPosition ] : [0, 0, -20020];
+				endTargetPosition = $debug ? [...venusPosition] : [0, 0, -20020];
 				endCameraPosition = $darkmode ? [-15, 0, -19972] : [20, 0, -19975];
 				break;
 			case 'mercury':
-				endTargetPosition = $debug ? [ ...mercuryPosition ] : [0, 0, -29995];
+				endTargetPosition = $debug ? [...mercuryPosition] : [0, 0, -29995];
 				endCameraPosition = $darkmode ? [-6, 0, -30008] : [6, 0, -30008];
 				break;
 		}
@@ -142,7 +136,7 @@
 		} else {
 			// NEW: Smooth transition
 			// setCameraAndTargetPositionSmooth(cameraTarget, endTargetPosition, cameraPosition, endCameraPosition);
-	
+
 			// OLD: Just update the positions - Only in debug mode
 			cameraTarget = endTargetPosition;
 			cameraPosition = endCameraPosition;
@@ -165,7 +159,7 @@
 
 	// function setCameraAndTargetPositionSmooth(startTargetPosition: [number, number, number], endTargetPosition: [number, number, number], startCameraPosition: [number, number, number], endCameraPosition: [number, number, number]) {
 	// 	console.log('setCameraAndTargetPositionSmooth :', { startTargetPosition, endTargetPosition, startCameraPosition, endCameraPosition });
-		
+
 	// 	// 1. Use start and end positions to generate a vector for camera and target
 	// 	// 1a. Target vector
 	// 	// Moon to Mars > [0, 0, -200] to [0, 0, -10000] > [0, 0, -9800]

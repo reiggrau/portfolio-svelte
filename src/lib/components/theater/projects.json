@@ -1,125 +1,125 @@
 [
-    {
-        "name": "Startup Business Cockpit",
-        "images": [
-            {   
-                "alt": "Login screen preview",
-                "src": "/previews/sbc_preview_1.png",
-                "title": "Login screen"
-            },
-            {   
-                "alt": "Time tracking preview",
-                "src": "/previews/sbc_preview_2.png",
-                "title": "Time tracking"
-            },
-            {   
-                "alt": "Company values and insights preview",
-                "src": "/previews/sbc_preview_3.png",
-                "title": "Company values and insights"
-            },
-            {   
-                "alt": "Holiday tracking preview",
-                "src": "/previews/sbc_preview_4.png",
-                "title": "Holiday tracking"
-            },
-            {   
-                "alt": "Key Performance Indicators preview",
-                "src": "/previews/sbc_preview_5.png",
-                "title": "Key Performance Indicators"
-            }
-        ],
-        "text": [
-            "The Startup Business Cockpit is a business support tool designed to assist in the creation and management of a startup business. It is built on Svelte and AWS.",
-            "The frontend is built with Svelte, Flowbite and D3, and the backend uses several Amazon Web Services such as Cognito and DynamoDB.",
-            "The application's authentication and authorisation allows different levels of permissions between members of the same company.",
-            "Every API is protected by an authorisation check and every new entry to the database is first checked with Zod to ensure the integrity of the database items.",
-            "Both the frontend and the backend were primarily built by me, from idea to product, with occasional help."
-        ],
-        "demo": "https://app.startup-business-cockpit.de/login",
-        "code": ""
-    },
-    {
-        "name": "Tribes",
-        "images": [
-            {
-                "alt": "Title screen preview",
-                "src": "/previews/tribes_preview_1.png",
-                "title": "Title screen"
-            },
-            {
-                "alt": "Character selection preview",
-                "src": "/previews/tribes_preview_2.png",
-                "title": "Character selection"
-            },
-            {
-                "alt": "Character creation preview",
-                "src": "/previews/tribes_preview_3.png",
-                "title": "Character creation"
-            },
-            {
-                "alt": "Gameplay preview",
-                "src": "/previews/tribes_preview_4.png",
-                "title": "Gameplay"
-            },
-            {
-                "alt": "Chat preview",
-                "src": "/previews/tribes_preview_5.png",
-                "title": "Chat"
-            },
-            {
-                "alt": "Profile edit preview",
-                "src": "/previews/tribes_preview_6.png",
-                "title": "Profile edit"
-            }
-        ],
-        "text": [
-            "My final project at SPICED Academy, TRIBES, is a prehistoric themed browser game coded in HTML, CSS, JavaScript, SQL, node.js, react.js, Redux, socket.io and Amazon Web Services.",
-            "The main menu is also the game lobby. Here you can either create a new character (new game) or continue with an old one. All your progress is stored in the database.",
-            "The prologue is a sequence of story text and questions, and a new character is created based on these questions. The user is then asked to choose a name and a portrait.",
-            "Once the character has been created, the player will be taken to the tutorial, where the various mechanics of the game will be explained.",
-            "The chat component has a global chat, where any user can write to anyone, or personal chats between two users who are 'friends'.",
-            "In the lobby, you can add a user picture and a bio to your profile. The username and email can also be changed, provided no other user is using them."
-        ],
-        "demo": "https://tribes-the-game.onrender.com/",
-        "code": "https://github.com/reiggrau/tribes-frontend_react"
-    },
-    {
-        "name": "imageBoard",
-        "images": [
-            {   
-                "alt": "Main screen preview",
-                "src": "/previews/imageboard_preview_1.png",
-                "title": "Main screen"
-            },
-            {   
-                "alt": "Registration preview",
-                "src": "/previews/imageboard_preview_2.png",
-                "title": "Registration"
-            },
-            {   
-                "alt": "Upload picture preview",
-                "src": "/previews/imageboard_preview_3.png",
-                "title": "Upload picture"
-            },
-            {   
-                "alt": "Picture title preview",
-                "src": "/previews/imageboard_preview_4.png",
-                "title": "Picture title preview"
-            },
-            {   
-                "alt": "Picture details preview",
-                "src": "/previews/imageboard_preview_5.png",
-                "title": "Picture details"
-            }
-        ],
-        "text": [
-            "The 'image board' project I created during the SPICED Full Stack Bootcamp, heavily inspired by the minimalist design of unsplash.com, uses Vue.js, AWS and PostgreSQL.",
-            "To upload your own image, you must first create an account. During this step, you will be given the option to add a profile picture, in which case a preview will be shown to the user.",
-            "In the image upload window, the user selects the file and a preview is generated. The user then needs to add a title and description to the image. Optionally, the user can add some tags to the image.",
-            "When the user moves the cursor over an image, its title is displayed.",
-            "When the user clicks on an image, a new window opens containing the same image in a higher resolution. The window will also contain the details of the image along with the comments associated with it. "
-        ],
-        "demo": "",
-        "code": "https://github.com/reiggrau/spiced_imageboard_vue"
-    }
+	{
+		"name": "Startup Business Cockpit",
+		"images": [
+			{
+				"alt": "Login screen preview",
+				"src": "/previews/sbc_preview_1.png",
+				"title": "Login screen"
+			},
+			{
+				"alt": "Time tracking preview",
+				"src": "/previews/sbc_preview_2.png",
+				"title": "Time tracking"
+			},
+			{
+				"alt": "Company values and insights preview",
+				"src": "/previews/sbc_preview_3.png",
+				"title": "Company values and insights"
+			},
+			{
+				"alt": "Holiday tracking preview",
+				"src": "/previews/sbc_preview_4.png",
+				"title": "Holiday tracking"
+			},
+			{
+				"alt": "Key Performance Indicators preview",
+				"src": "/previews/sbc_preview_5.png",
+				"title": "Key Performance Indicators"
+			}
+		],
+		"text": [
+			"The Startup Business Cockpit is a business support tool designed to assist in the creation and management of a startup business. It is built on Svelte and AWS.",
+			"The frontend is built with Svelte, Flowbite and D3, and the backend uses several Amazon Web Services such as Cognito and DynamoDB.",
+			"The application's authentication and authorisation allows different levels of permissions between members of the same company.",
+			"Every API is protected by an authorisation check and every new entry to the database is first checked with Zod to ensure the integrity of the database items.",
+			"Both the frontend and the backend were primarily built by me, from idea to product, with occasional help."
+		],
+		"demo": "https://app.startup-business-cockpit.de/login",
+		"code": ""
+	},
+	{
+		"name": "Tribes",
+		"images": [
+			{
+				"alt": "Title screen preview",
+				"src": "/previews/tribes_preview_1.png",
+				"title": "Title screen"
+			},
+			{
+				"alt": "Character selection preview",
+				"src": "/previews/tribes_preview_2.png",
+				"title": "Character selection"
+			},
+			{
+				"alt": "Character creation preview",
+				"src": "/previews/tribes_preview_3.png",
+				"title": "Character creation"
+			},
+			{
+				"alt": "Gameplay preview",
+				"src": "/previews/tribes_preview_4.png",
+				"title": "Gameplay"
+			},
+			{
+				"alt": "Chat preview",
+				"src": "/previews/tribes_preview_5.png",
+				"title": "Chat"
+			},
+			{
+				"alt": "Profile edit preview",
+				"src": "/previews/tribes_preview_6.png",
+				"title": "Profile edit"
+			}
+		],
+		"text": [
+			"My final project at SPICED Academy, TRIBES, is a prehistoric themed browser game coded in HTML, CSS, JavaScript, SQL, node.js, react.js, Redux, socket.io and Amazon Web Services.",
+			"The main menu is also the game lobby. Here you can either create a new character (new game) or continue with an old one. All your progress is stored in the database.",
+			"The prologue is a sequence of story text and questions, and a new character is created based on these questions. The user is then asked to choose a name and a portrait.",
+			"Once the character has been created, the player will be taken to the tutorial, where the various mechanics of the game will be explained.",
+			"The chat component has a global chat, where any user can write to anyone, or personal chats between two users who are 'friends'.",
+			"In the lobby, you can add a user picture and a bio to your profile. The username and email can also be changed, provided no other user is using them."
+		],
+		"demo": "https://tribes-the-game.onrender.com/",
+		"code": "https://github.com/reiggrau/tribes-frontend_react"
+	},
+	{
+		"name": "imageBoard",
+		"images": [
+			{
+				"alt": "Main screen preview",
+				"src": "/previews/imageboard_preview_1.png",
+				"title": "Main screen"
+			},
+			{
+				"alt": "Registration preview",
+				"src": "/previews/imageboard_preview_2.png",
+				"title": "Registration"
+			},
+			{
+				"alt": "Upload picture preview",
+				"src": "/previews/imageboard_preview_3.png",
+				"title": "Upload picture"
+			},
+			{
+				"alt": "Picture title preview",
+				"src": "/previews/imageboard_preview_4.png",
+				"title": "Picture title preview"
+			},
+			{
+				"alt": "Picture details preview",
+				"src": "/previews/imageboard_preview_5.png",
+				"title": "Picture details"
+			}
+		],
+		"text": [
+			"The 'image board' project I created during the SPICED Full Stack Bootcamp, heavily inspired by the minimalist design of unsplash.com, uses Vue.js, AWS and PostgreSQL.",
+			"To upload your own image, you must first create an account. During this step, you will be given the option to add a profile picture, in which case a preview will be shown to the user.",
+			"In the image upload window, the user selects the file and a preview is generated. The user then needs to add a title and description to the image. Optionally, the user can add some tags to the image.",
+			"When the user moves the cursor over an image, its title is displayed.",
+			"When the user clicks on an image, a new window opens containing the same image in a higher resolution. The window will also contain the details of the image along with the comments associated with it. "
+		],
+		"demo": "",
+		"code": "https://github.com/reiggrau/spiced_imageboard_vue"
+	}
 ]
