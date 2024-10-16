@@ -12,8 +12,9 @@
 
 	let emailError: string = '';
 	let messageError: string = '';
+	let serverError: string = '';
 
-	let buttonDisabled = false;
+	let buttonState: 'ready' | 'disabled' | 'success' | 'error' = 'ready';
 </script>
 
 <div id="Projects" class="w-full h-screen flex mt-16">
@@ -30,8 +31,8 @@
 			action="?/sendEmail"
 			method="POST"
 			class="mt-4 w-[60%] flex flex-col gap-4 opacity-100 text-white"
-			use:enhance={({ formElement, formData, action, cancel, submitter }) => {
-				buttonDisabled = true; // Prevent double sending
+			use:enhance={({ cancel }) => {
+				buttonState = 'disabled'; // Prevent double sending
 
 				// Frontend form checks
 				if (!email) emailError = 'You must include an email!';
@@ -44,19 +45,21 @@
 
 				if (emailError || messageError) {
 					cancel();
-					buttonDisabled = false;
+					buttonState = 'error';
 				}
 
 				return async ({ result, update }) => {
 					// Display success message
 					if (result.status === 200) {
+						buttonState = 'success';
 						email = '';
 						message = '';
-						alert('Email sent successfully!');
+						// alert('Email sent successfully!');
+					} else {
+						// Error feedback
+						buttonState = 'error';
+						serverError = 'Oof! Something went wrong!';
 					}
-
-					// Re-enable sending button
-					buttonDisabled = false;
 				};
 			}}
 		>
@@ -67,7 +70,7 @@
 					placeholder="your@email.com"
 					bind:value={email}
 					on:keydown={(e) => e.stopPropagation()}
-					on:focus={() => (emailError = '')}
+					on:focus={() => {emailError = ''; buttonState = 'ready'; serverError = '';}}
 				>
 					<EnvelopeSolid slot="left" class="w-4 h-4" />
 				</Input>
@@ -83,7 +86,7 @@
 					placeholder="Write a message..."
 					bind:value={message}
 					on:keydown={(e) => e.stopPropagation()}
-					on:focus={() => (messageError = '')}
+					on:focus={() => {messageError = ''; buttonState = 'ready'; serverError = '';}}
 				/>
 				<div class="flex justify-between">
 					<Helper class="mt-1 h-2" color="red">
@@ -98,8 +101,21 @@
 					</Helper>
 				</div>
 			</Label>
-			<div class="flex justify-center">
-				<SmallButton submit disabled={buttonDisabled}>Submit</SmallButton>
+			<div class="flex flex-col items-center">
+				<SmallButton submit bind:buttonState={buttonState}>
+					{#if buttonState === 'ready'}
+						Submit
+					{:else if buttonState === 'success'}
+						Success
+					{:else if buttonState === 'error'}
+						Error
+					{:else}
+						Sending...
+					{/if}
+				</SmallButton>
+				<Helper class="mt-1 h-2" color="red">
+					<span class="font-medium {serverError ? 'opacity-100' : 'opacity-0'}">{serverError}</span>
+				</Helper>
 			</div>
 		</form>
 	</div>

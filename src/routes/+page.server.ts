@@ -43,7 +43,7 @@ export const actions = {
 		// Handle error
 		if (error) {
 			console.error({ error });
-			return fail(400, { message, missing: true });
+			return fail(400, { message: error.message });
 		}
 
 		// Success response
