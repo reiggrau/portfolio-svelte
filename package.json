@@ -35,6 +35,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sveltejs/vite-plugin-svelte": "^2.5.3",
 		"@theatre/core": "^0.7.2",
 		"@theatre/studio": "^0.7.2",
 		"@threlte/core": "^7.3.0",
