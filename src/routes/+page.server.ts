@@ -2,10 +2,10 @@ import { fail } from '@sveltejs/kit';
 
 import { Resend } from 'resend';
 
-import { APIkey } from '$env/static/private';
+import { RESEND_API_KEY } from '$env/static/private';
 
 // const resend = new Resend('re_123456789');
-const resend = new Resend(APIkey);
+const resend = new Resend(RESEND_API_KEY);
 
 export const actions = {
 	sendEmail: async ({ request }) => {
@@ -33,7 +33,7 @@ export const actions = {
 		}
 
 		// Send email
-		const { data: emailData, error } = await resend.emails.send({
+		const { error } = await resend.emails.send({
 			from: `ReigGrau Portfolio <onboarding@resend.dev>`,
 			to: ['guillemreiggrau@gmail.com'],
 			subject: `${email}`,
