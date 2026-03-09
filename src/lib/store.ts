@@ -1,4 +1,10 @@
-import { writable } from 'svelte/store';
+import { writable } from 'svelte/store'; // Global state management for the application
+
+// Textures
+export const texturesReady = writable(false);
+
+// Texture load order
+export const loadingPhase = writable<'earth' | 'remaining' | 'done'>('earth');
 
 // Darkmode
 export const darkmode = writable(false);

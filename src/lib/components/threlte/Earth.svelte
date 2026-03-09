@@ -6,6 +6,8 @@
 	import { darkmode, HD } from '$lib/store';
 	import { debug } from '$lib/components/state';
 
+	import { texturesReady, loadingPhase } from '$lib/store';
+
 	import skyVS from '$lib/shaders/skyVS.glsl?raw';
 	import skyFS from '$lib/shaders/skyFS.glsl?raw';
 	import atmosphereVS from '$lib/shaders/atmosphereVS.glsl?raw';
@@ -51,6 +53,12 @@
 			return texture;
 		}
 	});
+
+	// LOADING VIEW: Once the essential textures resolve, mark ready
+	$: if ($earthTexture && $earthClouds) {
+		texturesReady.set(true);
+		loadingPhase.set('remaining'); // Rearth textures load first, then the rest
+	}
 
 	// Atmosphere
 	const atmosphereColor = new THREE.Color('#95D3F4');

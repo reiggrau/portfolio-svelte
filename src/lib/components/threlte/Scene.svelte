@@ -1,12 +1,9 @@
-<!-- https://threlte.xyz/docs/learn/getting-started/your-first-scene -->
-
 <script lang="ts">
-	import * as THREE from 'three';
 	import { T, useThrelte } from '@threlte/core';
 	import { interactivity, OrbitControls, TrackballControls, Suspense, Text } from '@threlte/extras';
 
 	import { debug } from '../state';
-	import { darkmode, view } from '$lib/store'; // 'earth' | 'moon' | 'mars'
+	import { loadingPhase, darkmode, view } from '$lib/store'; // 'earth' | 'moon' | 'mars'
 
 	import Earth from './Earth.svelte';
 	import Moon from './Moon.svelte';
@@ -234,16 +231,13 @@
 			ref.lookAt(22, 0, 24);
 		}}
 	/>
-
 	<Earth {earthPosition} {sunPosition} {earthViewVector} />
-
 	<Moon {moonPosition} />
-
-	<Mars {marsPosition} {sunPosition} {marsViewVector} />
-
-	<Venus {venusPosition} {sunPosition} {venusViewVector} />
-
-	<Mercury {mercuryPosition} />
+	{#if $loadingPhase !== 'earth'}
+		<Mars {marsPosition} {sunPosition} {marsViewVector} />
+		<Venus {venusPosition} {sunPosition} {venusViewVector} />
+		<Mercury {mercuryPosition} />
+	{/if}
 </Suspense>
 
 <!-- Camera -->

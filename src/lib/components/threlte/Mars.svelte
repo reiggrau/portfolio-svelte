@@ -2,7 +2,7 @@
 	import * as THREE from 'three';
 	import { T, useTask, useLoader, useThrelte } from '@threlte/core';
 	import { useTexture } from '@threlte/extras';
-	import { HD } from '$lib/store';
+	import { loadingPhase, HD } from '$lib/store';
 
 	import skyVS from '$lib/shaders/skyVS.glsl?raw';
 	import skyFS from '$lib/shaders/skyFS.glsl?raw';
@@ -25,6 +25,7 @@
 			return texture;
 		}
 	});
+
 	// Source: https://www.deviantart.com/slimysomething
 	$: marsBump = useLoader(THREE.TextureLoader).load(
 		`/textures/${textureRoure}/mars_topography.jpg`

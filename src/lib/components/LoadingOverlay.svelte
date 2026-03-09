@@ -1,18 +1,11 @@
 <script lang="ts">
-	import { overlay, sound } from '$lib/store';
-	import { onMount } from 'svelte';
+	import { overlay, sound, texturesReady } from '$lib/store';
 	import ContinueButton from './ContinueButton.svelte';
 
 	let loadingDisappears = false;
 	let overlayDisappears = false;
 
-	let continueReady = false;
-
-	onMount(() => {
-		setTimeout(() => {
-			continueReady = true;
-		}, 1000);
-	});
+	$: continueReady = $texturesReady; // Reactive — becomes true the moment Earth textures are loaded
 
 	function handleContinue() {
 		sound.set(true);
