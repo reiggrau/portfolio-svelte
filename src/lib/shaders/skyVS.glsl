@@ -35,7 +35,7 @@ uniform float uPower;
 void main() {
     vNormal = normalize( normalMatrix * normal );
     vec3 vNormel = normalize( normalMatrix * viewVector );
-    intensity = pow( uTop - dot(vNormal, vNormel), uPower );
+    intensity = pow( max(0.0, uTop - dot(vNormal, vNormel)), uPower );
     gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
 
 }

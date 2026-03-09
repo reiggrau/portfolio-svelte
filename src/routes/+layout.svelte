@@ -26,3 +26,9 @@
 	<!-- Footer -->
 	<Footer />
 </div>
+
+<style lang="postcss">
+	#layout-main {
+		@apply flex flex-col min-h-screen;
+	}
+</style>
