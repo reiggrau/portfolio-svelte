@@ -6,8 +6,7 @@
 
 	$: buttonColor = getButtonColor(buttonState);
 
-	function getButtonColor(buttonState: string) {
-		console.log('buttonState :', buttonState);
+	function getButtonColor(buttonState: 'ready' | 'disabled' | 'success' | 'error') {
 		switch (buttonState) {
 			case 'disabled':
 				return '#808080';

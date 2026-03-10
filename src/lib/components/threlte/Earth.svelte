@@ -22,18 +22,17 @@
 	// Textures
 	import Device from 'svelte-device-info';
 
-	$: textureRoure = $HD ? 'HD' : Device.isPhone ? 'mobile' : 'desktop';
-	$: console.log('textureRoure :', textureRoure);
+	$: textureRoute = $HD ? 'HD' : Device.isPhone ? 'mobile' : 'desktop';
 
-	$: earthTexture = useTexture(`/textures/${textureRoure}/earth_diffuse.jpg`, {
+	$: earthTexture = useTexture(`/textures/${textureRoute}/earth_diffuse.jpg`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			return texture;
 		}
 	});
-	$: earthBump = useTexture(`/textures/${textureRoure}/earth_topography.jpg`);
-	$: earthSpecular = useTexture(`/textures/${textureRoure}/earth_specular.png`);
-	$: earthClouds = useTexture(`/textures/${textureRoure}/earth_clouds.jpg`, {
+	$: earthBump = useTexture(`/textures/${textureRoute}/earth_topography.jpg`);
+	$: earthSpecular = useTexture(`/textures/${textureRoute}/earth_specular.png`);
+	$: earthClouds = useTexture(`/textures/${textureRoute}/earth_clouds.jpg`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			texture.wrapS = THREE.RepeatWrapping;
@@ -41,7 +40,7 @@
 			return texture;
 		}
 	});
-	$: earthLights = useTexture(`/textures/${textureRoure}/earth_lights.jpg`, {
+	$: earthLights = useTexture(`/textures/${textureRoute}/earth_lights.jpg`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			return texture;

@@ -10,12 +10,14 @@
 	<FooterCopyright
 		href="https://www.linkedin.com/in/reig-grau/"
 		target="_blank"
+		rel="noopener noreferrer"
 		by="ReigGrau™"
 		year={2024}
 	/>
 	<FooterIcon
 		href="https://github.com/reiggrau/portfolio-svelte"
 		target="_blank"
+		rel="noopener noreferrer"
 		class="hover:text-white"
 	>
 		<GithubSolid />

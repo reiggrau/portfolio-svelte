@@ -11,6 +11,7 @@
 	<a
 		href="https://www.linkedin.com/in/reig-grau/"
 		target="_blank"
+		rel="noopener noreferrer"
 		class="drawer bg-[#0e76a8] dark:bg-[#185a7a]"
 	>
 		<span class="w-28 text-center font-extralight">LinkedIn</span>
@@ -20,20 +21,17 @@
 	<a
 		href="https://github.com/reiggrau"
 		target="_blank"
+		rel="noopener noreferrer"
 		class="drawer bg-[#171515] dark:bg-[#121111]"
 	>
 		<span class="w-28 text-center font-extralight">Github</span>
 		<div class="w-10 h-10 flex justify-center items-center"><GithubSolid /></div>
 	</a>
-	<!-- Email -->
-	<!-- <a href="/" class="drawer bg-[#de5246] dark:bg-[#b63e34]">
-		<span class="w-32 text-center">Email</span>
-		<div class="w-12 h-12 flex justify-center items-center"><EnvelopeOutline size="lg" /></div>
-	</a> -->
 	<!-- Resume -->
 	<a
 		href="https://www.dropbox.com/scl/fi/fnzqlqj9nbmuk0dh7nu5z/CV-Guillem-Reig-Grau-2024-07-EN.pdf?rlkey=a3qvtixyb59gyngf3nakqfcr7&st=1bmx72f4&dl=0"
 		target="_blank"
+		rel="noopener noreferrer"
 		class="drawer bg-gray-500 dark:bg-gray-600"
 	>
 		<span class="w-28 text-center font-extralight">My CV</span>

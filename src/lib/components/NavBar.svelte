@@ -13,7 +13,7 @@
 	let mobileNav = false;
 	let fadeIn = true;
 
-	function toggleMovileNav(to: boolean) {
+	function toggleMobileNav(to: boolean) {
 		fadeIn = to ? true : false;
 		setTimeout(() => {
 			mobileNav = to;
@@ -80,7 +80,7 @@
 	</nav>
 
 	<!-- Hamburger -->
-	<button class="md:hidden p-2 mr-8" on:click={() => toggleMovileNav(true)}>
+	<button class="md:hidden p-2 mr-8" on:click={() => toggleMobileNav(true)}>
 		<BarsSolid size="lg" />
 	</button>
 </div>
@@ -94,24 +94,52 @@
 			: 'animate-disappear'} animate-appear absolute top-0 left-0 w-screen h-screen bg-black bg-opacity-80 text-white flex flex-col justify-center items-center"
 		role="button"
 		tabindex="0"
-		on:click={() => toggleMovileNav(false)}
-		on:keydown={(e) => e.key === 'Enter' && toggleMovileNav(false)}
+		on:click={() => toggleMobileNav(false)}
+		on:keydown={(e) => e.key === 'Enter' && toggleMobileNav(false)}
 	>
-		<!-- Close button -->
-		<!-- <div class='w-full flex justify-end p-6'>
-            <button on:click={()=> sidebarEnabled = false}>
-                <CloseSolid/>
-            </button>
-        </div> -->
-
 		<!-- Nav -->
-		<ul class="flex flex-col items-center gap-12 text-4xl p-12">
-			<li class="font-light">HOME</li>
-			<li class="font-light">ABOUT</li>
-			<li class="font-light">SKILLS</li>
-			<li class="font-light">PROJECTS</li>
-			<li class="font-light">CONTACT</li>
-		</ul>
+		<nav class="flex flex-col items-center gap-12 text-4xl p-12">
+			<button
+				class="font-light"
+				on:click={() => {
+					debug.set(false);
+					view.set('earth');
+					toggleMobileNav(false);
+				}}>HOME</button
+			>
+			<button
+				class="font-light"
+				on:click={() => {
+					debug.set(false);
+					view.set('moon');
+					toggleMobileNav(false);
+				}}>ABOUT</button
+			>
+			<button
+				class="font-light"
+				on:click={() => {
+					debug.set(false);
+					view.set('mars');
+					toggleMobileNav(false);
+				}}>SKILLS</button
+			>
+			<button
+				class="font-light"
+				on:click={() => {
+					debug.set(false);
+					view.set('venus');
+					toggleMobileNav(false);
+				}}>PROJECTS</button
+			>
+			<button
+				class="font-light"
+				on:click={() => {
+					debug.set(false);
+					view.set('mercury');
+					toggleMobileNav(false);
+				}}>CONTACT</button
+			>
+		</nav>
 	</div>
 {/if}
 

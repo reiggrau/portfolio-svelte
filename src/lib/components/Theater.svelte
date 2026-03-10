@@ -12,11 +12,7 @@
 	import Projects from './theater/Projects.svelte';
 	import FadeIn from './FadeIn.svelte';
 	import Contact from './theater/Contact.svelte';
-
-	// const onScroll = () => {};
 </script>
-
-<!-- <svelte:window on:scroll={onScroll} /> -->
 
 <div id="Theater" class="w-screen h-screen">
 	<div class="fixed w-full h-full {$debug ? 'z-20' : ''}">

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as THREE from 'three';
-	import { T, useTask, useLoader } from '@threlte/core';
+	import { T, useTask } from '@threlte/core';
 	import { useTexture } from '@threlte/extras';
 	import { HD } from '$lib/stores/app';
 
@@ -17,9 +17,9 @@
 	// Source: https://www.solarsystemscope.com/textures/
 	import Device from 'svelte-device-info';
 
-	$: textureRoure = $HD ? 'HD' : Device.isPhone ? 'mobile' : 'desktop';
+	$: textureRoute = $HD ? 'HD' : Device.isPhone ? 'mobile' : 'desktop';
 
-	$: marsTexture = useTexture(`/textures/${textureRoure}/mars_diffuse.jpg`, {
+	$: marsTexture = useTexture(`/textures/${textureRoute}/mars_diffuse.jpg`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			return texture;
@@ -27,8 +27,8 @@
 	});
 
 	// Source: https://www.deviantart.com/slimysomething
-	$: marsBump = useTexture(`/textures/${textureRoure}/mars_topography.jpg`);
-	$: marsClouds = useTexture(`/textures/${textureRoure}/mars_clouds.png`, {
+	$: marsBump = useTexture(`/textures/${textureRoute}/mars_topography.jpg`);
+	$: marsClouds = useTexture(`/textures/${textureRoute}/mars_clouds.png`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			texture.wrapS = THREE.RepeatWrapping;

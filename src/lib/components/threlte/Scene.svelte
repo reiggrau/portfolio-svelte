@@ -95,8 +95,6 @@
 	$: ($darkmode || $view || $debug, viewChange());
 
 	async function viewChange() {
-		console.log('viewChange()', { $darkmode, $view, $debug });
-
 		let endTargetPosition = cameraTarget; // Default is no change
 		let endCameraPosition = cameraPosition; // Default is no change
 
@@ -131,89 +129,22 @@
 			updateViewVectors();
 			//
 		} else {
-			// NEW: Smooth transition
-			// setCameraAndTargetPositionSmooth(cameraTarget, endTargetPosition, cameraPosition, endCameraPosition);
-
-			// OLD: Just update the positions - Only in debug mode
 			cameraTarget = endTargetPosition;
 			cameraPosition = endCameraPosition;
 			setCameraPosition(endCameraPosition);
 			updateViewVectors();
-			//
-
-			// cameraTarget = endTargetPosition;
-			// cameraPosition = endCameraPosition;
-			// setCameraPosition(endCameraPosition);
-			// updateViewVectors();
 		}
 	}
 
 	function setCameraPosition(position: [number, number, number]) {
 		$camera.position.set(position[0], position[1], position[2]);
-		// console.log('setCameraPosition :', position);
-		// $camera.position.lerp(new THREE.Vector3(position[0], position[1], position[2]), 0.4);
 	}
 
-	// function setCameraAndTargetPositionSmooth(startTargetPosition: [number, number, number], endTargetPosition: [number, number, number], startCameraPosition: [number, number, number], endCameraPosition: [number, number, number]) {
-	// 	console.log('setCameraAndTargetPositionSmooth :', { startTargetPosition, endTargetPosition, startCameraPosition, endCameraPosition });
-
-	// 	// 1. Use start and end positions to generate a vector for camera and target
-	// 	// 1a. Target vector
-	// 	// Moon to Mars > [0, 0, -200] to [0, 0, -10000] > [0, 0, -9800]
-	// 	const targetVector = [ ...endTargetPosition ].map((x, i) => x - startTargetPosition[i]);
-	// 	console.log('targetVector :', targetVector);
-
-	// 	// Moon to Mars (light mode)> [2.5, 0, -210] to [7, 0, -10017] > [4.5, 0, -9807]
-	// 	const cameraVector = [ ...endCameraPosition ].map((x, i) => x - startCameraPosition[i]);
-	// 	console.log('cameraVector :', cameraVector );
-
-	// 	// 2. Get the increments in 1/50 (50 frames per second)
-	// 	const targetIncrement = targetVector.map(x => x / 50);
-	// 	const cameraIncrement = cameraVector.map(x => x / 50);
-	// 	console.log('increment vectors :', { targetIncrement, cameraIncrement });
-
-	// 	// 3. Run a loop for each frame and update the positions with the increments
-	// 	for (let f = 1; f <= 50; f++) {
-	// 		setTimeout(()=>{
-	// 			// Update target position
-	// 			const currentTargetPosition = [ ...startTargetPosition ].map((x, i) => x + (targetIncrement[i] * f));
-	// 			cameraTarget = [ ...currentTargetPosition ];
-
-	// 			// Update camera position
-	// 			const currentCameraPosition = [ ...startCameraPosition ].map((x, i) => x + (cameraIncrement[i] * f));
-	// 			setCameraPosition([ ...currentCameraPosition ]);
-
-	// 			updateViewVectors();
-
-	// 			console.log('positions at frame :', { f, currentTargetPosition, currentCameraPosition });
-	// 		} , 20 * f)
-	// 	}
-	// }
-
 	function updateViewVectors() {
-		// console.log('updateViewVectors() new $camera.position :', $camera.position );
 		earthViewVector = getViewVector(earthPosition);
 		marsViewVector = getViewVector(marsPosition);
 		venusViewVector = getViewVector(venusPosition);
 	}
-
-	// Adapt camera position to window width
-	// onMount(() => {
-	// 	// console.log('window.innerWidth :', window.innerWidth);
-	// 	position = getCameraPosition(position, window.innerWidth);
-	// });
-
-	// function getCameraPosition(coordinates: [number, number, number], windowWidth: number) {
-	// 	// 1850 => 1420 => 1 => [ 22, 0, 24 ]
-	// 	// 430 => 0 => 2 => [ 11, 0, 44 ]
-
-	// 	const ratio = 2 - ((windowWidth - 430) / 1420);
-
-	// 	coordinates[0] = coordinates[0] / ratio;
-	// 	coordinates[2] = coordinates[2] * ratio;
-
-	// 	return coordinates;
-	// }
 </script>
 
 <svelte:window on:keydown={onKeyDown} />

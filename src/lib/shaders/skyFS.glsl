@@ -1,16 +1,3 @@
-// uniform vec3 atmosphereColor;
-
-// varying vec3 vertexNormal;
-
-// void main() {
-//     float intensity = 0.5 - dot(vertexNormal, vec3(0.0, 0.0, 1.0));
-//     vec3 atmosphere = vec3(atmosphereColor) * pow(intensity, 1.5);
-
-//     gl_FragColor = vec4(atmosphere, 1.0);
-// }
-
-// SOURCE: https://github.com/boyaquito/abovetheclouds/tree/master
-
 uniform vec4 uColor;
 varying vec3 vNormal;
 varying float intensity;

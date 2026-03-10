@@ -18,7 +18,6 @@
 
 		setTimeout(() => {
 			overlay.set(false);
-			console.log('Loading complete. Showing remaining content.');
 			loadingPhase.set('remaining');
 		}, 2500);
 	}
@@ -37,7 +36,6 @@
 				presents:
 			</h3>
 			{#if continueReady}
-				<!-- <button class='text-white font-light {continueReady ? 'animate-appearSlow' : 'opacity-0'}' on:click={handleContinue}> -->
 				<button
 					class="text-white font-light animate-appearSlow delay-1000"
 					on:click={handleContinue}
@@ -52,7 +50,6 @@
 					>
 				</div>
 			{/if}
-			<!-- <button class={continueReady ? 'animate-appearSlow' : 'opacity-0'} >Continue</button> -->
 		</div>
 	</div>
 {/if}

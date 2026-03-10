@@ -11,15 +11,15 @@
 	// Textures
 	import Device from 'svelte-device-info';
 
-	$: textureRoure = $HD ? 'HD' : Device.isPhone ? 'mobile' : 'desktop';
+	$: textureRoute = $HD ? 'HD' : Device.isPhone ? 'mobile' : 'desktop';
 
-	$: moonTexture = useTexture(`/textures/${textureRoure}/moon_diffuse.jpg`, {
+	$: moonTexture = useTexture(`/textures/${textureRoute}/moon_diffuse.jpg`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			return texture;
 		}
 	});
-	$: moonDisplacement = useTexture(`/textures/${textureRoure}/moon_topography.jpg`);
+	$: moonDisplacement = useTexture(`/textures/${textureRoute}/moon_topography.jpg`);
 
 	// Animation
 	let rotation = 0;

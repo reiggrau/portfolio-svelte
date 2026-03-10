@@ -4,19 +4,11 @@
 	import { SunSolid, MoonSolid } from 'flowbite-svelte-icons';
 	import { Tooltip } from 'flowbite-svelte';
 
-	let systemDarkmode;
-	let htmlClassList: any;
-
-	// if (browser) {
-	// 	systemDarkmode = window.matchMedia('(prefers-color-scheme: dark)');
-	// 	htmlClassList = window.document.documentElement.classList;
-
-	// 	systemDarkmode.matches ? darkmode.set(true) : darkmode.set(false);
-	// }
-
 	function toggleDarkMode() {
 		darkmode.set(!$darkmode);
-		htmlClassList.toggle('dark');
+		if (browser) {
+			document.documentElement.classList.toggle('dark');
+		}
 	}
 </script>
 
