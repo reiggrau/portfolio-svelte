@@ -3,7 +3,7 @@
 	import { T, useTask } from '@threlte/core';
 	import { useTexture } from '@threlte/extras';
 
-	import { darkmode, HD } from '$lib/stores/app';
+	import { HD } from '$lib/stores/app';
 	import { debug } from '$lib/stores/threlte';
 
 	import { texturesReady, loadingPhase } from '$lib/stores/app';
@@ -12,6 +12,8 @@
 	import skyFS from '$lib/shaders/skyFS.glsl?raw';
 	import atmosphereVS from '$lib/shaders/atmosphereVS.glsl?raw';
 	import atmosphereFS from '$lib/shaders/atmosphereFS.glsl?raw';
+	import nightLightsVS from '$lib/shaders/nightLightsVS.glsl?raw';
+	import nightLightsFS from '$lib/shaders/nightLightsFS.glsl?raw';
 
 	export let earthPosition: [number, number, number];
 	export let sunPosition: [number, number, number];
@@ -50,6 +52,18 @@
 	$: if ($earthTexture && $earthClouds) {
 		texturesReady.set(true);
 		loadingPhase.set('wait'); // Rearth textures load first, then wait for input
+	}
+
+	// Night lights shader uniforms
+	const nightLightsUniforms = {
+		lightsMap: { value: null as THREE.Texture | null },
+		sunDirection: { value: new THREE.Vector3(...sunPosition) },
+		intensity: { value: 0.5 }
+	};
+
+	// Update the lights texture uniform when it loads
+	$: if ($earthLights) {
+		nightLightsUniforms.lightsMap.value = $earthLights;
 	}
 
 	// Atmosphere
@@ -123,19 +137,23 @@
 				roughness={0.99}
 				lightMap={$earthClouds}
 				lightMapIntensity={-2}
-				emissive={0xffffff}
-				emissiveMap={$earthLights || null}
-				emissiveIntensity={$earthLights && $darkmode ? 0.7 : 0}
 			/>
 		</T.Mesh>
 
 		<!-- City lights -->
-		<!-- <T.Mesh
-			scale={1}
-		>
-			<T.IcosahedronGeometry args={[7.9, 64]}/>
-			<T.MeshStandardMaterial map={$earthLights} emissiveMap={$earthLights} emissiveIntensity={10} blending={THREE.AdditiveBlending}/>
-		</T.Mesh> -->
+		{#if $earthLights}
+			<T.Mesh scale={1.001}>
+				<T.IcosahedronGeometry args={[7.9, 64]} />
+				<T.ShaderMaterial
+					vertexShader={nightLightsVS}
+					fragmentShader={nightLightsFS}
+					uniforms={nightLightsUniforms}
+					transparent
+					blending={THREE.AdditiveBlending}
+					depthWrite={false}
+				/>
+			</T.Mesh>
+		{/if}
 
 		<!-- Clouds -->
 		<T.Mesh scale={1.004}>
