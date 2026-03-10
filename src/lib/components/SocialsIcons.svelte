@@ -1,10 +1,5 @@
 <script>
-	import {
-		LinkedinSolid,
-		GithubSolid,
-		EnvelopeOutline,
-		NewspapperOutline
-	} from 'flowbite-svelte-icons';
+	import { LinkedinSolid, GithubSolid, NewspapperOutline } from 'flowbite-svelte-icons';
 </script>
 
 <!-- Icons -->
@@ -48,6 +43,10 @@
 
 <style lang="postcss">
 	.drawer {
-		@apply relative flex items-center -left-28 hover:left-0 duration-300 shadow;
+		@apply relative flex items-center -left-28 duration-300 shadow;
+	}
+
+	.drawer:hover {
+		@apply left-0;
 	}
 </style>

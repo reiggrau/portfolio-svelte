@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as THREE from 'three';
-	import { T, useTask, useLoader } from '@threlte/core';
+	import { T, useLoader } from '@threlte/core';
 	import { useTexture } from '@threlte/extras';
 
 	export let mercuryPosition: [number, number, number];
@@ -15,12 +15,6 @@
 	const mercuryDisplacement = useLoader(THREE.TextureLoader).load(
 		`/textures/desktop/mercury_topography.jpg`
 	);
-
-	// Animation
-	let rotation = 0;
-	useTask((delta) => {
-		rotation += delta;
-	});
 </script>
 
 <!-- Mercury -->

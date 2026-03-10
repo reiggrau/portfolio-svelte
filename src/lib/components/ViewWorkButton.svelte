@@ -2,7 +2,7 @@
 <!-- Source: https://codepen.io/shawnrossouw/pen/qeBxxb -->
 
 <script>
-	import { view } from '$lib/store';
+	import { view } from '$lib/stores/app';
 </script>
 
 <button

@@ -1,5 +1,5 @@
 <script>
-	import { view } from '$lib/store';
+	import { view } from '$lib/stores/app';
 	import Arrows from './Arrows.svelte';
 
 	export let rotated = false;

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { darkmode } from '$lib/store';
+	import { darkmode } from '$lib/stores/app';
 	import { SunSolid, MoonSolid } from 'flowbite-svelte-icons';
 	import { Tooltip } from 'flowbite-svelte';
 

@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { Canvas } from '@threlte/core';
 	import { Environment } from '@threlte/extras';
 
-	import { debug } from './state';
-	import { view } from '$lib/store';
+	import { debug } from '$lib/stores/threlte';
+	import { view } from '$lib/stores/app';
 
 	import Scene from './threlte/Scene.svelte';
 	import Home from './theater/Home.svelte';

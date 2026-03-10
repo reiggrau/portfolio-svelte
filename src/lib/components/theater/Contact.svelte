@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Label, Input, Helper, Textarea } from 'flowbite-svelte';
 	import { EnvelopeSolid } from 'flowbite-svelte-icons';
-	import { darkmode } from '$lib/store';
+	import { darkmode } from '$lib/stores/app';
 	import ArrowsDown from '../ArrowsDown.svelte';
 	import SmallButton from '../SmallButton.svelte';
 

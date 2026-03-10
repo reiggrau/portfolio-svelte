@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { BarsSolid } from 'flowbite-svelte-icons';
 
-	import { debug } from './state';
+	import { debug } from '$lib/stores/threlte';
 
-	import { view } from '$lib/store';
+	import { view } from '$lib/stores/app';
 
 	import DarkModeButton from './navbar/DarkModeButton.svelte';
 	import DebugButton from './navbar/DebugButton.svelte';
@@ -41,13 +41,43 @@
 	</div>
 
 	<!-- Wide navigation bar -->
-	<ul class="hidden md:flex flex gap-4" on:click={() => debug.set(false)}>
-		<li class="text-glow" on:click={() => view.set('earth')}>HOME</li>
-		<li class="text-glow" on:click={() => view.set('moon')}>ABOUT</li>
-		<li class="text-glow" on:click={() => view.set('mars')}>SKILLS</li>
-		<li class="text-glow" on:click={() => view.set('venus')}>PROJECTS</li>
-		<li class="text-glow" on:click={() => view.set('mercury')}>CONTACT</li>
-	</ul>
+	<nav class="hidden md:flex flex gap-4">
+		<button
+			class="text-glow"
+			on:click={() => {
+				debug.set(false);
+				view.set('earth');
+			}}>HOME</button
+		>
+		<button
+			class="text-glow"
+			on:click={() => {
+				debug.set(false);
+				view.set('moon');
+			}}>ABOUT</button
+		>
+		<button
+			class="text-glow"
+			on:click={() => {
+				debug.set(false);
+				view.set('mars');
+			}}>SKILLS</button
+		>
+		<button
+			class="text-glow"
+			on:click={() => {
+				debug.set(false);
+				view.set('venus');
+			}}>PROJECTS</button
+		>
+		<button
+			class="text-glow"
+			on:click={() => {
+				debug.set(false);
+				view.set('mercury');
+			}}>CONTACT</button
+		>
+	</nav>
 
 	<!-- Hamburger -->
 	<button class="md:hidden p-2 mr-8" on:click={() => toggleMovileNav(true)}>
@@ -62,7 +92,10 @@
 		class="{fadeIn
 			? 'animate-appear'
 			: 'animate-disappear'} animate-appear absolute top-0 left-0 w-screen h-screen bg-black bg-opacity-80 text-white flex flex-col justify-center items-center"
+		role="button"
+		tabindex="0"
 		on:click={() => toggleMovileNav(false)}
+		on:keydown={(e) => e.key === 'Enter' && toggleMovileNav(false)}
 	>
 		<!-- Close button -->
 		<!-- <div class='w-full flex justify-end p-6'>
@@ -85,6 +118,14 @@
 <style lang="postcss">
 	/* How to add text shadow in Tailwind: https://www.hyperui.dev/blog/text-shadow-with-tailwindcss */
 	.text-glow {
-		@apply cursor-pointer hover:text-shadow dark:shadow-blue-500 hover:-mt-1;
+		@apply cursor-pointer;
+	}
+
+	.text-glow:hover {
+		@apply text-shadow -mt-1;
+	}
+
+	.text-glow:dark {
+		@apply shadow-blue-500;
 	}
 </style>

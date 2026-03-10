@@ -1,8 +1,8 @@
 <script lang="ts">
 	import * as THREE from 'three';
-	import { T, useTask, useLoader, useThrelte } from '@threlte/core';
+	import { T, useTask, useLoader } from '@threlte/core';
 	import { useTexture } from '@threlte/extras';
-	import { loadingPhase, HD } from '$lib/store';
+	import { HD } from '$lib/stores/app';
 
 	import skyVS from '$lib/shaders/skyVS.glsl?raw';
 	import skyFS from '$lib/shaders/skyFS.glsl?raw';
@@ -11,7 +11,7 @@
 
 	export let marsPosition: [number, number, number];
 	export let sunPosition: [number, number, number];
-	export let marsViewVector: any;
+	export let marsViewVector: { x: number; y: number; z: number };
 
 	// Textures
 	// Source: https://www.solarsystemscope.com/textures/

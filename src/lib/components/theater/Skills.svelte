@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { darkmode } from '$lib/store';
+	import { darkmode } from '$lib/stores/app';
 	import SkillCard from '../SkillCard.svelte';
 	import ArrowsDown from '../ArrowsDown.svelte';
 

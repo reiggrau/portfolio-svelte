@@ -2,7 +2,7 @@
 	import ViewWorkButton from '../ViewWorkButton.svelte';
 	import ArrowsDown from '../ArrowsDown.svelte';
 
-	import { darkmode } from '$lib/store';
+	import { darkmode } from '$lib/stores/app';
 </script>
 
 <div id="Home" class="w-full h-screen flex flex-col justify-center">

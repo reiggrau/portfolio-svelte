@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { overlay, sound, texturesReady } from '$lib/store';
+	import { overlay, sound, texturesReady } from '$lib/stores/app';
 	import ContinueButton from './ContinueButton.svelte';
 
 	let loadingDisappears = false;

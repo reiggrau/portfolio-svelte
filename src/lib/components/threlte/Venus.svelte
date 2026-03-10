@@ -10,7 +10,7 @@
 
 	export let venusPosition: [number, number, number];
 	export let sunPosition: [number, number, number];
-	export let venusViewVector: any;
+	export let venusViewVector: { x: number; y: number; z: number };
 
 	const venusTexture = useTexture(`/textures/desktop/venus_diffuse.jpg`, {
 		transform: (texture) => {

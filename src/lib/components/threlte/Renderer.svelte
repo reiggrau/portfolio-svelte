@@ -1,4 +1,5 @@
 <script lang="ts">
+	import * as THREE from 'three';
 	import { useThrelte, useRender } from '@threlte/core';
 	import {
 		EffectComposer,
@@ -7,8 +8,7 @@
 		SMAAEffect,
 		SMAAPreset,
 		BloomEffect,
-		KernelSize,
-		GodRaysEffect
+		KernelSize
 	} from 'postprocessing';
 
 	const { scene, renderer, camera, size } = useThrelte();
@@ -17,7 +17,7 @@
 	// default WebGLRenderer: https://github.com/pmndrs/postprocessing#usage
 	const composer = new EffectComposer(renderer);
 
-	function setupEffectComposer(camera: any) {
+	function setupEffectComposer(camera: THREE.Camera) {
 		composer.removeAllPasses();
 
 		composer.addPass(new RenderPass(scene, camera));

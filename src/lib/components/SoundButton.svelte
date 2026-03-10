@@ -2,7 +2,7 @@
 	import { VolumeUpOutline, VolumeUpSolid } from 'flowbite-svelte-icons';
 	import { Tooltip } from 'flowbite-svelte';
 
-	import { overlay, sound } from '$lib/store';
+	import { overlay, sound } from '$lib/stores/app';
 
 	import music from '$lib/assets/media/cradle_of_the_galaxy.mp3';
 

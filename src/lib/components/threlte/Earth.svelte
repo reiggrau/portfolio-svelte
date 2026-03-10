@@ -1,12 +1,12 @@
 <script lang="ts">
 	import * as THREE from 'three';
-	import { T, useTask, useLoader, useThrelte } from '@threlte/core';
+	import { T, useTask, useLoader } from '@threlte/core';
 	import { useTexture } from '@threlte/extras';
 
-	import { darkmode, HD } from '$lib/store';
-	import { debug } from '$lib/components/state';
+	import { darkmode, HD } from '$lib/stores/app';
+	import { debug } from '$lib/stores/threlte';
 
-	import { texturesReady, loadingPhase } from '$lib/store';
+	import { texturesReady, loadingPhase } from '$lib/stores/app';
 
 	import skyVS from '$lib/shaders/skyVS.glsl?raw';
 	import skyFS from '$lib/shaders/skyFS.glsl?raw';
@@ -16,10 +16,6 @@
 	export let earthPosition: [number, number, number];
 	export let sunPosition: [number, number, number];
 	export let earthViewVector: { x: number; y: number; z: number };
-
-	const { camera } = useThrelte();
-
-	let viewVector = { x: 0, y: 0, z: 0 };
 
 	// Textures
 	import Device from 'svelte-device-info';

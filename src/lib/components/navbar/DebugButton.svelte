@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { view } from '$lib/store';
-	import { debug } from '../state';
+	import { view } from '$lib/stores/app';
+	import { debug } from '$lib/stores/threlte';
 	import { GlobeOutline, GlobeSolid } from 'flowbite-svelte-icons';
 	import { Tooltip } from 'flowbite-svelte';
 

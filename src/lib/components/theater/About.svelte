@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { darkmode } from '$lib/store';
+	import { darkmode } from '$lib/stores/app';
 	import ArrowsDown from '../ArrowsDown.svelte';
 </script>
 

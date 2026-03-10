@@ -2,8 +2,8 @@
 	import { T, useThrelte } from '@threlte/core';
 	import { interactivity, OrbitControls, TrackballControls, Suspense, Text } from '@threlte/extras';
 
-	import { debug } from '../state';
-	import { loadingPhase, darkmode, view } from '$lib/store'; // 'earth' | 'moon' | 'mars'
+	import { debug } from '$lib/stores/threlte';
+	import { loadingPhase, darkmode, view } from '$lib/stores/app'; // 'earth' | 'moon' | 'mars'
 
 	import Earth from './Earth.svelte';
 	import Moon from './Moon.svelte';
@@ -27,15 +27,15 @@
 	// Camera
 	const { camera } = useThrelte();
 
-	let cameraPosition: any = $darkmode ? [-22, 0, 24] : [22, 0, 24]; // Default
-	let cameraTarget: any = $debug ? [0, 0, 0] : [0, 0, -16]; // Default
+	let cameraPosition: [number, number, number] = $darkmode ? [-22, 0, 24] : [22, 0, 24]; // Default
+	let cameraTarget: [number, number, number] = $debug ? [0, 0, 0] : [0, 0, -16]; // Default
 
 	// View vectors (required for atmosphere shaders)
 	let earthViewVector = getViewVector(earthPosition);
 	let marsViewVector = getViewVector(marsPosition);
 	let venusViewVector = getViewVector(venusPosition);
 
-	function getViewVector(bodyPosition: any) {
+	function getViewVector(bodyPosition: [number, number, number]) {
 		const viewVector = {
 			x: $camera.position.x - bodyPosition[0],
 			y: $camera.position.y - bodyPosition[1],
@@ -92,7 +92,7 @@
 	};
 
 	// Trigger at view change
-	$: $darkmode || $view || $debug, viewChange();
+	$: ($darkmode || $view || $debug, viewChange());
 
 	async function viewChange() {
 		console.log('viewChange()', { $darkmode, $view, $debug });

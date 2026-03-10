@@ -1,6 +1,6 @@
 <!-- Source: https://codepen.io/nishchal-007/pen/vYZLrJB -->
 
-<script lang='ts'>
+<script lang="ts">
 	export let submit = false;
 	export let buttonState: 'ready' | 'disabled' | 'success' | 'error' = 'ready';
 
@@ -21,18 +21,19 @@
 	}
 </script>
 
-<button id="SmallButton" class="corner-button" style="--theme-color: {buttonColor}" disabled={buttonState === 'disabled'} type={submit ? 'submit' : 'button'}>
+<button
+	id="SmallButton"
+	class="corner-button"
+	style="--theme-color: {buttonColor}"
+	disabled={buttonState === 'disabled'}
+	type={submit ? 'submit' : 'button'}
+>
 	<span>
 		<slot />
 	</span>
 </button>
 
 <style>
-	.outbutton {
-		max-width: 80%;
-		text-align: center;
-	}
-
 	.corner-button:before,
 	.corner-button span:before,
 	.corner-button:after,

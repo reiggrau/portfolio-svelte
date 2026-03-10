@@ -1,12 +1,5 @@
 <script>
-	import {
-		Footer,
-		FooterCopyright,
-		FooterLinkGroup,
-		FooterLink,
-		FooterBrand,
-		FooterIcon
-	} from 'flowbite-svelte';
+	import { Footer, FooterCopyright, FooterIcon } from 'flowbite-svelte';
 	import { GithubSolid } from 'flowbite-svelte-icons';
 </script>
 

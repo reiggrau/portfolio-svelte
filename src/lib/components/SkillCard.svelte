@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let src: any;
+	export let src: string;
 	export let skillName: string;
 </script>
 

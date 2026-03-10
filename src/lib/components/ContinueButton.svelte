@@ -2,19 +2,19 @@
 
 <div id="ContinueButton">
 	<div>
-		<a href="#">
+		<div class="continue-link">
 			<span></span>
 			<span></span>
 			<span></span>
 			<span></span>
 			<p class="absolute blur">Continue</p>
 			<p>Continue</p>
-		</a>
+		</div>
 	</div>
 </div>
 
 <style>
-	#ContinueButton div a {
+	#ContinueButton div .continue-link {
 		position: relative;
 		display: inline-block;
 		padding: 10px 20px;
@@ -26,7 +26,7 @@
 		letter-spacing: 4px;
 	}
 
-	#ContinueButton a:hover {
+	#ContinueButton .continue-link:hover {
 		background: #03e9f4;
 		color: #fff;
 		box-shadow:
@@ -36,12 +36,12 @@
 			0 0 100px #03e9f4;
 	}
 
-	#ContinueButton a span {
+	#ContinueButton .continue-link span {
 		position: absolute;
 		display: block;
 	}
 
-	#ContinueButton a span:nth-child(1) {
+	#ContinueButton .continue-link span:nth-child(1) {
 		top: 0;
 		left: -100%;
 		width: 100%;
@@ -60,7 +60,7 @@
 		}
 	}
 
-	#ContinueButton a span:nth-child(2) {
+	#ContinueButton .continue-link span:nth-child(2) {
 		top: -100%;
 		right: 0;
 		width: 1px;
@@ -80,7 +80,7 @@
 		}
 	}
 
-	#ContinueButton a span:nth-child(3) {
+	#ContinueButton .continue-link span:nth-child(3) {
 		bottom: 0;
 		right: -100%;
 		width: 100%;
@@ -100,7 +100,7 @@
 		}
 	}
 
-	#ContinueButton a span:nth-child(4) {
+	#ContinueButton .continue-link span:nth-child(4) {
 		bottom: -100%;
 		left: 0;
 		width: 1px;
