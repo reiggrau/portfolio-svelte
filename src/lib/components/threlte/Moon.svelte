@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as THREE from 'three';
-	import { T, useTask, useLoader } from '@threlte/core';
+	import { T, useTask } from '@threlte/core';
 	import { useTexture } from '@threlte/extras';
 
 	import { HD } from '$lib/stores/app';
@@ -19,9 +19,7 @@
 			return texture;
 		}
 	});
-	$: moonDisplacement = useLoader(THREE.TextureLoader).load(
-		`/textures/${textureRoure}/moon_topography.jpg`
-	);
+	$: moonDisplacement = useTexture(`/textures/${textureRoure}/moon_topography.jpg`);
 
 	// Animation
 	let rotation = 0;

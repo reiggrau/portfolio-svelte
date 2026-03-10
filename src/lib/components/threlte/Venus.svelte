@@ -18,7 +18,7 @@
 			return texture;
 		}
 	});
-	const venusClouds = useTexture(`/textures/desktop/venus_clouds_2.webp`, {
+	const venusClouds = useTexture(`/textures/desktop/venus_clouds.jpg`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			texture.wrapS = THREE.RepeatWrapping;
@@ -80,7 +80,7 @@
 	});
 </script>
 
-{#if $venusTexture}
+{#if $venusTexture && $venusClouds}
 	<T.Group
 		position={venusPosition}
 		rotation.x={((2.64 * Math.PI) / 180) * 1}

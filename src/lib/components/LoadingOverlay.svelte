@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { overlay, sound, texturesReady } from '$lib/stores/app';
+	import { loadingPhase, overlay, sound, texturesReady } from '$lib/stores/app';
 	import ContinueButton from './ContinueButton.svelte';
 
 	let loadingDisappears = false;
@@ -18,7 +18,9 @@
 
 		setTimeout(() => {
 			overlay.set(false);
-		}, 2000);
+			console.log('Loading complete. Showing remaining content.');
+			loadingPhase.set('remaining');
+		}, 2500);
 	}
 </script>
 

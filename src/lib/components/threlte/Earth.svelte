@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as THREE from 'three';
-	import { T, useTask, useLoader } from '@threlte/core';
+	import { T, useTask } from '@threlte/core';
 	import { useTexture } from '@threlte/extras';
 
 	import { darkmode, HD } from '$lib/stores/app';
@@ -29,12 +29,8 @@
 			return texture;
 		}
 	});
-	$: earthBump = useLoader(THREE.TextureLoader).load(
-		`/textures/${textureRoure}/earth_topography.jpg`
-	);
-	$: earthSpecular = useLoader(THREE.TextureLoader).load(
-		`/textures/${textureRoure}/earth_specular.png`
-	);
+	$: earthBump = useTexture(`/textures/${textureRoure}/earth_topography.jpg`);
+	$: earthSpecular = useTexture(`/textures/${textureRoure}/earth_specular.png`);
 	$: earthClouds = useTexture(`/textures/${textureRoure}/earth_clouds.jpg`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
@@ -53,7 +49,7 @@
 	// LOADING VIEW: Once the essential textures resolve, mark ready
 	$: if ($earthTexture && $earthClouds) {
 		texturesReady.set(true);
-		loadingPhase.set('remaining'); // Rearth textures load first, then the rest
+		loadingPhase.set('wait'); // Rearth textures load first, then wait for input
 	}
 
 	// Atmosphere
@@ -128,8 +124,8 @@
 				lightMap={$earthClouds}
 				lightMapIntensity={-2}
 				emissive={0xffffff}
-				emissiveMap={$earthLights}
-				emissiveIntensity={$darkmode ? 0.7 : 0}
+				emissiveMap={$earthLights || null}
+				emissiveIntensity={$earthLights && $darkmode ? 0.7 : 0}
 			/>
 		</T.Mesh>
 

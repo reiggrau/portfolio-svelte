@@ -233,7 +233,7 @@
 	/>
 	<Earth {earthPosition} {sunPosition} {earthViewVector} />
 	<Moon {moonPosition} />
-	{#if $loadingPhase !== 'earth'}
+	{#if $loadingPhase === 'remaining'}
 		<Mars {marsPosition} {sunPosition} {marsViewVector} />
 		<Venus {venusPosition} {sunPosition} {venusViewVector} />
 		<Mercury {mercuryPosition} />
