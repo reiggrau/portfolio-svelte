@@ -60,8 +60,10 @@
 	$: if ($earthCloudsStore) earthClouds = $earthCloudsStore;
 	$: if ($earthLightsStore) earthLights = $earthLightsStore;
 
-	// LOADING VIEW: Once the essential textures resolve, mark ready
-	$: if (earthTexture && earthClouds) {
+	// LOADING VIEW: Mark ready only on initial load, not on HD texture swaps
+	let initialLoadDone = false;
+	$: if (earthTexture && earthClouds && !initialLoadDone) {
+		initialLoadDone = true;
 		texturesReady.set(true);
 		loadingPhase.set('wait');
 	}
