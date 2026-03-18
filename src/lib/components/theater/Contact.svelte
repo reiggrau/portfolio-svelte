@@ -48,7 +48,7 @@
 					buttonState = 'error';
 				}
 
-				return async ({ result, update }) => {
+				return async ({ result }) => {
 					// Display success message
 					if (result.status === 200) {
 						buttonState = 'success';
@@ -70,7 +70,11 @@
 					placeholder="your@email.com"
 					bind:value={email}
 					on:keydown={(e) => e.stopPropagation()}
-					on:focus={() => {emailError = ''; buttonState = 'ready'; serverError = '';}}
+					on:focus={() => {
+						emailError = '';
+						buttonState = 'ready';
+						serverError = '';
+					}}
 				>
 					<EnvelopeSolid slot="left" class="w-4 h-4" />
 				</Input>
@@ -86,7 +90,11 @@
 					placeholder="Write a message..."
 					bind:value={message}
 					on:keydown={(e) => e.stopPropagation()}
-					on:focus={() => {messageError = ''; buttonState = 'ready'; serverError = '';}}
+					on:focus={() => {
+						messageError = '';
+						buttonState = 'ready';
+						serverError = '';
+					}}
 				/>
 				<div class="flex justify-between">
 					<Helper class="mt-1 h-2" color="red">
@@ -102,7 +110,7 @@
 				</div>
 			</Label>
 			<div class="flex flex-col items-center">
-				<SmallButton submit bind:buttonState={buttonState}>
+				<SmallButton submit bind:buttonState>
 					{#if buttonState === 'ready'}
 						Submit
 					{:else if buttonState === 'success'}

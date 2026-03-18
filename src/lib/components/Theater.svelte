@@ -1,11 +1,6 @@
 <script lang="ts">
-	import { Canvas } from '@threlte/core';
-	import { Environment } from '@threlte/extras';
-
 	import { debug } from '$lib/stores/threlte';
-	import { view } from '$lib/stores/app';
 
-	import Scene from './threlte/Scene.svelte';
 	import Home from './theater/Home.svelte';
 	import About from './theater/About.svelte';
 	import Skills from './theater/Skills.svelte';
@@ -14,44 +9,12 @@
 	import Contact from './theater/Contact.svelte';
 </script>
 
-<div id="Theater" class="w-screen h-screen">
-	<div class="fixed w-full h-full {$debug ? 'z-20' : ''}">
-		<Canvas
-			rendererParameters={{
-				powerPreference: 'high-performance',
-				antialias: false,
-				stencil: false,
-				depth: false
-			}}
-		>
-			<!-- Background stars -->
-			<Environment
-				path={'/textures/background/'}
-				files={'starmap_16k_edited4.png'}
-				isBackground={true}
-			/>
-
-			<!-- 3D models + lights + camera -->
-			<Scene />
-		</Canvas>
-	</div>
-
-	<!-- Scene text -->
-	{#if !$debug}
-		<FadeIn active={$view === 'earth'}>
-			<Home />
-		</FadeIn>
-		<FadeIn active={$view === 'moon'}>
-			<About />
-		</FadeIn>
-		<FadeIn active={$view === 'mars'}>
-			<Skills />
-		</FadeIn>
-		<FadeIn active={$view === 'venus'}>
-			<Projects />
-		</FadeIn>
-		<FadeIn active={$view === 'mercury'}>
-			<Contact />
-		</FadeIn>
-	{/if}
+<div id="Theater" class="overflow-y-auto overflow-x-hidden">
+	<FadeIn active={!$debug}>
+		<Home />
+		<About />
+		<Skills />
+		<Projects />
+		<Contact />
+	</FadeIn>
 </div>

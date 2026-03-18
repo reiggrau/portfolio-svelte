@@ -4,27 +4,20 @@
 	import SocialsIcons from '$lib/components/SocialsIcons.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import LoadingOverlay from '$lib/components/LoadingOverlay.svelte';
+	import ThreeBackground from '$lib/components/ThreeBackground.svelte';
 </script>
 
 <head>
 	<title>Welcome - ReigGrau</title>
 </head>
 
-<div id="layout-main">
-	<!-- Loading Overlay -->
+<div id="layout-main" class="h-screen w-screen overflow-hidden flex flex-col justify-between">
 	<LoadingOverlay />
-
-	<!-- Top navbar -->
 	<NavBar />
-
-	<!-- Side social icons -->
 	<SocialsIcons />
-
-	<!-- Content -->
 	<slot />
-
-	<!-- Footer -->
 	<Footer />
+	<ThreeBackground />
 </div>
 
 <style lang="postcss">

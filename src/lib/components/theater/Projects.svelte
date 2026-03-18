@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { darkmode } from '$lib/stores/app';
-	import { AngleRightSolid, AngleLeftSolid } from 'flowbite-svelte-icons';
 	import ArrowsDown from '../ArrowsDown.svelte';
 	import SmallButton from '../SmallButton.svelte';
 
@@ -105,3 +104,5 @@
 		<ArrowsDown />
 	</div>
 </div>
+
+<div class="h-screen" />

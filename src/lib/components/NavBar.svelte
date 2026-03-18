@@ -9,10 +9,28 @@
 	import DebugButton from './navbar/DebugButton.svelte';
 	import HDButton from './HDButton.svelte';
 	import SoundButton from './SoundButton.svelte';
+	import type { SectionViews } from '../../types';
 
 	let mobileNav = false;
 	let fadeIn = true;
 
+	const sectionViews: SectionViews = {
+		Home: 'earth',
+		About: 'moon',
+		Skills: 'mars',
+		Projects: 'venus',
+		Contact: 'mercury'
+	};
+
+	function navigateTo(sectionId: keyof SectionViews) {
+		debug.set(false);
+		view.set(sectionViews[sectionId]);
+
+		const el = document.getElementById(sectionId);
+		if (el) el.scrollIntoView({ behavior: 'smooth' });
+	}
+
+	// Mobile nav
 	function toggleMobileNav(to: boolean) {
 		fadeIn = to ? true : false;
 		setTimeout(() => {
@@ -23,7 +41,7 @@
 
 <div
 	id="NavBar"
-	class="text-sm font-light fixed w-full h-20 md:h-14 p-6 pr-12 shadow-lg bg-black bg-opacity-30 flex justify-between items-center text-white z-30"
+	class="absolute top-0 text-sm font-light w-full h-20 md:h-14 pl-6 pr-12 shadow-lg bg-black bg-opacity-30 flex justify-between items-center text-white z-30"
 >
 	<!-- Settings buttons -->
 	<div class="flex gap-6 items-center">
@@ -42,41 +60,11 @@
 
 	<!-- Wide navigation bar -->
 	<nav class="hidden md:flex flex gap-4">
-		<button
-			class="text-glow"
-			on:click={() => {
-				debug.set(false);
-				view.set('earth');
-			}}>HOME</button
-		>
-		<button
-			class="text-glow"
-			on:click={() => {
-				debug.set(false);
-				view.set('moon');
-			}}>ABOUT</button
-		>
-		<button
-			class="text-glow"
-			on:click={() => {
-				debug.set(false);
-				view.set('mars');
-			}}>SKILLS</button
-		>
-		<button
-			class="text-glow"
-			on:click={() => {
-				debug.set(false);
-				view.set('venus');
-			}}>PROJECTS</button
-		>
-		<button
-			class="text-glow"
-			on:click={() => {
-				debug.set(false);
-				view.set('mercury');
-			}}>CONTACT</button
-		>
+		<button class="text-glow" on:click={() => navigateTo('Home')}>HOME</button>
+		<button class="text-glow" on:click={() => navigateTo('About')}>ABOUT</button>
+		<button class="text-glow" on:click={() => navigateTo('Skills')}>SKILLS</button>
+		<button class="text-glow" on:click={() => navigateTo('Projects')}>PROJECTS</button>
+		<button class="text-glow" on:click={() => navigateTo('Contact')}>CONTACT</button>
 	</nav>
 
 	<!-- Hamburger -->
@@ -102,40 +90,35 @@
 			<button
 				class="font-light"
 				on:click={() => {
-					debug.set(false);
-					view.set('earth');
+					navigateTo('Home');
 					toggleMobileNav(false);
 				}}>HOME</button
 			>
 			<button
 				class="font-light"
 				on:click={() => {
-					debug.set(false);
-					view.set('moon');
+					navigateTo('About');
 					toggleMobileNav(false);
 				}}>ABOUT</button
 			>
 			<button
 				class="font-light"
 				on:click={() => {
-					debug.set(false);
-					view.set('mars');
+					navigateTo('Skills');
 					toggleMobileNav(false);
 				}}>SKILLS</button
 			>
 			<button
 				class="font-light"
 				on:click={() => {
-					debug.set(false);
-					view.set('venus');
+					navigateTo('Projects');
 					toggleMobileNav(false);
 				}}>PROJECTS</button
 			>
 			<button
 				class="font-light"
 				on:click={() => {
-					debug.set(false);
-					view.set('mercury');
+					navigateTo('Contact');
 					toggleMobileNav(false);
 				}}>CONTACT</button
 			>
@@ -150,10 +133,10 @@
 	}
 
 	.text-glow:hover {
-		@apply text-shadow -mt-1;
+		@apply text-shadow -mt-1 shadow-white;
 	}
 
-	.text-glow:dark {
+	:global(.dark) .text-glow:hover {
 		@apply shadow-blue-500;
 	}
 </style>

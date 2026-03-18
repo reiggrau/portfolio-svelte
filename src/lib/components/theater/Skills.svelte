@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { darkmode } from '$lib/stores/app';
 	import SkillCard from '../SkillCard.svelte';
 	import ArrowsDown from '../ArrowsDown.svelte';
 
@@ -47,3 +46,5 @@
 		<ArrowsDown />
 	</div>
 </div>
+
+<div class="h-screen" />

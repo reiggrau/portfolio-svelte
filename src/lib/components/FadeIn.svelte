@@ -15,9 +15,8 @@
 	}
 </script>
 
-<!-- <div class={progress === target ? 'animate-appearSlow' : 'animate-disappearSlow'}> -->
 {#if $progress}
-	<div id="FadeIn" class="reveal fixed w-full" style="--progress: {$progress};">
+	<div id="FadeIn" class="flex flex-col reveal" style="--progress: {$progress};">
 		<slot />
 	</div>
 {/if}
