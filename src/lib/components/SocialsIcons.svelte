@@ -29,7 +29,7 @@
 	</a>
 	<!-- Resume -->
 	<a
-		href="https://www.dropbox.com/scl/fi/fnzqlqj9nbmuk0dh7nu5z/CV-Guillem-Reig-Grau-2024-07-EN.pdf?rlkey=a3qvtixyb59gyngf3nakqfcr7&st=1bmx72f4&dl=0"
+		href="https://www.dropbox.com/scl/fi/c15ko1pjvocoyf4sey7gu/CV-Guillem-Reig-Grau-2025-2-EN.pdf?rlkey=ai0ju3gy0r51h0meajz5jpesy&st=cq3fztse&dl=0"
 		target="_blank"
 		rel="noopener noreferrer"
 		class="drawer bg-gray-500 dark:bg-gray-600"

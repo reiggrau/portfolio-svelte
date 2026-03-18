@@ -24,15 +24,15 @@
 
 	$: textureRoute = $HD ? 'HD' : Device.isPhone ? 'mobile' : 'desktop';
 
-	$: earthTexture = useTexture(`/textures/${textureRoute}/earth_diffuse.jpg`, {
+	$: earthTextureStore = useTexture(`/textures/${textureRoute}/earth_diffuse.jpg`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			return texture;
 		}
 	});
-	$: earthBump = useTexture(`/textures/${textureRoute}/earth_topography.jpg`);
-	$: earthSpecular = useTexture(`/textures/${textureRoute}/earth_specular.png`);
-	$: earthClouds = useTexture(`/textures/${textureRoute}/earth_clouds.jpg`, {
+	$: earthBumpStore = useTexture(`/textures/${textureRoute}/earth_topography.jpg`);
+	$: earthSpecularStore = useTexture(`/textures/${textureRoute}/earth_specular.png`);
+	$: earthCloudsStore = useTexture(`/textures/${textureRoute}/earth_clouds.jpg`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			texture.wrapS = THREE.RepeatWrapping;
@@ -40,17 +40,30 @@
 			return texture;
 		}
 	});
-	$: earthLights = useTexture(`/textures/${textureRoute}/earth_lights.jpg`, {
+	$: earthLightsStore = useTexture(`/textures/${textureRoute}/earth_lights.jpg`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			return texture;
 		}
 	});
 
+	// Retain last-loaded textures so the planet stays visible during HD swap
+	let earthTexture: THREE.Texture | undefined;
+	let earthBump: THREE.Texture | undefined;
+	let earthSpecular: THREE.Texture | undefined;
+	let earthClouds: THREE.Texture | undefined;
+	let earthLights: THREE.Texture | undefined;
+
+	$: if ($earthTextureStore) earthTexture = $earthTextureStore;
+	$: if ($earthBumpStore) earthBump = $earthBumpStore;
+	$: if ($earthSpecularStore) earthSpecular = $earthSpecularStore;
+	$: if ($earthCloudsStore) earthClouds = $earthCloudsStore;
+	$: if ($earthLightsStore) earthLights = $earthLightsStore;
+
 	// LOADING VIEW: Once the essential textures resolve, mark ready
-	$: if ($earthTexture && $earthClouds) {
+	$: if (earthTexture && earthClouds) {
 		texturesReady.set(true);
-		loadingPhase.set('wait'); // Rearth textures load first, then wait for input
+		loadingPhase.set('wait');
 	}
 
 	// Night lights shader uniforms
@@ -61,8 +74,8 @@
 	};
 
 	// Update the lights texture uniform when it loads
-	$: if ($earthLights) {
-		nightLightsUniforms.lightsMap.value = $earthLights;
+	$: if (earthLights) {
+		nightLightsUniforms.lightsMap.value = earthLights;
 	}
 
 	// Atmosphere
@@ -107,8 +120,8 @@
 
 	useTask((delta) => {
 		rotation += delta * ($debug ? 0.5 : 1);
-		if ($earthClouds) {
-			$earthClouds.offset.set(0.4 - rotation / ($debug ? 15000 : 3000), 0);
+		if (earthClouds) {
+			earthClouds.offset.set(0.4 - rotation / ($debug ? 15000 : 3000), 0);
 		}
 
 		// Link camera view to shader uniform value
@@ -118,7 +131,7 @@
 	});
 </script>
 
-{#if $earthTexture && $earthClouds}
+{#if earthTexture && earthClouds}
 	<T.Group
 		position={earthPosition}
 		rotation.x={((23.4 * Math.PI) / 180) * 1}
@@ -129,18 +142,18 @@
 			<T.IcosahedronGeometry args={[7.9, 64]} />
 			<T.MeshStandardMaterial
 				color={0xffffff}
-				map={$earthTexture}
-				bumpMap={$earthBump}
+				map={earthTexture}
+				bumpMap={earthBump}
 				bumpScale={2}
-				roughnessMap={$earthSpecular}
+				roughnessMap={earthSpecular}
 				roughness={0.99}
-				lightMap={$earthClouds}
+				lightMap={earthClouds}
 				lightMapIntensity={-2}
 			/>
 		</T.Mesh>
 
 		<!-- City lights -->
-		{#if $earthLights}
+		{#if earthLights}
 			<T.Mesh scale={1.001}>
 				<T.IcosahedronGeometry args={[7.9, 64]} />
 				<T.ShaderMaterial
@@ -159,8 +172,8 @@
 			<T.IcosahedronGeometry args={[7.9, 64]} />
 			<T.MeshStandardMaterial
 				color={'white'}
-				alphaMap={$earthClouds}
-				bumpMap={$earthClouds}
+				alphaMap={earthClouds}
+				bumpMap={earthClouds}
 				bumpScale={0.1}
 				transparent
 				depthWrite={false}

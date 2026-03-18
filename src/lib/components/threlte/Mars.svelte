@@ -19,7 +19,7 @@
 
 	$: textureRoute = $HD ? 'HD' : Device.isPhone ? 'mobile' : 'desktop';
 
-	$: marsTexture = useTexture(`/textures/${textureRoute}/mars_diffuse.jpg`, {
+	$: marsTextureStore = useTexture(`/textures/${textureRoute}/mars_diffuse.jpg`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			return texture;
@@ -27,8 +27,8 @@
 	});
 
 	// Source: https://www.deviantart.com/slimysomething
-	$: marsBump = useTexture(`/textures/${textureRoute}/mars_topography.jpg`);
-	$: marsClouds = useTexture(`/textures/${textureRoute}/mars_clouds.png`, {
+	$: marsBumpStore = useTexture(`/textures/${textureRoute}/mars_topography.jpg`);
+	$: marsCloudsStore = useTexture(`/textures/${textureRoute}/mars_clouds.png`, {
 		transform: (texture) => {
 			texture.anisotropy = 4;
 			texture.wrapS = THREE.RepeatWrapping;
@@ -36,6 +36,15 @@
 			return texture;
 		}
 	});
+
+	// Retain last-loaded textures so the planet stays visible during HD swap
+	let marsTexture: THREE.Texture | undefined;
+	let marsBump: THREE.Texture | undefined;
+	let marsClouds: THREE.Texture | undefined;
+
+	$: if ($marsTextureStore) marsTexture = $marsTextureStore;
+	$: if ($marsBumpStore) marsBump = $marsBumpStore;
+	$: if ($marsCloudsStore) marsClouds = $marsCloudsStore;
 
 	// Atmosphere
 	const color = new THREE.Color('#ad6242');
@@ -79,8 +88,8 @@
 	useTask((delta) => {
 		rotation += delta;
 
-		if ($marsClouds) {
-			$marsClouds.offset.set(0.4 - rotation / 2000, 0);
+		if (marsClouds) {
+			marsClouds.offset.set(0.4 - rotation / 2000, 0);
 		}
 
 		// Link camera view to shader uniform value
@@ -90,7 +99,7 @@
 	});
 </script>
 
-{#if $marsTexture && $marsClouds}
+{#if marsTexture && marsClouds}
 	<T.Group
 		position={marsPosition}
 		rotation.x={((25.2 * Math.PI) / 180) * 1}
@@ -101,11 +110,11 @@
 			<T.IcosahedronGeometry args={[4.2, 64]} />
 			<T.MeshStandardMaterial
 				color={0xffffff}
-				map={$marsTexture}
-				bumpMap={$marsBump}
+				map={marsTexture}
+				bumpMap={marsBump}
 				bumpScale={2}
 				roughness={0.99}
-				lightMap={$marsClouds}
+				lightMap={marsClouds}
 				lightMapIntensity={-1}
 			/>
 		</T.Mesh>
@@ -115,8 +124,8 @@
 			<T.IcosahedronGeometry args={[4.2, 64]} />
 			<T.MeshStandardMaterial
 				color={'white'}
-				alphaMap={$marsClouds}
-				bumpMap={$marsClouds}
+				alphaMap={marsClouds}
+				bumpMap={marsClouds}
 				bumpScale={0.1}
 				transparent
 				depthWrite={false}

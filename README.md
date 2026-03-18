@@ -1,74 +1,144 @@
-# Svelte & Tailwind + Flowbite Portfolio - By Reig-Grau
+# ReigGrau — 3D Solar System Portfolio
 
-Hi! I'm Reig-Grau, and this is my portfolio's documentation.
+An interactive developer portfolio built as a 3D solar system, where each planet represents a different section of the site. Navigate between planets to explore who I am, what I do, and what I've built.
 
-Here I will explain how and why I built my page the way I did, but also guide you through the different steps that I took in case you decide to build a similar porfolio of your own.
+![Hero screenshot — Earth view with the Home section text overlay and starfield background](images/hero.png)
 
-So, without further ado, let's begin!
+## Live Demo
 
-# SvelteKit
+> **[reiggrau.com](https://reiggrau-portfolio.vercel.app/)**
 
-The first step after deciding to build an app is framework selection.
+---
 
-There are many options (Next, Vue, Svelte...) with their pros and cons, but in the end they more or less do the same, so yo can't go wrong by choosing the one you are more familiar with.
+## Overview
 
-In my case I chose Svelte because it is the framework that I use in my full-time job and I am more comfortable with.
+This isn't a typical portfolio. Instead of scrolling through flat pages, visitors travel through space — from Earth to Mercury — each planet hosting a section of the portfolio with its own atmosphere, textures, and lighting.
 
-Once the decision is made, go to the framework's documentation and follow the steps to create a new project.
+The entire 3D scene runs in the browser using **Three.js** via **Threlte**, with custom GLSL shaders for atmospheres, sky glow, and Earth's city lights on the dark side. Textures are progressively loaded, and the scene adapts between mobile, desktop, and HD resolutions.
+
+### Planet → Section mapping
+
+| Planet    | Section      | Description                                       |
+| --------- | ------------ | ------------------------------------------------- |
+| 🌍 Earth  | **Home**     | Landing page with introduction                    |
+| 🌙 Moon   | **About**    | Background, experience, and personal interests    |
+| 🔴 Mars   | **Skills**   | Technical skill showcase                          |
+| 🪐 Venus  | **Projects** | Project carousel with live demos and source links |
+| ☿️ Mercury | **Contact**  | Email contact form                                |
+
+---
+
+## Screenshots
+
+![Loading screen — Cinematic "ReigGrau presents:" intro with glowing CONTINUE button](images/loading.png)
+
+![About section — Moon view with biography text overlay](images/about.png)
+
+![Skills section — Mars view with skill icon grid (Three.js, TypeScript, Svelte, React, etc.)](images/skills.png)
+
+![Projects section — Venus view with project carousel showing screenshots, descriptions, and links](images/projects.png)
+
+![Contact section — Mercury view with email contact form](images/contact.png)
+
+![Dark mode comparison — Same section in light mode (camera right) vs dark mode (camera left)](images/darkmode.png)
+
+![Debug mode — Free camera with OrbitControls enabled, showing the full scene layout](images/debug.png)
+
+---
+
+## Features
+
+- **3D Solar System Navigation** — Travel between planets using the navbar, keyboard shortcuts (`1`–`5`, `↑`/`↓`), or mobile menu
+- **Custom GLSL Shaders** — Atmosphere halos, sky glow with directional lighting, and Earth night-side city lights with terminator fade
+- **Progressive Loading** — Earth loads first with a cinematic intro screen; remaining planets load in the background after user interaction
+- **Responsive Textures** — Automatically serves mobile, desktop, or HD texture sets based on device and user preference
+- **Dark Mode** — Toggles color scheme and shifts the camera perspective
+- **Post-Processing** — Bloom and SMAA anti-aliasing via EffectComposer
+- **Contact Form** — Server-side email delivery through the Resend API
+- **Ambient Music** — Optional background soundtrack activated on user interaction
+
+---
+
+## Tech Stack
+
+| Category            | Technologies                                                            |
+| ------------------- | ----------------------------------------------------------------------- |
+| **Framework**       | SvelteKit 2, Svelte 4, TypeScript                                       |
+| **3D / WebGL**      | Three.js, Threlte (@threlte/core, @threlte/extras), custom GLSL shaders |
+| **Styling**         | Tailwind CSS 3, Flowbite Svelte                                         |
+| **Post-Processing** | postprocessing (Bloom, SMAA)                                            |
+| **Animation**       | Theatre.js, Svelte spring/motion                                        |
+| **Backend**         | SvelteKit server actions, Resend (email API)                            |
+| **Build**           | Vite 5, @sveltejs/adapter-auto                                          |
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm
+
+### Installation
 
 ```bash
-npm create svelte@latest <your app name>
-cd <your app name>
+git clone https://github.com/reiggrau/portfolio-svelte.git
+cd portfolio-svelte
 npm install
-npm run dev -- --open
 ```
 
-A new tab should open with the newly-created app. Otherwise, go to http://localhost:5173
-
-# Tailwind
-
-Assuming you chose the 'skeleton app' when creating your Svelte app, you could start building your portfolio by changing the few pre-existing files and adding new ones, but there is a tool that I like to use to make the CSS part easier (in my opinion) and you might want to use too. This tool is called 'Tailwind'.
-
-Tailwind is a CSS framework that has pre-existing CSS classes like 'flex, grid, text-center, etc.' that can be used to style the html elements directly in your Svelte pages and components.
-
-With Tailwind you can move from this:
+### Development
 
 ```bash
-#example {
-    padding: 0.875em 256px;
-    margin-left: 16px;
-    text-align: center;
-    font-size: 12px;
-}
+npm run dev
 ```
 
-To this:
+Opens at [http://localhost:5173](http://localhost:5173).
+
+### Production Build
 
 ```bash
-<div id='example' class='py-[0.875em] px-64 ml-4 text-center text-xs'></div>
+npm run build
+npm run preview
 ```
 
-In order to add Tailwind to your project, go to their documentation page (Svelte version: https://tailwindcss.com/docs/guides/sveltekit) and follow the installation steps, the first one being:
+### Environment Variables
 
-```bash
-npm install -D tailwindcss postcss autoprefixer
-npx tailwindcss init -p
+Create a `.env` file in the project root:
+
+```
+RESEND_API_KEY=your_resend_api_key
 ```
 
-Don't forget to follow the 'setup' steps that go next!
+Required for the contact form email functionality.
 
-TIP: If you have many elements in your page or component that share the same Tailwind classes, intead of writing the same classes again and again, you can create a custom class in the 'stye' block of your Svelte file that applies all those Tailwind classes. The end result should look like this:
+---
 
-```bash
-<div id='e1' class='example'></div>
-<div id='e2' class='example'></div>
-<div id='e3' class='example'></div>
+## Project Structure
 
-<style lang="postcss">
-    .example {
-        @apply py-[0.875em] px-64 ml-4 text-center text-xs;
-    }
-</style>
+```
+src/
+├── lib/
+│   ├── components/
+│   │   ├── threlte/          # 3D planet components + scene + renderer
+│   │   ├── theater/          # Content sections (Home, About, Skills, Projects, Contact)
+│   │   └── navbar/           # Navigation sub-components
+│   ├── shaders/              # Custom GLSL vertex/fragment shaders
+│   ├── stores/               # Svelte stores (app state, threlte state)
+│   └── assets/               # Skill logos and static images
+├── routes/
+│   ├── +page.svelte          # Main page
+│   └── +page.server.ts       # Contact form server action
+└── static/
+    └── textures/             # Planet textures (mobile / desktop / HD)
 ```
 
-WORK IN PROGRESS
+---
+
+## Author
+
+**Guillem Reig Grau** — Full Stack Web Developer based in Barcelona
+
+- [LinkedIn](https://www.linkedin.com/in/reig-grau/)
+- [GitHub](https://github.com/reiggrau)
