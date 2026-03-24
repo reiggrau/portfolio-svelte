@@ -2,6 +2,9 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { browser } from '$app/environment';
 
+	import { tweened } from 'svelte/motion';
+	import { cubicInOut } from 'svelte/easing';
+
 	import { view } from '$lib/stores/app';
 	import { debug } from '$lib/stores/threlte';
 
@@ -17,14 +20,26 @@
 
 	let isScrolling = false;
 	let touchStartY = 0;
-	const COOLDOWN = 800;
+	const COOLDOWN = 1800;
+	const SCROLL_DURATION = 1800;
+
+	const scrollY = tweened(0, { duration: SCROLL_DURATION, easing: cubicInOut });
+
+	// Keep the scroll container in sync with the tweened value
+	$: {
+		const container = browser ? document.getElementById('page-main') : null;
+		if (container) container.scrollTop = $scrollY;
+	}
 
 	function navigateTo(nextView: View) {
 		debug.set(false);
 		view.set(nextView);
 
+		const container = document.getElementById('page-main');
 		const el = document.getElementById(viewSections[nextView]);
-		if (el) el.scrollIntoView({ behavior: 'smooth' });
+		if (container && el) {
+			scrollY.set(el.offsetTop - container.offsetTop, { duration: SCROLL_DURATION });
+		}
 	}
 
 	function navigate(direction: 1 | -1) {

@@ -28,7 +28,7 @@
 
 	// Camera
 	const { camera } = useThrelte();
-	const TRANSITION_DURATION = 1200;
+	const TRANSITION_DURATION = 1800;
 
 	type Vec3 = [number, number, number];
 

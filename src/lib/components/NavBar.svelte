@@ -11,16 +11,29 @@
 	import SoundButton from './SoundButton.svelte';
 	import { sectionViews } from '../../types';
 	import type { Section } from '../../types';
+	import { tweened } from 'svelte/motion';
+	import { cubicInOut } from 'svelte/easing';
 
 	let mobileNav = false;
 	let fadeIn = true;
+
+	const SCROLL_DURATION = 1800;
+	const scrollY = tweened(0, { duration: SCROLL_DURATION, easing: cubicInOut });
+
+	$: {
+		const container = typeof document !== 'undefined' ? document.getElementById('page-main') : null;
+		if (container) container.scrollTop = $scrollY;
+	}
 
 	function navigateTo(sectionId: Section) {
 		debug.set(false);
 		view.set(sectionViews[sectionId]);
 
+		const container = document.getElementById('page-main');
 		const el = document.getElementById(sectionId);
-		if (el) el.scrollIntoView({ behavior: 'smooth' });
+		if (container && el) {
+			scrollY.set(el.offsetTop - container.offsetTop, { duration: SCROLL_DURATION });
+		}
 	}
 
 	// Mobile nav
