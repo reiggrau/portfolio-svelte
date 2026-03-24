@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { T, useThrelte } from '@threlte/core';
 	import { interactivity, OrbitControls, TrackballControls, Suspense, Text } from '@threlte/extras';
+	import { tweened } from 'svelte/motion';
+	import { cubicInOut } from 'svelte/easing';
 
 	import { debug } from '$lib/stores/threlte';
 	import { loadingPhase, darkmode, view } from '$lib/stores/app'; // 'earth' | 'moon' | 'mars'
@@ -26,9 +28,26 @@
 
 	// Camera
 	const { camera } = useThrelte();
+	const TRANSITION_DURATION = 1200;
 
-	let cameraPosition: [number, number, number] = $darkmode ? [-22, 0, 24] : [22, 0, 24]; // Default
-	let cameraTarget: [number, number, number] = $debug ? [0, 0, 0] : [0, 0, -16]; // Default
+	type Vec3 = [number, number, number];
+
+	const cameraPosition = tweened<Vec3>($darkmode ? [-22, 0, 24] : [22, 0, 24], {
+		duration: TRANSITION_DURATION,
+		easing: cubicInOut
+	});
+	const cameraTarget = tweened<Vec3>($debug ? [0, 0, 0] : [0, 0, -16], {
+		duration: TRANSITION_DURATION,
+		easing: cubicInOut
+	});
+
+	// Keep Three.js camera in sync with tweened values
+	$: {
+		$camera.position.set($cameraPosition[0], $cameraPosition[1], $cameraPosition[2]);
+		earthViewVector = getViewVector(earthPosition);
+		marsViewVector = getViewVector(marsPosition);
+		venusViewVector = getViewVector(venusPosition);
+	}
 
 	// View vectors (required for atmosphere shaders)
 	let earthViewVector = getViewVector(earthPosition);
@@ -42,6 +61,12 @@
 			z: $camera.position.z - bodyPosition[2]
 		};
 		return viewVector;
+	}
+
+	function updateViewVectors() {
+		earthViewVector = getViewVector(earthPosition);
+		marsViewVector = getViewVector(marsPosition);
+		venusViewVector = getViewVector(venusPosition);
 	}
 
 	// Navigation + debug
@@ -95,8 +120,8 @@
 	$: ($darkmode || $view || $debug, viewChange());
 
 	async function viewChange() {
-		let endTargetPosition = cameraTarget; // Default is no change
-		let endCameraPosition = cameraPosition; // Default is no change
+		let endTargetPosition = $cameraTarget;
+		let endCameraPosition = $cameraPosition;
 
 		switch ($view) {
 			case 'earth':
@@ -121,29 +146,9 @@
 				break;
 		}
 
-		if ($debug) {
-			// OLD: Just update the positions - Only in debug mode
-			cameraTarget = endTargetPosition;
-			cameraPosition = endCameraPosition;
-			setCameraPosition(endCameraPosition);
-			updateViewVectors();
-			//
-		} else {
-			cameraTarget = endTargetPosition;
-			cameraPosition = endCameraPosition;
-			setCameraPosition(endCameraPosition);
-			updateViewVectors();
-		}
-	}
-
-	function setCameraPosition(position: [number, number, number]) {
-		$camera.position.set(position[0], position[1], position[2]);
-	}
-
-	function updateViewVectors() {
-		earthViewVector = getViewVector(earthPosition);
-		marsViewVector = getViewVector(marsPosition);
-		venusViewVector = getViewVector(venusPosition);
+		const opts = $debug ? { duration: 0 } : {};
+		cameraTarget.set(endTargetPosition, opts);
+		cameraPosition.set(endCameraPosition, opts);
 	}
 </script>
 
@@ -173,7 +178,7 @@
 
 <!-- Camera -->
 <T.PerspectiveCamera
-	position={cameraPosition}
+	position={$cameraPosition}
 	fov={30}
 	zoom={1}
 	near={0.1}
@@ -187,11 +192,11 @@
 			enableZoom={true}
 			zoomSpeed={0.5}
 			enableDamping
-			target={cameraTarget}
+			target={$cameraTarget}
 			on:change={updateViewVectors}
 		/>
 	{/if}
-	<TrackballControls target={cameraTarget} enabled={false} staticMoving={false} zoomSpeed={0.5} />
+	<TrackballControls target={$cameraTarget} enabled={false} staticMoving={false} zoomSpeed={0.5} />
 </T.PerspectiveCamera>
 
 <!-- Ligh (Sun)-->
