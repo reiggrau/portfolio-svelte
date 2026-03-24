@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store'; // Global state management for the application
+import type { View } from '../../types';
 
 // Textures
 export const texturesReady = writable(false);
@@ -10,7 +11,7 @@ export const loadingPhase = writable<'earth' | 'wait' | 'remaining'>('earth');
 export const darkmode = writable(false);
 
 // Scene focus
-export const view = writable('earth'); // 'earth' | 'moon' | 'mars'
+export const view = writable('earth' as View); // 'earth' | 'moon' | 'mars'
 
 // HD mode
 export const HD = writable(false);

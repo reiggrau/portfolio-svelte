@@ -17,7 +17,7 @@
 	let buttonState: 'ready' | 'disabled' | 'success' | 'error' = 'ready';
 </script>
 
-<div id="Projects" class="w-full h-screen flex mt-16">
+<div id="Contact" class="w-full h-screen flex mt-16">
 	<div
 		class="flex flex-col justify-center items-center w-[40%] {$darkmode
 			? 'ml-[50%] mr-[10%]'

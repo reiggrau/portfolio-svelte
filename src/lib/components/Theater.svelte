@@ -1,4 +1,8 @@
 <script lang="ts">
+	import { onMount, onDestroy } from 'svelte';
+	import { browser } from '$app/environment';
+
+	import { view } from '$lib/stores/app';
 	import { debug } from '$lib/stores/threlte';
 
 	import Home from './theater/Home.svelte';
@@ -7,9 +11,78 @@
 	import Projects from './theater/Projects.svelte';
 	import FadeIn from './FadeIn.svelte';
 	import Contact from './theater/Contact.svelte';
+
+	import { viewOrder, viewSections } from '../../types';
+	import type { View } from '../../types';
+
+	let isScrolling = false;
+	let touchStartY = 0;
+	const COOLDOWN = 800;
+
+	function navigateTo(nextView: View) {
+		debug.set(false);
+		view.set(nextView);
+
+		const el = document.getElementById(viewSections[nextView]);
+		if (el) el.scrollIntoView({ behavior: 'smooth' });
+	}
+
+	function navigate(direction: 1 | -1) {
+		if (isScrolling) return;
+
+		const currentViewIndex = viewOrder.indexOf($view);
+		if (currentViewIndex === -1) return;
+
+		const nextIndex = currentViewIndex + direction;
+		if (nextIndex < 0 || nextIndex >= viewOrder.length) return;
+
+		isScrolling = true;
+		navigateTo(viewOrder[nextIndex]);
+		setTimeout(() => (isScrolling = false), COOLDOWN);
+	}
+
+	function onWheel(e: WheelEvent) {
+		if ($debug) return;
+		e.preventDefault();
+		navigate(e.deltaY > 0 ? 1 : -1);
+	}
+
+	function onTouchStart(e: TouchEvent) {
+		touchStartY = e.touches[0].clientY;
+	}
+
+	function onTouchEnd(e: TouchEvent) {
+		if ($debug) return;
+		const delta = touchStartY - e.changedTouches[0].clientY;
+		if (Math.abs(delta) > 50) navigate(delta > 0 ? 1 : -1);
+	}
+
+	function blockScroll(e: Event) {
+		if (!$debug) e.preventDefault();
+	}
+
+	onMount(() => {
+		document.addEventListener('wheel', onWheel, { passive: false });
+		document.addEventListener('touchstart', onTouchStart);
+		document.addEventListener('touchend', onTouchEnd);
+		document.addEventListener('touchmove', blockScroll, { passive: false });
+	});
+
+	onDestroy(() => {
+		if (!browser) return;
+		document.removeEventListener('wheel', onWheel);
+		document.removeEventListener('touchstart', onTouchStart);
+		document.removeEventListener('touchend', onTouchEnd);
+		document.removeEventListener('touchmove', blockScroll);
+	});
 </script>
 
-<div id="Theater" class="overflow-y-auto overflow-x-hidden">
+<div
+	id="Theater"
+	class="overflow-x-hidden"
+	class:overflow-hidden={!$debug}
+	class:overflow-y-auto={$debug}
+>
 	<FadeIn active={!$debug}>
 		<Home />
 		<About />

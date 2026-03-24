@@ -9,20 +9,13 @@
 	import DebugButton from './navbar/DebugButton.svelte';
 	import HDButton from './HDButton.svelte';
 	import SoundButton from './SoundButton.svelte';
-	import type { SectionViews } from '../../types';
+	import { sectionViews } from '../../types';
+	import type { Section } from '../../types';
 
 	let mobileNav = false;
 	let fadeIn = true;
 
-	const sectionViews: SectionViews = {
-		Home: 'earth',
-		About: 'moon',
-		Skills: 'mars',
-		Projects: 'venus',
-		Contact: 'mercury'
-	};
-
-	function navigateTo(sectionId: keyof SectionViews) {
+	function navigateTo(sectionId: Section) {
 		debug.set(false);
 		view.set(sectionViews[sectionId]);
 
